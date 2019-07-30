@@ -1,0 +1,7 @@
+{
+  "name": "@mobov/gui-creator-library-element-ui",
+  "private": false,
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT"
+}

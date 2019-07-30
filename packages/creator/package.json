@@ -1,0 +1,50 @@
+{
+  "name": "@mobov/gui-creator",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@mobov/es-helper": "^1.0.6",
+    "@mobov/scss-helper": "^0.0.5",
+    "@mobov/vui": "^0.2.28",
+    "blueimp-md5": "^2.10.0",
+    "core-js": "^2.6.5",
+    "dom-to-image": "^2.6.0",
+    "element-ui": "^2.10.0",
+    "file-saver": "^2.0.1",
+    "jszip": "^3.2.0",
+    "lodash": "^4.17.11",
+    "monaco-editor": "^0.16.2",
+    "muse-ui": "^3.0.2",
+    "ulid": "^2.3.0",
+    "vue": "^2.6.10",
+    "vue-color": "^2.7.0",
+    "vue-router": "^3.0.3",
+    "vuedraggable": "^2.19.1",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/blueimp-md5": "^2.7.0",
+    "@types/file-saver": "^2.0.0",
+    "@types/jszip": "^3.1.5",
+    "@types/lodash": "^4.14.122",
+    "@types/vue-color": "^2.4.2",
+    "@vue/cli-plugin-babel": "^3.9.0",
+    "@vue/cli-plugin-eslint": "^3.9.0",
+    "@vue/cli-plugin-typescript": "^3.9.0",
+    "@vue/cli-service": "^3.9.0",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "@vue/eslint-config-typescript": "^4.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "sass": "^1.18.0",
+    "sass-loader": "^7.1.0",
+    "typescript": "^3.4.3",
+    "vue-template-compiler": "^2.6.10"
+  }
+}
