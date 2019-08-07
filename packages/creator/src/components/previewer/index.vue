@@ -4,11 +4,14 @@
   $--previewer-cursor-draw: url('../../assets/draw.png'), auto;
   .previewer {
     padding: 2rem;
+    .tool-bar {
+      margin-bottom: 30px;
+    }
     .previewer-screen {
       height: 805px;
       width: 350px;
       border-radius: 4px;
-      box-shadow: 0 0 0 14px #090a0d, 0 0 0 17px #9fa3a8, 0 0 34px 17px rgba(0,0,0,0.2);
+      box-shadow: 0 0 0 7px #090a0d, 0 0 0 10px #9fa3a8, 0 0 17px 10px rgba(0,0,0,0.2);
       margin: 0;
       overflow: hidden;
       position: relative;
@@ -37,13 +40,16 @@
   }
 </style>
 <script lang="jsx">
-  import { compiler } from '../../utils'
+  import CompSuit from './comp-suit.vue'
+  import render from './render'
   import { createNamespacedHelpers } from 'vuex'
+  import ToolBar from '../tool-bar/index'
 
-  const {mapGetters, mapState} = createNamespacedHelpers('previewer')
+  const { mapGetters, mapState } = createNamespacedHelpers('previewer')
 
   export default {
     name: 'previewer',
+    components: { ToolBar, CompSuit },
     computed: {
       ...mapState([
         'mode'
@@ -71,20 +77,20 @@
       }
     },
     render (h) {
-      const {screenStyles, screenClasses, handleClick} = this
+      const { screenStyles, screenClasses, handleClick } = this
 
       return (
         <div class="previewer">
+          <ToolBar />
           <figure staticClass="previewer-screen" style={screenStyles} class={screenClasses}>
             <div ref="$screen" staticClass="previewer-screen-main" onClick={handleClick}>
-              {compiler(h, this.UiNodes)}
+                {render(h, this.UiNodes)}
             </div>
           </figure>
         </div>
       )
     },
     mounted () {
-      console.log(this.UiNodes)
     }
   }
 </script>

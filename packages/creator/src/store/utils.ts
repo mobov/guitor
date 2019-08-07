@@ -4,7 +4,6 @@ import { deepCopy } from '@mobov/es-helper'
  * 对象合并对象
  * @param source
  * @param target
- * @param key
  */
 export function setObjectData (source: any, target: any) {
   if (source instanceof Object && target instanceof Object) {

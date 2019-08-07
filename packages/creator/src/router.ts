@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Library from './views/library.vue'
 
 Vue.use(Router)
 
@@ -9,14 +8,13 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
-      name: 'library',
-      component: Library
+      path: '*',
+      redirect: '/comp-api',
     },
     {
       path: '/comp-api',
       name: 'comp-api',
-      component: () => import(/* webpackChunkName: "styles" */ './views/comp-api.vue')
+      component: () => import(/* webpackChunkName: "comp-api" */ './views/comp-api.vue')
     },
     {
       path: '/styles',
@@ -26,7 +24,7 @@ export default new Router({
     {
       path: '/project',
       name: 'project',
-      component: () => import(/* webpackChunkName: "styles" */ './views/project.vue')
+      component: () => import(/* webpackChunkName: "project" */ './views/project.vue')
     }
   ]
 })

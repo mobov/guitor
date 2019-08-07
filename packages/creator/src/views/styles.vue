@@ -1,28 +1,34 @@
 <style lang="scss">
-  .comp-api {
-
+  .style-group {
+    .style-group-title {
+      font-size: 14px;
+    }
   }
 </style>
 <template>
   <m-view class="styles" paddingY="md" paddingX="sm">
-    背景
-    <control-item class="m-mb-sm m-px-sm"
-                  v-model="item.value"
-                  @input="handleUpdate(item.field, arguments[0])"
-                  :type="item.type"
-                  :key="index"
-                  :label="item.label"
-                  :config="item.config"
-                  v-for="(item, index) in data"></control-item>
+    <div class="style-group" v-for="group in groups">
+      <el-divider content-position="left">{{group.name}}</el-divider>
+      <div class="style-group-main">
+        <control-item class="m-mb-sm m-px-sm"
+                      v-for="item in group.attrs"
+                      :key="item"
+                      v-model="styles[item].value"
+                      @input="handleUpdate(item, arguments[0])"
+                      :type="styles[item].type"
+                      :label="styles[item].label"
+                      :config="styles[item].config" />
+      </div>
+    </div>
   </m-view>
 </template>
 <script>
-  import ControlTypes from '@/control-types/style'
+  import { groups, styles } from '@/utils/style.config'
   import ControlItem from '@/components/control-item'
   import { createNamespacedHelpers } from 'vuex'
   import { deepCopy } from '@mobov/es-helper'
 
-  const {mapGetters, mapState, mapMutations} = createNamespacedHelpers('project')
+  const { mapGetters, mapState, mapMutations } = createNamespacedHelpers('project')
 
   export default {
     name: 'styles',
@@ -31,7 +37,8 @@
     },
     data () {
       return {
-        data: []
+        styles: deepCopy(styles),
+        groups
       }
     },
     computed: {
@@ -44,22 +51,28 @@
       activeStyles () {
         return this.activeNode.nodeData.style
       },
-      styleKeys () {
-        return Object.keys(ControlTypes)
+      activeStyleKeys () {
+        return Object.keys(this.activeStyles)
       }
     },
-    created () {
-      this.initData()
-      console.log(this.activeStyles)
+    watch: {
+      activeUid: {
+        immediate: true,
+        handler (newVal) {
+          console.log(this.activeUid)
+          if (newVal) {
+            this.init()
+          }
+        }
+      }
     },
     methods: {
       ...mapMutations([
         'SET_NODE'
       ]),
       formatIStyle (data) {
-        if (data.field === 'backgroundImage') {
+        if (data.backgroundImage.length > 0) {
           data.value = data.value.substring(3, data.value.length - 2)
-          console.log(data.value)
         }
       },
       formatOStyle (data) {
@@ -67,29 +80,19 @@
           data.backgroundImage = `url(${data.backgroundImage})`
         }
       },
-      initData () {
-        console.log(this.activeStyles)
-        this.styleKeys.forEach(style => {
-          const result = Object.assign({
-              field: style,
-              config: {}
-            },
-            deepCopy(ControlTypes[style]),
-            this.activeStyles[style] === undefined ? {} : {
-            value: this.activeStyles[style]
-          })
-          this.formatIStyle(result)
-          this.data.push(result)
+      init () {
+        const data = deepCopy(styles)
+        this.activeStyleKeys.forEach(style => {
+          data[style].value = this.activeStyles[style]
         })
-        console.log(this.data)
+        this.formatIStyle(data)
+        this.styles = data
       },
       handleUpdate (field, val) {
         const style = {
           [field]: val
         }
-        console.log(style)
         this.formatOStyle(style)
-        console.log(style)
         this.SET_NODE({
           uid: this.activeUid,
           style

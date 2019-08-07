@@ -38,20 +38,21 @@
 <template>
   <m-app id="app" class="app">
     <m-frame
-      rightSize="500px"
+      rightSize="400px"
       headerSize="50px"
-      leftSize="50px"
+      leftSize="300px"
       fillHeader="none"
       :leftIndex="5"
       :rightIndex="5">
       <m-flex width="100%" height="100%" align="center" justify="center">
         <previewer/>
       </m-flex>
+      <library slot="left"/>
       <m-frame slot="right" class="side-panel" :header-size="50" :elevation="2">
         <m-app-bar slot="header" :size="50" class="side-panel-navs">
           <el-tabs v-model="activeName">
-            <el-tab-pane label="组件库" name="library"></el-tab-pane>
             <el-tab-pane label="组件API" name="comp-api"></el-tab-pane>
+            <el-tab-pane label="操作" name="operation"></el-tab-pane>
             <el-tab-pane label="样式" name="styles"></el-tab-pane>
             <el-tab-pane label="项目" name="project"></el-tab-pane>
           </el-tabs>
@@ -74,12 +75,15 @@
   </m-app>
 </template>
 <script>
-  import Vue from 'vue'
-  import Previewer from '@/components/previewer'
+  import Previewer from './components/previewer'
+  import ToolBar from './components/tool-bar/index'
+  import Library from './components/library'
 
   export default {
     name: 'app',
     components: {
+      Library,
+      ToolBar,
       Previewer
     },
     data () {

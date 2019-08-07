@@ -8,7 +8,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@mobov/es-helper": "^1.0.6",
+    "@mobov/es-helper": "^1.1.7",
+    "@mobov/gui-creator-library-element-ui": "^1.0.0",
     "@mobov/scss-helper": "^0.0.5",
     "@mobov/vui": "^0.2.28",
     "blueimp-md5": "^2.10.0",
@@ -20,11 +21,11 @@
     "lodash": "^4.17.11",
     "monaco-editor": "^0.16.2",
     "muse-ui": "^3.0.2",
+    "sortablejs": "^1.10.0-rc3",
     "ulid": "^2.3.0",
     "vue": "^2.6.10",
     "vue-color": "^2.7.0",
     "vue-router": "^3.0.3",
-    "vuedraggable": "^2.19.1",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

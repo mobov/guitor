@@ -8,7 +8,8 @@
     width: 100%;
     &.--size,
     &.--number,
-    &.--color {
+    &.--color,
+    &.--switch {
       width: 50%;
     }
   }

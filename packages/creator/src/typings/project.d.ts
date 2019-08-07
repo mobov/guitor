@@ -10,7 +10,7 @@ export type PackageConfig = {
 
 export type UiNodes = Array<UiNode>
 
-export type Data = {
+export type Options = {
   PackageConfig: PackageConfig
   UiNodes: UiNodes
 }
