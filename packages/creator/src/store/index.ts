@@ -18,6 +18,8 @@ export interface RootGetters {
   ['previewer/UiNodes']: typeof previewer.getters.UiNodes
   ['project/UiNodes']: typeof project.getters.UiNodes
   ['library/getComponent']: typeof library.getters.getComponent
+  ['library/isContainer']: typeof library.getters.isContainer
+
 }
 
 export default new Vuex.Store({

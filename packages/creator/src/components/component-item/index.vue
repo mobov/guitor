@@ -11,9 +11,6 @@
   export default {
     name: 'component-item',
     props: {
-      compName: {
-        type: String
-      },
       value: {
         type: Object
       }
@@ -43,18 +40,20 @@
       handleDragEnd (e) {
         if (this.isDragging) {
           this.eventBus.$emit('insertNode', {
-            name: this.compName
+            name: this.value.name
           })
           this.isDragging = false
         }
       },
       handleInsert () {
+        console.log(this.value)
         this.eventBus.$emit('insertNode', {
-          name: this.compName
+          name: this.value.name
         })
       }
     },
     mounted () {
+      console.log(this.value)
       document.addEventListener('dragend', this.handleDragEnd)
       // document.addEventListener('mousemove', this.handleMouseMove)
       // document.addEventListener('mouseup', this.handleMouseUp)

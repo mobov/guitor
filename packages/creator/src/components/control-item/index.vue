@@ -9,7 +9,7 @@
     &.--size,
     &.--number,
     &.--color,
-    &.--switch {
+    &.--boolean {
       width: 50%;
     }
   }

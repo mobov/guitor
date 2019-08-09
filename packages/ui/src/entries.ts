@@ -1,2 +1,2 @@
-export { default as HBox } from './box'
+export { default as HContainer } from './box'
 

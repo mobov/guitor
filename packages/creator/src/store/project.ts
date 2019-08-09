@@ -14,6 +14,11 @@ type nodeSetData = {
   domProps?: { [field: string]: any }
 }
 
+type nodeSetConfig = {
+  uid: string
+  [field: string]: any
+}
+
 type swapOpts = {
   from: Project.UiNode
   to: Project.UiNode
@@ -36,11 +41,14 @@ export type Getters = {
 }
 export type Mutations = {
   SET_PROJECT: (state: State, val: Project.Options) => void
-  SET_NODE: (state: State, val: nodeSetData) => void
+  SET_NODE_DATA: (state: State, val: nodeSetData) => void
+  SET_NODE_BOX_CONFIG: (state: State, val: nodeSetConfig) => void
+  SET_NODE_UI_CONFIG: (state: State, val: nodeSetConfig) => void
   SET_ACTIVE_NODE: (state: State, val: string) => void
   SWAP_NODE: (state: State, val: swapOpts) => void
   INSERT_NODE: (state: State, val: UiNode) => void
   REMOVE_NODE: (state: State, val: UiNode) => void
+  CLEAR_NODE: (state: State, val: UiNode) => void
 }
 
 export type ActionsParams = {
@@ -56,7 +64,9 @@ export type Actions = {
   insertNode: (params: ActionsParams, val: Project.UiNode) => Promise<void>
   sortNode: (params: ActionsParams, val: sortOpts) => Promise<void>
   removeNode: (params: ActionsParams, val: Project.UiNode) => Promise<void>
+  clearNode: (params: ActionsParams, val: Project.UiNode) => Promise<void>
   moveNode: (params: ActionsParams, val: sortOpts) => Promise<void>
+  setNodeLock: (params: ActionsParams, val: Project.UiNode) => Promise<void>
   activeNodeInner: (params: ActionsParams, val: Project.UiNode) => Promise<void>
   activeNodeOuter: (params: ActionsParams, val: Project.UiNode) => Promise<void>
   activeNodePrev: (params: ActionsParams, val: Project.UiNode) => Promise<void>
@@ -73,16 +83,21 @@ export default {
         dependencies: {}
       },
       UiNodes: [{
-        name: 'HBox',
+        name: 'HContainerY',
+        tag: 'HContainer',
         uid: 'root',
+        uiConfig: {
+          isLocked: false,
+          isContainer: true
+        },
         nodeData: {
           props: {
             direction: 'y',
             justify: 'start',
-            align: 'start'
+            align: 'start',
+            space: 5
           },
           style: {
-            padding: '5px',
             minHeight: '100%',
             height: 'auto'
           },
@@ -97,20 +112,36 @@ export default {
     UiNodes: state => state.Data.UiNodes,
     activeNode: state => getPathNode(state.activeUid, state.Data.UiNodes),
     activeNodeIsContainer: (state, getters, rootState, rootGetters) => {
+      console.log( rootGetters['library/getComponent'](getters.activeNode.name as any))
       const compData = rootGetters['library/getComponent'](getters.activeNode.name as any) as any
-      return compData.isContainer !== undefined ? compData.isContainer : false
+
+      return compData.uiConfig !== undefined
+        ? compData.uiConfig.isContainer !== undefined
+          ? compData.uiConfig.isContainer
+          : false
+        : false
     }
   },
   mutations: <Mutations> {
     SET_PROJECT (state, val) {
       state.Data = val
     },
-    SET_NODE (state, val) {
+    SET_NODE_DATA (state, val) {
       const $target = getPathNode(val.uid, state.Data.UiNodes)
       setObjectData($target.nodeData.style, val.style)
       setObjectData($target.nodeData.props, val.props)
       setObjectData($target.nodeData.attrs, val.attrs)
       setObjectData($target.nodeData.domProps, val.domProps)
+    },
+    SET_NODE_BOX_CONFIG (state, val) {
+      console.log(val)
+      const $target = getPathNode(val.uid, state.Data.UiNodes)
+      console.log($target)
+      setObjectData($target.boxConfig, val.boxConfig)
+    },
+    SET_NODE_UI_CONFIG (state, val) {
+      const $target = getPathNode(val.uid, state.Data.UiNodes)
+      setObjectData($target.uiConfig, val.uiConfig)
     },
     SET_ACTIVE_NODE (state, val) {
       state.activeUid = val
@@ -141,6 +172,12 @@ export default {
       const nodeIndex = parentNode.children.findIndex(_ => _.uid === val.uid)
       parentNode.children.splice(nodeIndex, 1)
     },
+    CLEAR_NODE (state, val) {
+      const node = getPathNode(val.uid, state.Data.UiNodes)
+       if (node.children.length) {
+         node.children.splice(0, node.children.length)
+       }
+    },
     INSERT_NODE (state, val) {
       const parentNode = getPathNode(val.pid, state.Data.UiNodes)
       parentNode.children.push(val)
@@ -149,16 +186,42 @@ export default {
   actions: <Actions> {
     insertNode ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
       const node = deepCopy(data)
-      const nodeComp = rootGetters['library/getComponent'](data.name as any) as any
-      const nodeData = deepCopy(nodeComp.nodeData)
-      node.children = node.children ? node.children : []
-      merge(node, { uid: ulid(), nodeData })
-      node.children = node.children ? node.children : []
-      node.nodeData.domProps = node.nodeData.domProps ?  node.nodeData.domProps : {}
-      node.nodeData.style = node.nodeData.style ?  node.nodeData.style : {}
-      node.nodeData.attrs = node.nodeData.attrs ?  node.nodeData.attrs : {}
+
+      const handleNode = (node: any, pid: string, root: boolean) => {
+        const nodeComp = rootGetters['library/getComponent'](node.name as any) as any
+        const nodeCompData = deepCopy(nodeComp)
+        const nodeCopy = deepCopy(node)
+        merge(node, {
+          uid: ulid(),
+          pid,
+          tag: nodeCompData.tag,
+          uiConfig: {
+            isLocked: false
+          },
+          children: nodeCompData.children ? nodeCompData.children : [],
+          nodeData: {
+            style: {},
+            attrs: {},
+            props: {},
+            domProps: {}
+          }
+        }, {
+          nodeData: nodeCompData.nodeData,
+          uiConfig: nodeCompData.uiConfig ? nodeCompData.uiConfig : {}
+        }, nodeCopy)
+        if (!node.uiConfig.isContainer) {
+          node.boxConfig = nodeCompData.boxConfig
+        }
+        if (node.children.length > 0) {
+          node.children.forEach((child: any) => handleNode(child, node.uid, false))
+        }
+      }
+      handleNode(node, node.pid, true)
+
+      console.log(node)
+
       commit('INSERT_NODE', node)
-      commit('SET_ACTIVE_NODE', node.uid)
+      // commit('SET_ACTIVE_NODE', node.uid)
     },
     sortNode ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
       const parentNode = getPathNode(data.id, state.Data.UiNodes)
@@ -167,8 +230,19 @@ export default {
       commit('SWAP_NODE', { from, to })
     },
     removeNode ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
-      commit('REMOVE_NODE', data)
       commit('SET_ACTIVE_NODE', data.pid)
+      commit('REMOVE_NODE', data)
+    },
+    setNodeLock ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
+      commit('SET_NODE_UI_CONFIG', {
+        uid: data.uid,
+        uiConfig: {
+          isLocked: !data.uiConfig.isLocked
+        }
+      })
+    },
+    clearNode ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
+      commit('CLEAR_NODE', data)
     },
     moveNode ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
 

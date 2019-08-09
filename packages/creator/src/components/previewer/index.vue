@@ -4,14 +4,25 @@
   $--previewer-cursor-draw: url('../../assets/draw.png'), auto;
   .previewer {
     padding: 2rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
     .tool-bar {
       margin-bottom: 30px;
     }
     .previewer-screen {
-      height: 805px;
-      width: 350px;
+      height: 80vh;
+      width: 90%;
+      /*border: 5px solid #9fa3a8;*/
+      background-color: #090a0d;
+      padding: 8px;
+      box-sizing: border-box;
       border-radius: 4px;
-      box-shadow: 0 0 0 7px #090a0d, 0 0 0 10px #9fa3a8, 0 0 17px 10px rgba(0,0,0,0.2);
+      box-shadow: var(--m-elevation-2);
+      /*box-shadow: 0 0 0 7px #090a0d, 0 0 0 10px #9fa3a8, 0 0 17px 10px rgba(0,0,0,0.2);*/
       margin: 0;
       overflow: hidden;
       position: relative;
@@ -26,10 +37,13 @@
     }
     .previewer-screen-main {
       font-size: 10px;
-      height: inherit;
-      width: inherit;
-      max-width: inherit;
-      min-width: inherit;
+      height: 100%;
+      width: 100%;
+      background-color: white;
+      /*height: inherit;*/
+      /*width: inherit;*/
+      /*max-width: inherit;*/
+      /*min-width: inherit;*/
       @include scroller();
       @include no-scroll-bar();
     }
@@ -41,7 +55,7 @@
 </style>
 <script lang="jsx">
   import CompSuit from './comp-suit.vue'
-  import render from './render'
+  import { renderComponent } from './render'
   import { createNamespacedHelpers } from 'vuex'
   import ToolBar from '../tool-bar/index'
 
@@ -66,8 +80,8 @@
       },
       screenStyles () {
         return {
-          height: `${this.height}px`,
-          width: `${this.width}px`
+          // height: `${this.height}px`,
+          // width: `${this.width}px`
         }
       }
     },
@@ -82,11 +96,11 @@
       return (
         <div class="previewer">
           <ToolBar />
-          <figure staticClass="previewer-screen" style={screenStyles} class={screenClasses}>
+          <div staticClass="previewer-screen" style={screenStyles} class={screenClasses}>
             <div ref="$screen" staticClass="previewer-screen-main" onClick={handleClick}>
-                {render(h, this.UiNodes)}
+                {renderComponent(h, this.UiNodes)}
             </div>
-          </figure>
+          </div>
         </div>
       )
     },

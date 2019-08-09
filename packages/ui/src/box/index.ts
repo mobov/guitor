@@ -1,7 +1,7 @@
-import HBox from './box.vue'
+import HContainer from './box.vue'
 
-HBox.install = (Vue) => {
-  Vue.component('HBox', HBox)
+HContainer.install = (Vue) => {
+  Vue.component('HContainer', HContainer)
 }
 
-export default HBox
+export default HContainer

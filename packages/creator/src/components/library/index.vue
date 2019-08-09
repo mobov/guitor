@@ -18,22 +18,11 @@
     <div :key="library.name" v-for="library in Data">
       <el-divider content-position="left">{{library.label}}</el-divider>
       <m-row paddingX="sm">
-        <m-col class="item" :padding="2" :xs="8" :key="name" v-for="(item, name) in library.components">
-          <component-item :comp-name="name" :value="item"></component-item>
+        <m-col class="item" v-if="isShow(item)" :padding="2" :xs="8" :key="item.name" v-for="item in library.components">
+          <component-item :value="item"></component-item>
         </m-col>
       </m-row>
     </div>
-    <!--<m-list :title="library.label" :key="library.name" v-for="library in Data">-->
-     <!---->
-      <!--&lt;!&ndash;{{library.components}}&ndash;&gt;-->
-      <!--&lt;!&ndash;<draggable :options="dragOptions" v-model="library.components">&ndash;&gt;-->
-        <!--<m-row paddingX="sm">-->
-          <!--<m-col class="item" :padding="2" :xs="8" :key="name" v-for="(item, name) in library.components">-->
-            <!--<component-item :comp-name="name" :value="item"></component-item>-->
-          <!--</m-col>-->
-        <!--</m-row>-->
-      <!--&lt;!&ndash;</draggable>&ndash;&gt;-->
-    <!--</m-list>-->
   </m-view>
 </template>
 <script>
@@ -58,8 +47,10 @@
         'Data'
       ])
     },
-    created () {
-      console.log(this.Data)
+    methods: {
+      isShow (data) {
+        return !(!!data.uiConfig && !!data.uiConfig.isHidden)
+      }
     }
   }
 </script>

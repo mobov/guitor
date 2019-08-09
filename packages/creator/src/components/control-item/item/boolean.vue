@@ -1,7 +1,7 @@
 <style lang='scss'>
 </style>
 <template>
-  <div class="control-item-switch">
+  <div class="control-item-boolean">
     <el-switch
       v-model="_value"
       active-color="#13ce66"
@@ -12,7 +12,7 @@
 <script>
 
   export default {
-    name: 'control-item-switch',
+    name: 'control-item-boolean',
     props: {
       value: {
         type: Boolean

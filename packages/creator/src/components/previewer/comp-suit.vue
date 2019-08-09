@@ -1,6 +1,6 @@
 <script lang="jsx">
   import Sortable from 'sortablejs'
-  import render from './render'
+  import { renderComponent } from './render'
   import { createNamespacedHelpers } from 'vuex'
 
   const { mapGetters, mapState, mapMutations, mapActions } = createNamespacedHelpers('project')
@@ -12,9 +12,9 @@
   // ]
 
   const SuitsHandlerDirections = [
-      '↑',
+    '↑',
     '←', '→',
-      '↓'
+    '↓'
   ]
 
   let dropId = '0'
@@ -45,20 +45,14 @@
       ...mapState([
         'activeUid'
       ]),
-      $dom () {
-        let $el = this.$el
-        // fixme: element-ui的$el做了代理不是根$el
-        if (this.node.name === 'ElInput') {
-          $el = this.$el.parentNode
-        }
-        return $el
-      },
+      ...mapGetters([
+        'activeNode'
+      ]),
       classes () {
         return {
           'comp-suit': true,
           '--active': this.isActive,
           '--over': this.isOver,
-          '--isHanding': this.isHanding,
           '--isContainer': this.isContainer,
           '--isLocked': this.isLocked
         }
@@ -70,15 +64,13 @@
         return this.nodeUid === 'root'
       },
       isContainer () {
-        const compData = this.$store.getters['library/getComponent'](this.node.name)
-        return compData.isContainer !== undefined ? compData.isContainer : false
+        return this.node.uiConfig.isContainer
       },
       isActive () {
         return this.activeUid === this.nodeUid
       },
       isLocked () {
-        return false
-        // return this.ActiveNode.uiConfig.locked
+        return this.node.uiConfig.isLocked
       }
     },
     methods: {
@@ -105,7 +97,7 @@
       init () {
         this.initSuits()
 
-        this.$sortable = new Sortable(this.$dom, {
+        this.$sortable = new Sortable(this.$el, {
           group: this.nodeUid,
           draggable: '.comp-suit',
           // Element is dropped into the list from another list
@@ -145,6 +137,11 @@
         }
       },
       handleInsertNode (val) {
+        console.log(this.isLocked)
+        console.log(this.node)
+        if (this.activeNode.uiConfig.isLocked) {
+          return
+        }
         this.insertNode({
           name: val.name,
           pid: this.activeUid
@@ -182,12 +179,11 @@
     beforeDestroy () {
       this.removeSuitListeners()
     },
+    RChildren (h) {
+
+    },
     render (h) {
-      this.node.nodeData.class = this.node.nodeData.class ? {
-        [`uid-${this.node.uid}`]: true,
-        ...this.node.nodeData.class,
-        ...this.classes
-      } : {
+      const classes = {
         [`uid-${this.node.uid}`]: true,
         ...this.classes
       }
@@ -196,17 +192,33 @@
       //     name: 'drag-ani'
       //   }
       // ]
-      // this.node.nodeData.attrs = this.node.nodeData.attrs === undefined ? {
-      //   draggable: true,
-      // } : {
-      //   draggable: true,
-      //   ...this.node.nodeData.attrs
-      // }
-      return h(
-        this.node.name,
-        this.node.nodeData,
-        this.node.children ? render(h, this.node.children) : []
-      )
+      if (this.node.uiConfig.isContainer) {
+        this.node.nodeData.class = this.node.nodeData.class ? {
+          ...this.node.nodeData.class,
+          ...this.classes
+        } : classes
+
+        return h(
+          this.node.tag,
+          this.node.nodeData,
+          this.node.children ? renderComponent(h, this.node.children) : []
+        )
+      } else {
+        return h(
+          'HBox',
+          {
+            'class': classes,
+            props: this.node.boxConfig
+          },
+          [
+            h(
+              this.node.tag,
+              this.node.nodeData,
+              this.node.children ? this.node.children : []
+            )
+          ]
+        )
+      }
     }
   }
 </script>
@@ -214,7 +226,7 @@
   @import "~@mobov/scss-helper/import";
   // $--element-active-color: #ffd0a3;
   $--comp-suit-handler-color-normal: #03a9f4;
-  $--comp-suit-handler-color-locked: #ff5252;
+  $--comp-suit-handler-color-locked: #ffa365;
   $--comp-suit-handler-color-over: #ffa365;
   $--comp-suit-handler-pos-fix: 0;
   $--comp-suit-handler-size: 2px;
@@ -230,62 +242,69 @@
     box-sizing: border-box;
     position: relative;
     transform: translate3d(0, 0, 0);
+
     &.--active {
       z-index: 99;
       /*border-width: 0 !important;*/
-      >.comp-suit-handler {
+      > .comp-suit-handler {
         background-color: var(--comp-suit-handler-color);
         /*transition: transform ease .3s;*/
         position: absolute;
       }
-      >.--↑,
-      >.--→,
-      >.--↓,
-      >.--← {
+
+      > .--↑,
+      > .--→,
+      > .--↓,
+      > .--← {
         z-index: 100;
       }
-      >.--↑,
-      >.--↓ {
+
+      > .--↑,
+      > .--↓ {
         height: $--comp-suit-handler-size;
-        width: calc(100% + #{$--comp-suit-handler-size }) ;
+        width: calc(100% + #{$--comp-suit-handler-size });
         left: $--comp-suit-handler-position;
       }
 
-      >.--→,
-      >.--← {
+      > .--→,
+      > .--← {
         width: $--comp-suit-handler-size;
-        height: calc(100% + #{$--comp-suit-handler-size }) ;
+        height: calc(100% + #{$--comp-suit-handler-size });
         top: $--comp-suit-handler-position;
       }
 
-      >.--↑ {
+      > .--↑ {
         top: $--comp-suit-handler-position;
       }
 
-      >.--↓ {
+      > .--↓ {
         bottom: $--comp-suit-handler-position;
       }
 
-      >.--← {
+      > .--← {
         left: $--comp-suit-handler-position;
       }
 
-      >.--→ {
+      > .--→ {
         right: $--comp-suit-handler-position;
       }
     }
+
     &.--isContainer {
       border: 1px dashed rgba(0, 0, 0, .5);
-      >.comp-suit-mask {
+
+      > .comp-suit-mask {
         display: none;
       }
     }
+
     &.--isLocked {
       --comp-suit-handler-color: #{$--comp-suit-handler-color-locked};
+      > .comp-suit-mask {
+        display: block;
+      }
     }
-    &.--isHanding {
-      --comp-suit-handler-scale: 1
-    }
+
     .comp-suit-mask {
       /*visibility: hidden;*/
       background-color: transparent;
@@ -308,10 +327,10 @@
   }
 
   /*.comp-suit-axis {*/
-    /*width: 1px;*/
-    /*height: 100vh;*/
-    /*position: absolute;*/
-    /*background-color: var(--comp-suit-handler-color);*/
+  /*width: 1px;*/
+  /*height: 100vh;*/
+  /*position: absolute;*/
+  /*background-color: var(--comp-suit-handler-color);*/
   /*}*/
 
 </style>

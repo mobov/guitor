@@ -5,30 +5,44 @@
 </style>
 <template>
   <m-view class="comp-api" paddingY="md" paddingX="sm">
-    <control-item class="m-mb-sm m-px-sm"
-                  v-model="item.value"
-                  :type="item.type"
-                  :key="`props${index}`"
-                  :label="item.label"
-                  :config="item.config"
-                  @input="handleUpdate('props', item.field, arguments[0])"
-                  v-for="(item, index) in propsData"></control-item>
-    <control-item class="m-mb-sm m-px-sm"
-                  v-model="item.value"
-                  :type="item.type"
-                  :key="`attrs${index}`"
-                  :label="item.label"
-                  :config="item.config"
-                  @input="handleUpdate('attrs', item.field, arguments[0])"
-                  v-for="(item, index) in attrsData"></control-item>
-    <control-item class="m-mb-sm m-px-sm"
-                  v-model="item.value"
-                  :type="item.type"
-                  :key="`attrs${index}`"
-                  :label="item.label"
-                  :config="item.config"
-                  @input="handleUpdate('domProps', item.field, arguments[0])"
-                  v-for="(item, index) in domPropsData"></control-item>
+    <div v-if="!activeNodeIsContainer">
+      <el-divider content-position="left">盒属性</el-divider>
+      <control-item  class="m-mb-sm m-px-sm"
+                    v-model="item.value"
+                    :type="item.type"
+                    :key="`boxConfig${index}`"
+                    :label="item.label"
+                    :config="item.config"
+                    @input="handleUpdateBoxConfig(item.field, arguments[0])"
+                    v-for="(item, index) in boxConfigData"></control-item>
+    </div>
+    <div>
+      <el-divider content-position="left">组件API</el-divider>
+      <control-item class="m-mb-sm m-px-sm"
+                    v-model="item.value"
+                    :type="item.type"
+                    :key="`props${index}`"
+                    :label="item.label"
+                    :config="item.config"
+                    @input="handleUpdate('props', item.field, arguments[0])"
+                    v-for="(item, index) in propsData"></control-item>
+      <control-item class="m-mb-sm m-px-sm"
+                    v-model="item.value"
+                    :type="item.type"
+                    :key="`attrs${index}`"
+                    :label="item.label"
+                    :config="item.config"
+                    @input="handleUpdate('attrs', item.field, arguments[0])"
+                    v-for="(item, index) in attrsData"></control-item>
+      <control-item class="m-mb-sm m-px-sm"
+                    v-model="item.value"
+                    :type="item.type"
+                    :key="`attrs${index}`"
+                    :label="item.label"
+                    :config="item.config"
+                    @input="handleUpdate('domProps', item.field, arguments[0])"
+                    v-for="(item, index) in domPropsData"></control-item>
+    </div>
   </m-view>
 </template>
 <script>
@@ -47,18 +61,23 @@
       return {
         propsData: [],
         attrsData: [],
-        domPropsData: []
+        domPropsData: [],
+        boxConfigData: []
       }
     },
     computed: {
       ...mapGetters([
-        'activeNode'
+        'activeNode',
+        'activeNodeIsContainer'
       ]),
       ...mapState([
         'activeUid'
       ]),
       compData () {
         return this.$store.getters['library/getComponent'](this.activeNode.name)
+      },
+      boxConfigApi () {
+        return this.$store.getters['library/getComponent']('HContainerY').control.props
       },
       propsApi () {
         return this.compData.control.props || {}
@@ -68,6 +87,9 @@
       },
       domPropsApi () {
         return this.compData.control.domProps || {}
+      },
+      boxConfigApiKeys () {
+        return ['flex', 'space']
       },
       propsApiKeys () {
         return Object.keys(this.propsApi)
@@ -89,12 +111,34 @@
     },
     methods: {
       ...mapMutations([
-        'SET_NODE'
+        'SET_NODE_DATA',
+        'SET_NODE_BOX_CONFIG'
       ]),
       init () {
         this.initData('props')
         this.initData('attrs')
         this.initData('domProps')
+        if (!this.activeNodeIsContainer) {
+          this.initBoxConfigData()
+        }
+      },
+      initBoxConfigData () {
+        const apiKeys = this.boxConfigApiKeys
+        const api = this.boxConfigApi
+        const fieldData = this.activeNode.boxConfig
+        const data = []
+        apiKeys.forEach(field => {
+          const result = Object.assign({
+              field,
+              config: {}
+            },
+            deepCopy(api[field]),
+            fieldData[field] === undefined ? {} : {
+              value: fieldData[field]
+            })
+          data.push(result)
+        })
+        this.boxConfigData = data
       },
       initData (type = 'props') {
         const apiKeys = this[`${type}ApiKeys`]
@@ -118,9 +162,17 @@
         const data = {
           [field]: val
         }
-        this.SET_NODE({
+        this.SET_NODE_DATA({
           uid: this.activeUid,
           [type]: data
+        })
+      },
+      handleUpdateBoxConfig (field, val) {
+        this.SET_NODE_BOX_CONFIG({
+          uid: this.activeUid,
+          boxConfig: {
+            [field]: val
+          }
         })
       }
     },

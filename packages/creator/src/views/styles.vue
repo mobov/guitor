@@ -68,7 +68,7 @@
     },
     methods: {
       ...mapMutations([
-        'SET_NODE'
+        'SET_NODE_DATA'
       ]),
       formatIStyle (data) {
         if (data.backgroundImage.length > 0) {
@@ -93,7 +93,7 @@
           [field]: val
         }
         this.formatOStyle(style)
-        this.SET_NODE({
+        this.SET_NODE_DATA({
           uid: this.activeUid,
           style
         })

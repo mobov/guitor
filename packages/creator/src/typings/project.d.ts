@@ -15,16 +15,24 @@ export type Options = {
   UiNodes: UiNodes
 }
 
+
+
+export type BoxConfig = {
+
+}
+
 export type UiConfig = {
-  disabled?: boolean
-  locked: boolean
+  isContainer?: boolean
+  isLocked?: boolean
 }
 
 export type UiNode = {
   name: string
+  tag: string
   uid: string
   pid: string
   uiConfig: UiConfig
+  boxConfig: BoxConfig
   nodeData: VNodeData
   children: UiNodes
 }

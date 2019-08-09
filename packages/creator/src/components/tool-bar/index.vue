@@ -1,41 +1,57 @@
 <template>
   <m-flex class="tool-bar" justify="center">
     <m-flex :elevation="2" class="tool-bar-main">
-      <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
-                @click="handleActivePrev">
-        <m-icon value="arrow_upward"></m-icon>
-      </m-button>
+      <el-tooltip content="向上" placement="top">
+        <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
+                  @click="handleActivePrev">
+          <m-icon value="arrow_upward"></m-icon>
+        </m-button>
+      </el-tooltip>
       <div class="tool-bar-divider"></div>
-      <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
-                @click="handleActiveNext">
-        <m-icon value="arrow_downward"></m-icon>
-      </m-button>
+      <el-tooltip content="向下" placement="top">
+        <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
+                  @click="handleActiveNext">
+          <m-icon value="arrow_downward"></m-icon>
+        </m-button>
+      </el-tooltip>
       <div class="tool-bar-divider"></div>
-      <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
-                @click="handleActiveInner">
-        <m-icon value="unfold_less"></m-icon>
-      </m-button>
+      <el-tooltip content="向里" placement="top">
+        <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
+                  @click="handleActiveInner">
+          <m-icon value="unfold_less"></m-icon>
+        </m-button>
+      </el-tooltip>
       <div class="tool-bar-divider"></div>
-      <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
-                @click="handleActiveOuter">
-        <m-icon value="unfold_more"></m-icon>
-      </m-button>
+      <el-tooltip content="向外" placement="top">
+        <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
+                  :disabled="isRoot"
+                  @click="handleActiveOuter">
+          <m-icon value="unfold_more"></m-icon>
+        </m-button>
+      </el-tooltip>
       <div class="tool-bar-divider"></div>
-      <m-button :disabled="!isContainer" height="100%" :width="40"
-                :color="lockColor" variety="flat" shape="square"
-                @click="handleLock">
-        <m-icon :value="lockIcon"></m-icon>
-      </m-button>
+      <el-tooltip content="锁定" placement="top">
+        <m-button :disabled="!isContainer" height="100%" :width="40"
+                  :color="lockColor" variety="flat" shape="square"
+                  @click="handleLock">
+          <m-icon :value="lockIcon"></m-icon>
+        </m-button>
+      </el-tooltip>
       <div class="tool-bar-divider"></div>
-      <m-button height="100%" :width="40" color="error" variety="flat" shape="square"
-                @click="handleRemove">
-        <m-icon value="delete"></m-icon>
-      </m-button>
+      <el-tooltip content="删除节点" placement="top">
+        <m-button height="100%" :width="40" color="error" variety="flat" shape="square"
+                  :disabled="isRoot"
+                  @click="handleRemove">
+          <m-icon value="delete"></m-icon>
+        </m-button>
+      </el-tooltip>
       <div class="tool-bar-divider"></div>
-      <m-button :disabled="!isContainer" height="100%" :width="40" color="error" variety="flat" shape="square"
-                @click="handleRemove">
-        <m-icon value="delete_outline"></m-icon>
-      </m-button>
+      <el-tooltip content="清空节点" placement="top">
+        <m-button :disabled="!isContainer" height="100%" :width="40" color="error" variety="flat" shape="square"
+                  @click="handleClear">
+          <m-icon value="delete_outline"></m-icon>
+        </m-button>
+      </el-tooltip>
     </m-flex>
   </m-flex>
 </template>
@@ -48,7 +64,6 @@
     name: 'tool-bar',
     data () {
       return {
-        isLocked: false
       }
     },
     computed: {
@@ -62,8 +77,14 @@
       isContainer () {
         return this.activeNodeIsContainer
       },
+      isRoot () {
+        return this.activeNode.uid === 'root'
+      },
+      isLocked () {
+        return this.activeNode.uiConfig.isLocked === true
+      },
       lockColor () {
-        return this.isLocked ? 'error' : 'success'
+        return this.isLocked ? 'warning' : 'success'
       },
       lockIcon () {
         return this.isLocked ? 'lock_outline' : 'lock_open'
@@ -74,10 +95,10 @@
         'activeNodePrev',
         'activeNodeNext',
         'activeNodeOuter',
-        'activeNodeInner'
-      ]),
-      ...mapActions([
-        'removeNode'
+        'activeNodeInner',
+        'setNodeLock',
+        'removeNode',
+        'clearNode'
       ]),
       handleActivePrev () {
         this.activeNodePrev(this.activeNode)
@@ -94,8 +115,11 @@
       handleRemove () {
         this.removeNode(this.activeNode)
       },
+      handleClear () {
+        this.clearNode(this.activeNode)
+      },
       handleLock () {
-        this.isLocked = !this.isLocked
+        this.setNodeLock(this.activeNode)
       }
     }
   }
@@ -104,6 +128,7 @@
   .tool-bar {
     height: 50px;
     width: 100%;
+    margin-top: 20px;
     /*padding: 2rem;*/
     .tool-bar-main {
       overflow: hidden;

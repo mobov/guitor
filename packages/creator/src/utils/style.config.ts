@@ -21,6 +21,22 @@ export const groups = [{
 // }
 
 export const styles = {
+  minHeight: {
+    type: 'size',
+    label: '最小高度',
+    value: '0px',
+    config: {
+      step: 5
+    }
+  },
+  minWidth: {
+    type: 'size',
+    label: '最小宽度',
+    value: '0px',
+    config: {
+      step: 5
+    }
+  },
   height: {
     type: 'size',
     label: '高度',

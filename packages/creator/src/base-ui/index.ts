@@ -1,3 +1,4 @@
+import HContainer from './container.vue'
 import HBox from './box.vue'
 import Vue, { VueConstructor } from 'vue'
 
@@ -8,6 +9,7 @@ export type MegH5Plugin = {
 export default {
   installed: false,
   install (Vue, opts = {}) {
+    Vue.component('HContainer', HContainer)
     Vue.component('HBox', HBox)
   }
 } as MegH5Plugin
