@@ -19,7 +19,15 @@
       <el-divider content-position="left">{{library.label}}</el-divider>
       <m-row paddingX="sm">
         <m-col class="item" v-if="isShow(item)" :padding="2" :xs="8" :key="item.name" v-for="item in library.components">
-          <component-item :value="item"></component-item>
+          <component-item :value="item" type="component"></component-item>
+        </m-col>
+      </m-row>
+    </div>
+    <div>
+      <el-divider content-position="left">本地模板</el-divider>
+      <m-row paddingX="sm">
+        <m-col class="item" :padding="2" :xs="8" :key="item.name" v-for="item in Templates">
+          <component-item :value="item" type="template"></component-item>
         </m-col>
       </m-row>
     </div>
@@ -44,7 +52,8 @@
     },
     computed: {
       ...mapState([
-        'Data'
+        'Data',
+        'Templates'
       ])
     },
     methods: {

@@ -52,6 +52,44 @@
           <m-icon value="delete_outline"></m-icon>
         </m-button>
       </el-tooltip>
+      <div class="tool-bar-divider"></div>
+      <el-popover
+        placement="bottom"
+        title="保存模板"
+        v-model="template.show"
+        width="300"
+        trigger="click">
+        <m-flex width="100%" marginY="sm">
+          <el-input v-model="template.value"></el-input>
+        </m-flex>
+        <m-flex width="100%" justify="end">
+          <m-button :size="40" @click="template.show = !template.show" paddingX="sm" marginRight="sm" color="default" variety="flat">
+            取消
+          </m-button>
+          <m-button :size="40" @click="handleTemplate" paddingX="sm" color="success" variety="flat">
+            保存
+          </m-button>
+        </m-flex>
+        <el-tooltip slot="reference" content="保存为模板" placement="top">
+          <m-button :disabled="!isContainer" height="100%" :width="40" color="primary" variety="flat" shape="square">
+            <m-icon value="folder_shared"></m-icon>
+          </m-button>
+        </el-tooltip>
+      </el-popover>
+      <div class="tool-bar-divider"></div>
+      <el-tooltip content="PC模式" placement="top">
+        <m-button height="100%" :width="40" :color="mode === 'pc' ? 'primary' : 'default'" variety="flat" shape="square"
+                  @click="handleMode('pc')">
+          <m-icon value="laptop_chromebook"></m-icon>
+        </m-button>
+      </el-tooltip>
+      <div class="tool-bar-divider"></div>
+      <el-tooltip content="移动端模式" placement="top">
+        <m-button height="100%" :width="40" :color="mode === 'mobile' ? 'primary' : 'default'" variety="flat" shape="square"
+                  @click="handleMode('mobile')">
+          <m-icon value="phone_android"></m-icon>
+        </m-button>
+      </el-tooltip>
     </m-flex>
   </m-flex>
 </template>
@@ -64,6 +102,10 @@
     name: 'tool-bar',
     data () {
       return {
+        template: {
+          show: false,
+          value: '新建模板'
+        }
       }
     },
     computed: {
@@ -74,6 +116,9 @@
         'activeNode',
         'activeNodeIsContainer'
       ]),
+      mode () {
+        return this.$store.state.previewer.mode
+      },
       isContainer () {
         return this.activeNodeIsContainer
       },
@@ -120,7 +165,17 @@
       },
       handleLock () {
         this.setNodeLock(this.activeNode)
-      }
+      },
+      handleTemplate () {
+        this.$store.dispatch('library/saveTemplate', {
+          name: this.template.value,
+          UiNode: this.activeNode
+        })
+        this.template.show = !this.template.show
+      },
+      handleMode (val) {
+        this.$store.commit('previewer/SET_MODE', val)
+      },
     }
   }
 </script>

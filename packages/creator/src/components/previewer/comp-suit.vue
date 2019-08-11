@@ -1,6 +1,6 @@
 <script lang="jsx">
   import Sortable from 'sortablejs'
-  import { renderComponent } from './render'
+  import { renderComponent, renderComponentChildren } from './render'
   import { createNamespacedHelpers } from 'vuex'
 
   const { mapGetters, mapState, mapMutations, mapActions } = createNamespacedHelpers('project')
@@ -76,7 +76,8 @@
     methods: {
       ...mapActions([
         'sortNode',
-        'insertNode'
+        'insertComponent',
+        'insertTemplate'
       ]),
       ...mapMutations([
         'SET_ACTIVE_NODE'
@@ -136,13 +137,20 @@
           e.stopPropagation()
         }
       },
-      handleInsertNode (val) {
-        console.log(this.isLocked)
-        console.log(this.node)
+      handleInsertComponent (val) {
         if (this.activeNode.uiConfig.isLocked) {
           return
         }
-        this.insertNode({
+        this.insertComponent({
+          name: val.name,
+          pid: this.activeUid
+        })
+      },
+      handleInsertTemplate (val) {
+        if (this.activeNode.uiConfig.isLocked) {
+          return
+        }
+        this.insertTemplate({
           name: val.name,
           pid: this.activeUid
         })
@@ -155,7 +163,8 @@
         if (this.isRoot) {
           this.$el.addEventListener('dragstart', this.handleDragStart)
           this.$el.addEventListener('dragend', this.handleDragEnd)
-          this.eventBus.$on('insertNode', this.handleInsertNode)
+          this.eventBus.$on('insertComponent', this.handleInsertComponent)
+          this.eventBus.$on('insertTemplate', this.handleInsertTemplate)
         }
         // this.$el.addEventListener('dragleave', this.handleDragLeave)
       },
@@ -167,7 +176,8 @@
         if (this.isRoot) {
           this.$el.removeEventListener('dragstart', this.handleDragStart)
           this.$el.removeEventListener('dragend', this.handleDragEnd)
-          this.eventBus.$off('insertNode', this.handleInsertNode)
+          this.eventBus.$off('insertComponent', this.handleInsertComponent)
+          this.eventBus.$off('insertTemplate', this.handleInsertTemplate)
         }
         // this.$el.removeEventListener('dragleave', this.handleDragLeave)
       }
@@ -178,9 +188,6 @@
     },
     beforeDestroy () {
       this.removeSuitListeners()
-    },
-    RChildren (h) {
-
     },
     render (h) {
       const classes = {
@@ -204,6 +211,7 @@
           this.node.children ? renderComponent(h, this.node.children) : []
         )
       } else {
+        console.log(this.node)
         return h(
           'HBox',
           {
@@ -214,7 +222,7 @@
             h(
               this.node.tag,
               this.node.nodeData,
-              this.node.children ? this.node.children : []
+              this.node.children ? renderComponentChildren(h, this.node.children) : []
             )
           ]
         )

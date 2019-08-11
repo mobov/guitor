@@ -1,3 +1,5 @@
+import { UiNode } from '@/typings/project'
+
 type fieldItem = {
   [field: string]: any
 }
@@ -53,3 +55,7 @@ export type Plugin = {
   }
 }
 
+export type Template = {
+  name: string
+  UiNode: UiNode
+}

@@ -5,7 +5,7 @@
     box-sizing: border-box;
     /*width: 100%;*/
     /*height: 100%;*/
-    width: auto;
+    /*width: 100%;*/
     height: auto;
     /*flex-wrap: nowrap;*/
     /*&.--wrap {*/
@@ -46,11 +46,39 @@
   export default {
     name: 'HBox',
     props: {
+      width: {
+        type: String,
+        default: 'auto'
+      },
       flex: {
         type: Number,
         default: 1
       },
       space: {
+        type: Number,
+        default: 5
+      },
+      spaceY: {
+        type: Number,
+        default: 5
+      },
+      spaceX: {
+        type: Number,
+        default: 5
+      },
+      spaceT: {
+        type: Number,
+        default: 5
+      },
+      spaceB: {
+        type: Number,
+        default: 5
+      },
+      spaceL: {
+        type: Number,
+        default: 5
+      },
+      spaceR: {
         type: Number,
         default: 5
       }
@@ -59,6 +87,7 @@
       styles () {
         return {
           flex: this.flex,
+          width: this.width,
           padding: `${this.space}px`
         }
       },

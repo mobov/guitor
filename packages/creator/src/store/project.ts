@@ -1,4 +1,5 @@
 import Project, { UiNode } from '@/typings/project'
+import Library from '@/typings/library'
 import { ulid } from 'ulid'
 import { getPathNode } from '@/utils'
 import { setObjectData } from '@/store/utils'
@@ -61,7 +62,8 @@ export type ActionsParams = {
 }
 
 export type Actions = {
-  insertNode: (params: ActionsParams, val: Project.UiNode) => Promise<void>
+  insertComponent: (params: ActionsParams, val: Project.UiNode) => Promise<void>
+  insertTemplate: (params: ActionsParams, val: { name: string, pid: string, UiNode: UiNode }) => Promise<void>
   sortNode: (params: ActionsParams, val: sortOpts) => Promise<void>
   removeNode: (params: ActionsParams, val: Project.UiNode) => Promise<void>
   clearNode: (params: ActionsParams, val: Project.UiNode) => Promise<void>
@@ -106,7 +108,8 @@ export default {
         children: []
       }]
     },
-    activeUid: 'root'
+    activeUid: 'root',
+    Templates: []
   },
   getters: <Getters> {
     UiNodes: state => state.Data.UiNodes,
@@ -134,9 +137,7 @@ export default {
       setObjectData($target.nodeData.domProps, val.domProps)
     },
     SET_NODE_BOX_CONFIG (state, val) {
-      console.log(val)
       const $target = getPathNode(val.uid, state.Data.UiNodes)
-      console.log($target)
       setObjectData($target.boxConfig, val.boxConfig)
     },
     SET_NODE_UI_CONFIG (state, val) {
@@ -184,7 +185,7 @@ export default {
     }
   },
   actions: <Actions> {
-    insertNode ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
+    insertComponent ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
       const node = deepCopy(data)
 
       const handleNode = (node: any, pid: string, root: boolean) => {
@@ -222,6 +223,21 @@ export default {
 
       commit('INSERT_NODE', node)
       // commit('SET_ACTIVE_NODE', node.uid)
+    },
+    insertTemplate ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
+      const template = rootGetters['library/getTemplate'](data.name as any) as any
+      const templateNode = deepCopy(template.UiNode)
+      const handleIds = (node: any, pid: string) => {
+        node.uid = ulid()
+        node.pid = pid
+        if (node.children.length > 0) {
+          node.children.forEach((child: any) => handleIds(child, node.uid))
+        }
+      }
+      handleIds(templateNode, data.pid)
+      console.log(templateNode)
+
+      commit('INSERT_NODE', templateNode)
     },
     sortNode ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
       const parentNode = getPathNode(data.id, state.Data.UiNodes)

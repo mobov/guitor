@@ -84,6 +84,9 @@
         const data = deepCopy(styles)
         this.activeStyleKeys.forEach(style => {
           data[style].value = this.activeStyles[style]
+          console.log(style)
+          console.log(data[style].value)
+          console.log(this.activeStyles[style])
         })
         this.formatIStyle(data)
         this.styles = data

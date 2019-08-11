@@ -15,7 +15,6 @@
     }
     .previewer-screen {
       height: 80vh;
-      width: 90%;
       /*border: 5px solid #9fa3a8;*/
       background-color: #090a0d;
       padding: 8px;
@@ -33,6 +32,12 @@
       }
       &.--on-draw {
         cursor: $--previewer-cursor-draw;
+      }
+      &.--mode-pc {
+        width: 90%;
+      }
+      &.--mode-mobile {
+        width: 480px;
       }
     }
     .previewer-screen-main {

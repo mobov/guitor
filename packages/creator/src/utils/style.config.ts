@@ -1,7 +1,7 @@
 export const groups = [{
   name: '盒模型',
   attrs: [
-    'height', 'width', 'margin', 'padding',
+    'minHeight', 'minWidth', 'height', 'width', 'margin', 'padding',
     'marginLeft', 'marginRight', 'marginTop', 'marginBottom',
     'paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom'
   ]
@@ -24,7 +24,7 @@ export const styles = {
   minHeight: {
     type: 'size',
     label: '最小高度',
-    value: '0px',
+    value: 'auto',
     config: {
       step: 5
     }
@@ -32,7 +32,7 @@ export const styles = {
   minWidth: {
     type: 'size',
     label: '最小宽度',
-    value: '0px',
+    value: 'auto',
     config: {
       step: 5
     }
@@ -40,7 +40,7 @@ export const styles = {
   height: {
     type: 'size',
     label: '高度',
-    value: '0px',
+    value: 'auto',
     config: {
       step: 5
     }
@@ -48,7 +48,7 @@ export const styles = {
   width: {
     type: 'size',
     label: '宽度',
-    value: '0px',
+    value: 'auto',
     config: {
       step: 5
     }
@@ -56,7 +56,7 @@ export const styles = {
   margin: {
     type: 'size',
     label: '外边距',
-    value: '0px',
+    value: 'auto',
     config: {
       step: 5
     }
@@ -64,7 +64,7 @@ export const styles = {
   padding: {
     type: 'size',
     label: '内边距',
-    value: '0px',
+    value: 'auto',
     config: {
       step: 5
     }
@@ -72,7 +72,7 @@ export const styles = {
   marginLeft: {
     type: 'size',
     label: '外左边距',
-    value: '0px',
+    value: 'auto',
     config: {
       step: 5
     }
@@ -80,7 +80,7 @@ export const styles = {
   marginRight: {
     type: 'size',
     label: '外右边距',
-    value: '0px',
+    value: 'auto',
     config: {
       step: 5
     }
@@ -88,7 +88,7 @@ export const styles = {
   marginTop: {
     type: 'size',
     label: '外上边距',
-    value: '0px',
+    value: 'auto',
     config: {
       step: 5
     }
@@ -96,7 +96,7 @@ export const styles = {
   marginBottom: {
     type: 'size',
     label: '外下边距',
-    value: '0px',
+    value: 'auto',
     config: {
       step: 5
     }
@@ -104,7 +104,7 @@ export const styles = {
   paddingLeft: {
     type: 'size',
     label: '内左边距',
-    value: '0px',
+    value: 'auto',
     config: {
       step: 5
     }
@@ -112,7 +112,7 @@ export const styles = {
   paddingRight: {
     type: 'size',
     label: '内右边距',
-    value: '0px',
+    value: 'auto',
     config: {
       step: 5
     }
@@ -120,7 +120,7 @@ export const styles = {
   paddingTop: {
     type: 'size',
     label: '内上边距',
-    value: '0px',
+    value: 'auto',
     config: {
       step: 5
     }
@@ -128,7 +128,7 @@ export const styles = {
   paddingBottom: {
     type: 'size',
     label: '内下边距',
-    value: '0px',
+    value: 'auto',
     config: {
       step: 5
     }

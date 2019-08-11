@@ -9,7 +9,7 @@ import './style/style.scss'
 // import './components/comp-suit/style.scss'
 import Mobov, {
   MApp, MFrame, MView, MIcon, MButton, MFlexFiller, MFlex, MList, MListItem, MChip,
-  MCheckbox, MRadio, MAppBar, MRow, MCol, MAvatar
+  MCheckbox, MRadio, MAppBar, MRow, MCol, MAvatar, MTable, MTableCol
 } from '@mobov/vui'
 import LibraryBaseUi from './base-ui/library'
 import LibraryElementUi from '@mobov/gui-creator-library-element-ui'
@@ -31,6 +31,12 @@ import delete_outline from '@mobov/vui/lib/icons/delete_outline'
 import lock_open from '@mobov/vui/lib/icons/lock_open'
 // @ts-ignore
 import lock_outline from '@mobov/vui/lib/icons/lock_outline'
+// @ts-ignore
+import folder_shared from '@mobov/vui/lib/icons/folder_shared'
+// @ts-ignore
+import laptop_chromebook from '@mobov/vui/lib/icons/laptop_chromebook'
+// @ts-ignore
+import phone_android from '@mobov/vui/lib/icons/phone_android'
 
 
 Library.register(LibraryBaseUi as any)
@@ -54,7 +60,9 @@ Vue.use(Mobov, {
     MRadio,
     MRow,
     MCol,
-    MChip
+    MChip,
+    MTable,
+    MTableCol
   },
   icons: {
     arrow_downward,
@@ -64,7 +72,10 @@ Vue.use(Mobov, {
     icon_delete,
     delete_outline,
     lock_open,
-    lock_outline
+    lock_outline,
+    folder_shared,
+    laptop_chromebook,
+    phone_android
   }
 })
 

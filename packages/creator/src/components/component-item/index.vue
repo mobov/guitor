@@ -4,13 +4,17 @@
        @drag="handleDrag"
        @dblclick="handleInsert"
        v-drag-ani>
-    {{value.label}}
+    {{ value.label || value.name }}
   </div>
 </template>
 <script>
   export default {
     name: 'component-item',
     props: {
+      type: {
+        type: String,
+        default: 'component' //  component/ template
+      },
       value: {
         type: Object
       }
@@ -39,21 +43,18 @@
       },
       handleDragEnd (e) {
         if (this.isDragging) {
-          this.eventBus.$emit('insertNode', {
-            name: this.value.name
-          })
+          this.handleInsert()
           this.isDragging = false
         }
       },
       handleInsert () {
-        console.log(this.value)
-        this.eventBus.$emit('insertNode', {
+        const evtName = this.type === 'component' ? 'insertComponent' : 'insertTemplate'
+        this.eventBus.$emit(evtName, {
           name: this.value.name
         })
       }
     },
     mounted () {
-      console.log(this.value)
       document.addEventListener('dragend', this.handleDragEnd)
       // document.addEventListener('mousemove', this.handleMouseMove)
       // document.addEventListener('mouseup', this.handleMouseUp)

@@ -6,7 +6,6 @@
       margin-bottom: 10px;
     }
     width: 100%;
-    &.--size,
     &.--number,
     &.--color,
     &.--boolean {
@@ -26,7 +25,7 @@ export default {
   name: 'control-item',
   props: {
     value: {
-      type: [String, Number, Boolean]
+      type: [String, Number, Boolean, Array, Object]
     },
     label: {
       type: String,
@@ -47,7 +46,6 @@ export default {
         return this.value
       },
       set (val) {
-        console.log(this.value === val)
         if (this.value !== val) {
           this.$emit('input', val)
         }

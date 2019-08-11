@@ -119,7 +119,8 @@ module.exports = {
       tag: 'ElInput',
       label: '输入框',
       boxConfig: {
-        flex: 1
+        flex: 1,
+        width: '100%'
       },
       nodeData: {
         props: {
@@ -271,71 +272,6 @@ module.exports = {
         }
       }
     },
-    ElRadioGroup: {
-      tag: 'ElRadioGroup',
-      label: '单选组',
-      boxConfig: {
-        flex: 0
-      },
-      nodeData: {
-        props: {
-          value: '输入值',
-          size: 'medium',
-          textColor: '#ffffff',
-          fill: '#409EFF'
-        }
-      },
-      control: {
-        props: {
-          value: {
-            label: '输入值',
-            type: 'text'
-          },
-          size: {
-            label: '尺寸',
-            type: 'radio',
-            selections: [{
-              label: 'medium',
-              value: 'medium'
-            }, {
-              label: 'small',
-              value: 'small'
-            }, {
-              label: 'mini',
-              value: 'mini'
-            }]
-          },
-          textColor: {
-            label: '激活文本色',
-            type: 'color'
-          },
-          fill: {
-            label: '填充色',
-            type: 'color'
-          }
-        }
-      },
-      children: [
-        {
-          name: 'ElRadio',
-          nodeData: {
-            props: {
-              value: '单选1',
-              label: '单选1'
-            }
-          }
-        },
-        {
-          name: 'ElRadio',
-          nodeData: {
-            props: {
-              value: '单选2',
-              label: '单选2'
-            }
-          }
-        }
-      ]
-    },
     ElRadio: {
       tag: 'ElRadio',
       label: '单选',
@@ -346,6 +282,102 @@ module.exports = {
         props: {
           value: '单选1',
           label: '单选1',
+          border: false
+        }
+      },
+      control: {
+        props: {
+          value: {
+            label: '输入值',
+            type: 'text'
+          },
+          label: {
+            label: '标志值',
+            type: 'text'
+          },
+          textColor: {
+            label: '激活文本色',
+            type: 'color'
+          },
+          fill: {
+            label: '填充色',
+            type: 'color'
+          }
+        }
+      }
+    },
+    ElRadioGroup: {
+      tag: 'ElRadioGroup',
+      label: '单选组',
+      boxConfig: {
+        flex: 1
+      },
+      control: {
+        props: {
+          value: {
+            label: '输入值',
+            type: 'text'
+          },
+          textColor: {
+            label: '激活文本色',
+            type: 'color'
+          },
+          fill: {
+            label: '填充色',
+            type: 'color'
+          }
+        },
+        children: {
+          type: 'array',
+          label: '选项列表',
+          config: {
+            columns: [{
+              field: 'label',
+              label: '标题',
+              type: 'text'
+            }]
+          }
+        }
+      },
+      nodeData: {
+        props: {
+          value: '输入值',
+          textColor: '#ffffff',
+          fill: '#409EFF'
+        }
+      },
+      children: [
+        {
+          name: 'ElRadio',
+          nodeData: {
+            props: {
+              label: '单选1'
+            }
+          }
+        },
+        {
+          name: 'ElRadio',
+          nodeData: {
+            props: {
+              label: '单选2'
+            }
+          }
+        }
+      ]
+    },
+    ElRadioButton: {
+      tag: 'ElRadioButton',
+      label: '单选按钮',
+      boxConfig: {
+        flex: 0
+      },
+      uiConfig: {
+        isHidden: true
+      },
+      nodeData: {
+        props: {
+          value: '单选按钮1',
+          label: '单选按钮1',
           size: 'medium',
           border: false
         }
@@ -363,16 +395,18 @@ module.exports = {
           size: {
             label: '尺寸',
             type: 'radio',
-            selections: [{
-              label: 'medium',
-              value: 'medium'
-            }, {
-              label: 'small',
-              value: 'small'
-            }, {
-              label: 'mini',
-              value: 'mini'
-            }]
+            config: {
+              selections: [{
+                label: 'medium',
+                value: 'medium'
+              }, {
+                label: 'small',
+                value: 'small'
+              }, {
+                label: 'mini',
+                value: 'mini'
+              }]
+            }
           },
           textColor: {
             label: '激活文本色',
@@ -382,8 +416,95 @@ module.exports = {
             label: '填充色',
             type: 'color'
           }
+        },
+        children: {
+          type: 'array',
+          label: '选项列表',
+          config: {
+            columns: [{
+              field: 'label',
+              label: '标题',
+              type: 'text'
+            }]
+          }
         }
       }
+    },
+    ElRadioButtonGroup: {
+      tag: 'ElRadioGroup',
+      label: '单选按钮组',
+      boxConfig: {
+        flex: 1
+      },
+      nodeData: {
+        props: {
+          value: '单选1',
+          size: 'medium',
+          textColor: '#ffffff',
+          fill: '#409EFF'
+        }
+      },
+      control: {
+        props: {
+          value: {
+            label: '输入值',
+            type: 'text'
+          },
+          size: {
+            label: '尺寸',
+            type: 'radio',
+            config: {
+              selections: [{
+                label: 'medium',
+                value: 'medium'
+              }, {
+                label: 'small',
+                value: 'small'
+              }, {
+                label: 'mini',
+                value: 'mini'
+              }]
+            }
+          },
+          textColor: {
+            label: '激活文本色',
+            type: 'color'
+          },
+          fill: {
+            label: '填充色',
+            type: 'color'
+          }
+        },
+        children: {
+          type: 'array',
+          label: '选项列表',
+          config: {
+            columns: [{
+              field: 'label',
+              label: '标题',
+              type: 'text'
+            }]
+          }
+        }
+      },
+      children: [
+        {
+          name: 'ElRadioButton',
+          nodeData: {
+            props: {
+              label: '单选1'
+            }
+          }
+        },
+        {
+          name: 'ElRadioButton',
+          nodeData: {
+            props: {
+              label: '单选2'
+            }
+          }
+        }
+      ]
     },
     ElTag: {
       tag: 'ElTag',
@@ -696,7 +817,8 @@ module.exports = {
       label: '滑块',
       tag: 'ElSlider',
       boxConfig: {
-        flex: 1
+        flex: 1,
+        width: '100%'
       },
       nodeData: {
         props: {
@@ -786,10 +908,309 @@ module.exports = {
           }
         }
       }
+    },
+    ElOption: {
+      label: '选择器单元',
+      tag: 'ElOption',
+      uiConfig: {
+        isHidden: true
+      }
+    },
+    ElSelect: {
+      label: '选择器',
+      tag: 'ElSelect',
+      boxConfig: {
+        flex: 1
+      },
+      nodeData: {
+        props: {
+          value: '选项1',
+          multiple: false,
+          size: 'medium',
+          max: 100,
+          step: 1,
+          disabled: false,
+          clearable: false,
+          multipleLimit: 0,
+          filterable: false,
+          allowCreate: true,
+          loading: false,
+          loadingText: '加载中',
+          noMatchText: '无匹配数据',
+          noDataText: '无数据',
+          placeholder: '请选择'
+        }
+      },
+      control: {
+        props: {
+          value: {
+            label: '值',
+            type: 'text'
+          },
+          // multiple: {
+          //   label: '多选',
+          //   type: 'boolean'
+          // },
+          disabled: {
+            label: '禁用',
+            type: 'boolean'
+          },
+          size: {
+            label: '尺寸',
+            type: 'radio',
+            config: {
+              selections: [{
+                label: 'large',
+                value: 'large'
+              }, {
+                label: 'medium',
+                value: 'medium'
+              }, {
+                label: 'small',
+                value: 'small'
+              }, {
+                label: 'mini',
+                value: 'mini'
+              }]
+            }
+          },
+          clearable: {
+            label: '禁用',
+            type: 'boolean'
+          },
+          collapseTags: {
+            label: '多选时是否将选中值按文字的形式展示',
+            type: 'boolean'
+          },
+          multipleLimit: {
+            label: '多选时用户最多可以选择的项目数，为 0 则不限制',
+            type: 'number'
+          },
+          placeholder: {
+            label: '占位文本',
+            type: 'text'
+          },
+          filterable: {
+            label: '是否可搜索',
+            type: 'boolean'
+          },
+          allowCreate: {
+            label: '是否允许用户创建新条目，需配合 filterable 使用',
+            type: 'boolean'
+          },
+          loading: {
+            label: '是否正在从远程获取数据',
+            type: 'boolean'
+          },
+          loadingText: {
+            label: '远程加载时显示的文字',
+            type: 'text'
+          },
+          noMatchText: {
+            label: '搜索条件无匹配时显示的文字',
+            type: 'text'
+          },
+          noDataText: {
+            label: '选项为空时显示的文字',
+            type: 'text'
+          }
+        }
+      },
+      children: [
+        {
+          name: 'ElOption',
+          nodeData: {
+            props: {
+              label: '选项1',
+              value: '选项1'
+            }
+          }
+        },
+        {
+          name: 'ElOption',
+          nodeData: {
+            props: {
+              label: '选项2',
+              value: '选项2'
+            }
+          }
+        }
+      ]
+    },
+    ElFormItem: {
+      tag: 'ElFormItem',
+      label: '表单单元',
+      uiConfig: {
+        isContainer: true
+      },
+      boxConfig: {
+        space: 0
+      },
+      nodeData: {
+        props: {
+          label: '文本',
+          labelWidth: '50px',
+          required: false,
+          size: 'medium'
+        }
+      },
+      control: {
+        props: {
+          label: {
+            label: '标签文本',
+            type: 'text'
+          },
+          labelWidth: {
+            label: '标签宽度',
+            type: 'size'
+          },
+          required: {
+            label: '是否显示必填字段的红色星号',
+            type: 'boolean'
+          },
+          size: {
+            label: '尺寸',
+            type: 'radio',
+            config: {
+              selections: [ {
+                label: 'medium',
+                value: 'medium'
+              }, {
+                label: 'small',
+                value: 'small'
+              }, {
+                label: 'mini',
+                value: 'mini'
+              }]
+            }
+          }
+        }
+      },
+    },
+    ElForm: {
+      label: '表单',
+      tag: 'ElForm',
+      uiConfig: {
+        isContainer: true
+      },
+      nodeData: {
+        props: {
+          inline: false,
+          labelPosition: 'right',
+          labelWidth: '80px',
+          labelSuffix: '',
+          hideRequiredAsterisk: false,
+          size: 'medium'
+        },
+        style: {
+          padding: '5px',
+          width: '100%'
+        }
+      },
+      control: {
+        props: {
+          inline: {
+            label: '行内表单模式',
+            type: 'boolean'
+          },
+          labelPosition: {
+            label: '表单域标签的位置',
+            type: 'radio',
+            config: {
+              selections: [{
+                label: 'right',
+                value: 'right'
+              }, {
+                label: 'left',
+                value: 'left'
+              }, {
+                label: 'top',
+                value: 'top'
+              }]
+            }
+          },
+          labelWidth: {
+            label: '标签宽度',
+            type: 'size'
+          },
+          labelSuffix: {
+            label: '标签的后缀',
+            type: 'text'
+          },
+          hideRequiredAsterisk: {
+            label: '是否显示必填字段的红色星号',
+            type: 'boolean'
+          },
+          size: {
+            label: '尺寸',
+            type: 'radio',
+            config: {
+              selections: [{
+                label: 'medium',
+                value: 'medium'
+              }, {
+                label: 'small',
+                value: 'small'
+              }, {
+                label: 'mini',
+                value: 'mini'
+              }]
+            }
+          }
+        }
+      },
+      children: [{
+        name: 'ElFormItem',
+        nodeData: {
+          props: {
+            label: '文本',
+            labelWidth: '80px',
+            required: false,
+            size: 'medium'
+          }
+        },
+        children: [{
+          name: 'ElInput',
+          boxConfig: {
+            space: 0
+          },
+          nodeData: {
+            props: {
+              value: '文本'
+            }
+          }
+        }]
+      }, {
+        name: 'ElFormItem',
+        nodeData: {
+          props: {
+            label: '文本',
+            labelWidth: '80px',
+            required: false,
+            size: 'medium'
+          }
+        }
+      }, {
+        name: 'ElFormItem',
+        nodeData: {
+          props: {
+            label: '文本',
+            labelWidth: '80px',
+            required: false,
+            size: 'medium'
+          }
+        }
+      }, {
+        name: 'ElFormItem',
+        nodeData: {
+          props: {
+            label: '文本',
+            labelWidth: '80px',
+            required: false,
+            size: 'medium'
+          }
+        }
+      }]
     }
-    // ElFormItem: {
-    //   tag: 'ElFormItem',
-    //   label: '表单单元-文本'
-    // }
   }
 }

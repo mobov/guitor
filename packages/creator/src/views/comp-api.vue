@@ -18,6 +18,13 @@
     </div>
     <div>
       <el-divider content-position="left">组件API</el-divider>
+      <control-item v-if="childrenApi" class="m-mb-sm m-px-sm"
+                    v-model="childrenData"
+                    :type="childrenApi.type"
+                    key="children"
+                    :label="childrenApi.label"
+                    :config="childrenApi.config"
+                  ></control-item>
       <control-item class="m-mb-sm m-px-sm"
                     v-model="item.value"
                     :type="item.type"
@@ -87,6 +94,12 @@
       },
       domPropsApi () {
         return this.compData.control.domProps || {}
+      },
+      childrenApi () {
+        return this.compData.control.children || false
+      },
+      childrenData () {
+        return this.activeNode.children || false
       },
       boxConfigApiKeys () {
         return ['flex', 'space']

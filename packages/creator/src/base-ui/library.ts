@@ -10,7 +10,7 @@ export default {
       },
       nodeData: {
         props: {
-          flex: 0,
+          flex: 1,
           space: 10,
           wrap: false,
           direction: 'y',

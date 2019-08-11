@@ -13,11 +13,10 @@ export interface RootState {
 }
 
 export interface RootGetters {
-  ['previewer/height']: typeof previewer.getters.height
-  ['previewer/width']: typeof previewer.getters.width
   ['previewer/UiNodes']: typeof previewer.getters.UiNodes
   ['project/UiNodes']: typeof project.getters.UiNodes
   ['library/getComponent']: typeof library.getters.getComponent
+  ['library/getTemplate']: typeof library.getters.getTemplate
   ['library/isContainer']: typeof library.getters.isContainer
 
 }
