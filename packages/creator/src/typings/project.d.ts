@@ -24,6 +24,8 @@ export type BoxConfig = {
 export type UiConfig = {
   isContainer?: boolean
   isLocked?: boolean
+  parentExcludes: []
+  parentIncludes: []
 }
 
 export type UiNode = {

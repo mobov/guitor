@@ -6,11 +6,11 @@
       margin-bottom: 10px;
     }
     width: 100%;
-    &.--number,
-    &.--color,
-    &.--boolean {
-      width: 50%;
-    }
+    /*&.--number,*/
+    /*&.--color,*/
+    /*&.--boolean {*/
+      /*width: 50%;*/
+    /*}*/
   }
 </style>
 <template>

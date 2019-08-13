@@ -37,20 +37,30 @@
         width: 90%;
       }
       &.--mode-mobile {
-        width: 480px;
+        max-width: 425px;
+        width: 100%;
+      }
+      &.--view-editor {
+
+      }
+      &.--view-preview {
+        .--isContainer {
+          border: none !important;
+        }
       }
     }
     .previewer-screen-main {
       font-size: 10px;
       height: 100%;
       width: 100%;
+      min-height: 100%;
+      max-height: 100%;
+      min-width: 100%;
+      max-width: 100%;
       background-color: white;
-      /*height: inherit;*/
-      /*width: inherit;*/
-      /*max-width: inherit;*/
-      /*min-width: inherit;*/
-      @include scroller();
-      @include no-scroll-bar();
+      overflow: auto;
+      padding: 0;
+      margin: 0;
     }
 
     a, iframe {
@@ -61,6 +71,7 @@
 <script lang="jsx">
   import CompSuit from './comp-suit.vue'
   import { renderComponent } from './render'
+  import dom2str from 'dom-to-string'
   import { createNamespacedHelpers } from 'vuex'
   import ToolBar from '../tool-bar/index'
 
@@ -71,7 +82,8 @@
     components: { ToolBar, CompSuit },
     computed: {
       ...mapState([
-        'mode'
+        'mode',
+        'view'
       ]),
       ...mapGetters([
         'width',
@@ -80,7 +92,8 @@
       ]),
       screenClasses () {
         return {
-          [`--mode-${this.mode}`]: true
+          [`--mode-${this.mode}`]: true,
+          [`--view-${this.view}`]: true
         }
       },
       screenStyles () {
@@ -97,19 +110,23 @@
     },
     render (h) {
       const { screenStyles, screenClasses, handleClick } = this
-
+      // const srcDoc = dom2str(document.querySelector('body'))
+      // const srcDoc = dom2str(document.querySelector('body'))
+      // const srcDoc = dom2str(document.querySelector('body'))
+      // <iframe style="height: 100%;width: 100%" srcDoc={srcDoc} />
       return (
         <div class="previewer">
           <ToolBar />
           <div staticClass="previewer-screen" style={screenStyles} class={screenClasses}>
             <div ref="$screen" staticClass="previewer-screen-main" onClick={handleClick}>
-                {renderComponent(h, this.UiNodes)}
+              {renderComponent(h, this.UiNodes)}
             </div>
           </div>
         </div>
       )
     },
     mounted () {
+//
     }
   }
 </script>

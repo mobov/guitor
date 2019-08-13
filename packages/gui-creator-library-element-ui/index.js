@@ -19,9 +19,6 @@ module.exports = {
           autofocus: false,
           icon: '',
           nativeType: 'button'
-        },
-        domProps: {
-          innerText: '按钮'
         }
       },
       control: {
@@ -108,12 +105,12 @@ module.exports = {
             }
           }
         },
-        domProps: {
-          innerText: {
-            type: 'text'
-          }
+        children: {
+          label: '按钮文案',
+          type: 'text'
         }
-      }
+      },
+      children: '按钮'
     },
     ElInput: {
       tag: 'ElInput',
@@ -333,6 +330,7 @@ module.exports = {
           config: {
             columns: [{
               field: 'label',
+              path: 'nodeData/props',
               label: '标题',
               type: 'text'
             }]
@@ -360,6 +358,125 @@ module.exports = {
           nodeData: {
             props: {
               label: '单选2'
+            }
+          }
+        }
+      ]
+    },
+    ElCheckbox: {
+      tag: 'ElCheckbox',
+      label: '多选',
+      boxConfig: {
+        flex: 0
+      },
+      nodeData: {
+        props: {
+          value: '多选1',
+          label: '多选1',
+          indeterminate: false,
+          checked: false,
+          border: false,
+          disabled: false,
+          size: 'medium'
+        }
+      },
+      control: {
+        props: {
+          value: {
+            label: '输入值',
+            type: 'text'
+          },
+          label: {
+            label: '标志值',
+            type: 'text'
+          },
+          indeterminate: {
+            label: '设置 indeterminate 状态，只负责样式控制',
+            type: 'boolean'
+          },
+          checked: {
+            label: '当前是否勾选',
+            type: 'boolean'
+          },
+          disabled: {
+            label: '禁用',
+            type: 'boolean'
+          },
+          size: {
+            label: '尺寸',
+            type: 'radio',
+            toolTip: '尺寸，只在border=true时有效',
+            config: {
+              selections: [{
+                label: 'medium',
+                value: 'medium'
+              }, {
+                label: 'small',
+                value: 'small'
+              }, {
+                label: 'mini',
+                value: 'mini'
+              }]
+            }
+          }
+        }
+      }
+    },
+    ElCheckboxGroup: {
+      tag: 'ElCheckboxGroup',
+      label: '多选组',
+      boxConfig: {
+        flex: 1
+      },
+      control: {
+        props: {
+          value: {
+            label: '输入值',
+            type: 'text'
+          },
+          textColor: {
+            label: '激活文本色',
+            type: 'color'
+          },
+          fill: {
+            label: '填充色',
+            type: 'color'
+          }
+        },
+        children: {
+          type: 'array',
+          label: '选项列表',
+          config: {
+            columns: [{
+              field: 'label',
+              path: 'nodeData/props',
+              label: '标题',
+              type: 'text'
+            }]
+          }
+        }
+      },
+      nodeData: {
+        props: {
+          value: '输入值',
+          textColor: '#ffffff',
+          fill: '#409EFF'
+        }
+      },
+      children: [
+        {
+          name: 'ElCheckbox',
+          nodeData: {
+            props: {
+              label: '多选1'
+            }
+          }
+        },
+        {
+          name: 'ElCheckbox',
+          nodeData: {
+            props: {
+              label: '多选2'
             }
           }
         }
@@ -481,6 +598,7 @@ module.exports = {
           config: {
             columns: [{
               field: 'label',
+              path: 'nodeData/props',
               label: '标题',
               type: 'text'
             }]
@@ -520,9 +638,6 @@ module.exports = {
           hit: false,
           closable: false,
           disableTransitions: true
-        },
-        domProps: {
-          innerText: '标签'
         }
       },
       control: {
@@ -587,7 +702,7 @@ module.exports = {
             type: 'text'
           }
         }
-      },
+      }
       // children: [{
       //   tag: 'span',
       //
@@ -609,9 +724,6 @@ module.exports = {
           icon: '',
           underline: true,
           disabled: false
-        },
-        domProps: {
-          innerText: '超链接'
         }
       },
       control: {
@@ -653,11 +765,6 @@ module.exports = {
           underline: {
             label: '下划线',
             type: 'boolean'
-          }
-        },
-        domProps: {
-          innerText: {
-            type: 'text'
           }
         }
       }
@@ -1041,7 +1148,8 @@ module.exports = {
       tag: 'ElFormItem',
       label: '表单单元',
       uiConfig: {
-        isContainer: true
+        isContainer: true,
+        parentIncludes: ['ElForm']
       },
       boxConfig: {
         space: 0
@@ -1072,7 +1180,7 @@ module.exports = {
             label: '尺寸',
             type: 'radio',
             config: {
-              selections: [ {
+              selections: [{
                 label: 'medium',
                 value: 'medium'
               }, {
@@ -1085,13 +1193,14 @@ module.exports = {
             }
           }
         }
-      },
+      }
     },
     ElForm: {
       label: '表单',
       tag: 'ElForm',
       uiConfig: {
-        isContainer: true
+        isContainer: true,
+        parentExcludes: ['ElForm']
       },
       nodeData: {
         props: {
@@ -1210,6 +1319,326 @@ module.exports = {
             size: 'medium'
           }
         }
+      }]
+    },
+    ElTableColumn: {
+      label: '表格单元',
+      tag: 'ElTableColumn',
+      uiConfig: {
+        isHidden: true,
+        isContainer: false
+      },
+      nodeData: {
+        props: {
+          type: 'none',
+          label: '标题',
+          width: 'auto',
+          // fixed: 'none',
+          sortable: false,
+          resizable: true,
+          showOverflowTooltip: false,
+          align: 'left',
+          headerAlign: 'left'
+        }
+      },
+      control: {
+        props: {
+          type: {
+            label: '列类型',
+            type: 'radio',
+            config: {
+              selections: [{
+                label: 'selection',
+                value: 'selection'
+              }, {
+                label: 'index',
+                value: 'index'
+              }, {
+                label: 'expand',
+                value: 'expand'
+              }, {
+                label: 'none',
+                value: 'none'
+              }]
+            }
+          },
+          label: {
+            label: '列标题',
+            type: 'text'
+          },
+          width: {
+            label: '宽度',
+            type: 'size'
+          },
+          fixed: {
+            label: '固定列',
+            type: 'radio',
+            config: {
+              selections: [{
+                label: 'left',
+                value: 'left'
+              }, {
+                label: 'right',
+                value: 'right'
+              }]
+            }
+          },
+          sortable: {
+            label: '排序',
+            type: 'boolean'
+          },
+          resizable: {
+            label: '拖动改变宽度',
+            type: 'boolean'
+          },
+          showOverflowTooltip: {
+            label: '当内容过长被隐藏时显示 tooltip',
+            type: 'boolean'
+          },
+          align: {
+            label: '对齐方式',
+            type: 'radio',
+            config: {
+              selections: [{
+                label: 'left',
+                value: 'left'
+              }, {
+                label: 'center',
+                value: 'center'
+              }, {
+                label: 'right',
+                value: 'right'
+              }]
+            }
+          },
+          headerAlign: {
+            label: '头部对齐方式',
+            type: 'radio',
+            config: {
+              selections: [{
+                label: 'left',
+                value: 'left'
+              }, {
+                label: 'center',
+                value: 'center'
+              }, {
+                label: 'right',
+                value: 'right'
+              }]
+            }
+          }
+        }
+      },
+      children: []
+    },
+    ElTable: {
+      label: '表格',
+      tag: 'ElTable',
+      uiConfig: {
+        isContainer: false
+      },
+      nodeData: {
+        props: {
+          data: [{
+            date: '2016-05-02',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+          }, {
+            date: '2016-05-02',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+          }, {
+            date: '2016-05-02',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+          }, {
+            date: '2016-05-02',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+          }, {
+            date: '2016-05-02',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+          }, {
+            date: '2016-05-02',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+          }],
+          height: undefined,
+          maxHeight: undefined,
+          stripe: false,
+          border: true,
+          size: 'medium',
+          fit: true,
+          showHeader: true,
+          highlightCurrentRow: false,
+          emptyText: '暂无数据',
+          defaultExpandAll: false,
+          showSummary: false,
+          sumText: '合计',
+          indent: 16
+        }
+      },
+      control: {
+        props: {
+          data: {
+            label: '表格数据',
+            type: 'array',
+            config: {
+              columns: [{
+                field: 'name',
+                label: '标题',
+                type: 'text'
+              }, {
+                field: 'address',
+                label: '地址',
+                type: 'text'
+              }, {
+                field: 'date',
+                label: '日期',
+                type: 'text'
+              }]
+            }
+          },
+          height: {
+            label: '高度',
+            type: 'size'
+          },
+          maxHeight: {
+            label: '最大高度',
+            type: 'size'
+          },
+          stripe: {
+            label: '是否为斑马纹 table',
+            type: 'boolean'
+          },
+          border: {
+            label: '是否带有纵向边框',
+            type: 'boolean'
+          },
+          size: {
+            label: '尺寸',
+            type: 'radio',
+            config: {
+              selections: [{
+                label: 'medium',
+                value: 'medium'
+              }, {
+                label: 'small',
+                value: 'small'
+              }, {
+                label: 'mini',
+                value: 'mini'
+              }]
+            }
+          },
+          fit: {
+            label: '列的宽度是否自撑开',
+            type: 'boolean'
+          },
+          showHeader: {
+            label: '是否显示表头',
+            type: 'boolean'
+          },
+          highlightCurrentRow: {
+            label: '是否要高亮当前行',
+            type: 'boolean'
+          },
+          emptyText: {
+            label: '空数据时显示的文本内容',
+            type: 'text'
+          },
+          defaultExpandAll: {
+            label: '是否默认展开所有行',
+            type: 'boolean'
+          },
+          showSummary: {
+            label: '是否在表尾显示合计行',
+            type: 'boolean'
+          },
+          sumText: {
+            label: '合计行第一列的文本',
+            type: 'text'
+          },
+          indent: {
+            label: '展示树形数据时，树节点的缩进',
+            type: 'number'
+          }
+        }
+      },
+      children: [{
+        name: 'ElTableColumn',
+        nodeData: {
+          props: {
+            label: '日期',
+            prop: 'date'
+          }
+        },
+        children: []
+      }, {
+        name: 'ElTableColumn',
+        nodeData: {
+          props: {
+            label: '标题',
+            prop: 'name'
+          }
+        },
+        children: []
+      }, {
+        name: 'ElTableColumn',
+        nodeData: {
+          props: {
+            label: '地址',
+            prop: 'address'
+          }
+        },
+        children: []
+      }]
+    },
+    ElBreadcrumbItem: {
+      label: '面包屑单元',
+      tag: 'ElBreadcrumbItem',
+      uiConfig: {
+        isHidden: true,
+        isContainer: false
+      },
+      nodeData: {
+        props: {
+        }
+      }
+    },
+    ElBreadcrumb: {
+      label: '面包屑',
+      tag: 'ElBreadcrumb',
+      uiConfig: {
+        isContainer: false
+      },
+      nodeData: {
+        props: {
+          separator: '/',
+          separatorClass: undefined
+        }
+      },
+      control: {
+        props: {
+          separator: {
+            label: '分隔符',
+            type: 'text'
+          },
+          separatorClass: {
+            label: '图标分隔符',
+            type: 'text'
+          }
+        }
+      },
+      children: [{
+        name: 'ElBreadcrumbItem',
+      }, {
+        name: 'ElBreadcrumbItem',
+      }, {
+        name: 'ElBreadcrumbItem',
+      }, {
+        name: 'ElBreadcrumbItem',
       }]
     }
   }

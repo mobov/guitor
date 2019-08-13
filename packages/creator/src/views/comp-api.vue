@@ -41,14 +41,6 @@
                     :config="item.config"
                     @input="handleUpdate('attrs', item.field, arguments[0])"
                     v-for="(item, index) in attrsData"></control-item>
-      <control-item class="m-mb-sm m-px-sm"
-                    v-model="item.value"
-                    :type="item.type"
-                    :key="`attrs${index}`"
-                    :label="item.label"
-                    :config="item.config"
-                    @input="handleUpdate('domProps', item.field, arguments[0])"
-                    v-for="(item, index) in domPropsData"></control-item>
     </div>
   </m-view>
 </template>
@@ -68,7 +60,6 @@
       return {
         propsData: [],
         attrsData: [],
-        domPropsData: [],
         boxConfigData: []
       }
     },
@@ -84,7 +75,7 @@
         return this.$store.getters['library/getComponent'](this.activeNode.name)
       },
       boxConfigApi () {
-        return this.$store.getters['library/getComponent']('HContainerY').control.props
+        return this.$store.getters['library/getComponent']('HContainer').control.props
       },
       propsApi () {
         return this.compData.control.props || {}
@@ -92,14 +83,16 @@
       attrsApi () {
         return this.compData.control.attrs || {}
       },
-      domPropsApi () {
-        return this.compData.control.domProps || {}
-      },
       childrenApi () {
         return this.compData.control.children || false
       },
-      childrenData () {
-        return this.activeNode.children || false
+      childrenData: {
+        get () {
+          return this.activeNode.children || false
+        },
+        set (val) {
+          this.activeNode.children = val
+        }
       },
       boxConfigApiKeys () {
         return ['flex', 'space']
@@ -109,9 +102,6 @@
       },
       attrsApiKeys () {
         return Object.keys(this.attrsApi)
-      },
-      domPropsApiKeys () {
-        return Object.keys(this.domPropsApi)
       }
     },
     watch: {
@@ -130,7 +120,6 @@
       init () {
         this.initData('props')
         this.initData('attrs')
-        this.initData('domProps')
         if (!this.activeNodeIsContainer) {
           this.initBoxConfigData()
         }

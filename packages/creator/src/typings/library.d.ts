@@ -1,4 +1,5 @@
-import { UiNode } from '@/typings/project'
+import { BoxConfig, UiConfig, UiNode, UiNodes } from '@/typings/project'
+import { VNodeData } from 'vue'
 
 type fieldItem = {
   [field: string]: any
@@ -12,13 +13,11 @@ export interface PluginComponentPack {
     props: fieldItem
     style?: fieldItem
     attrs?: fieldItem
-    domProps?: fieldItem
   }
   control: {
     props: fieldItem
     style?: fieldItem
     attrs?: fieldItem
-    domProps?: fieldItem
   }
 }
 
@@ -35,7 +34,6 @@ export interface ComponentOption {
     props: fieldItem
     style: fieldItem
     attrs: fieldItem
-    domProps: fieldItem
   }
 }
 
@@ -55,7 +53,18 @@ export type Plugin = {
   }
 }
 
+export type TemplateOption = {
+  name?: string
+  tag?: string
+  uid?: string
+  pid?: string
+  uiConfig?: UiConfig
+  boxConfig?: BoxConfig
+  nodeData?: any
+  children?: TemplateOption
+}
+
 export type Template = {
   name: string
-  UiNode: UiNode
+  UiNode: any
 }

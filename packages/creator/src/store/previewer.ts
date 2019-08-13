@@ -2,6 +2,7 @@ import { RootState, RootGetters } from '@/store/index'
 
 export type State = {
   mode: 'pc' | 'mobile'
+  view: 'preview' | 'editor'
 }
 
 export type Getters = {
@@ -12,23 +13,14 @@ export type Getters = {
 
 export type Mutations = {
   SET_MODE: (state: State, val: 'pc' | 'mobile') => void
+  SET_VIEW: (state: State, val: 'preview' | 'editor') => void
 }
-
-// export const ModeSize = {
-//   pc: {
-//     height: 768,
-//     width: 1024
-//   },
-//   mobile: {
-//     height: 805,
-//     width: 350
-//   }
-// }
 
 export default {
   namespaced: true,
   state: <State> {
-    mode: 'pc'
+    mode: 'pc',
+    view: 'editor'
   },
   getters: <Getters> {
     UiNodes: (state, getters, rootState, rootGetters) => rootGetters['project/UiNodes']
@@ -36,6 +28,9 @@ export default {
   mutations: <Mutations> {
     SET_MODE (state, val) {
       state.mode = val
+    },
+    SET_VIEW (state, val) {
+      state.view = val
     }
   }
 }

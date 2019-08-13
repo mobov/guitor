@@ -5,17 +5,18 @@
     box-sizing: border-box;
     /*width: 100%;*/
     /*height: 100%;*/
-    width: auto;
-    height: auto;
+    width: 100%;
     flex-wrap: nowrap;
     &.--wrap {
       flex-wrap: wrap;
     }
     &.--direction-x {
       flex-direction: row;
+      height: auto;
     }
     &.--direction-y {
       flex-direction: column;
+      height: 100%;
     }
     &.--justify-start {
       justify-content: flex-start;

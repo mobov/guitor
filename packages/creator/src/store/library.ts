@@ -30,7 +30,8 @@ export type ActionsParams = {
 }
 
 export type Actions = {
-  saveTemplate: (params: ActionsParams, val: Library.Template) => Promise<void>
+  registerLibrary: (params: ActionsParams, val: Library.Plugin) => Promise<void>
+  registerTemplate: (params: ActionsParams, val: Library.Template) => Promise<void>
 }
 
 export default {
@@ -69,8 +70,7 @@ export default {
           nodeData: {
             style: {},
             attrs: {},
-            props: {},
-            domProps: {}
+            props: {}
           }
         }, item)
       })
@@ -78,7 +78,10 @@ export default {
     }
   },
   actions: <Actions> {
-    saveTemplate ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
+    registerLibrary ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
+      commit('SET_DATA', data)
+    },
+    registerTemplate ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
       const template = deepCopy(data)
       state.Templates.push(template)
     }

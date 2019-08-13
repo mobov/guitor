@@ -52,20 +52,9 @@
         <m-app-bar slot="header" :size="50" class="side-panel-navs">
           <el-tabs v-model="activeName">
             <el-tab-pane label="组件API" name="comp-api"></el-tab-pane>
-            <el-tab-pane label="操作" name="operation"></el-tab-pane>
             <el-tab-pane label="样式" name="styles"></el-tab-pane>
             <el-tab-pane label="项目" name="project"></el-tab-pane>
           </el-tabs>
-          <!--<mu-tabs :value.sync="activeName">-->
-            <!--<mu-tab value="library">组件库</mu-tab>-->
-            <!--<mu-tab value="comp-api">组件API</mu-tab>-->
-            <!--<mu-tab value="styles">样式</mu-tab>-->
-            <!--<mu-tab value="project">项目</mu-tab>-->
-          <!--</mu-tabs>-->
-          <!--<m-button :fontColor="isActive('library') ? 'gray' : 'white'" @click="handleTo('library')" height="100%" paddingX="md" marginRight="sm">组件库</m-button>-->
-          <!--<m-button :fontColor="isActive('comp-api') ? 'gray' : 'white'" @click="handleTo('comp-api')" height="100%" paddingX="md" marginRight="sm">组件API</m-button>-->
-          <!--<m-button :fontColor="isActive('styles') ? 'gray' : 'white'" @click="handleTo('styles')" height="100%" paddingX="md" marginRight="sm">样式</m-button>-->
-          <!--<m-button :fontColor="isActive('project') ? 'gray' : 'white'" @click="handleTo('project')" height="100%" paddingX="md" marginRight="sm">项目</m-button>-->
         </m-app-bar>
         <keep-alive>
           <router-view></router-view>

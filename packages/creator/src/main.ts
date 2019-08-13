@@ -37,7 +37,12 @@ import folder_shared from '@mobov/vui/lib/icons/folder_shared'
 import laptop_chromebook from '@mobov/vui/lib/icons/laptop_chromebook'
 // @ts-ignore
 import phone_android from '@mobov/vui/lib/icons/phone_android'
-
+// @ts-ignore
+import dvr from '@mobov/vui/lib/icons/dvr'
+// @ts-ignore
+import tv from '@mobov/vui/lib/icons/tv'
+// @ts-ignore
+import screen_share from '@mobov/vui/lib/icons/screen_share'
 
 Library.register(LibraryBaseUi as any)
 Library.register(LibraryElementUi as any)
@@ -75,7 +80,10 @@ Vue.use(Mobov, {
     lock_outline,
     folder_shared,
     laptop_chromebook,
-    phone_android
+    phone_android,
+    dvr,
+    tv,
+    screen_share
   }
 })
 

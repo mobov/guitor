@@ -12,7 +12,6 @@ type nodeSetData = {
   style?: { [field: string]: any }
   props?: { [field: string]: any }
   attrs?: { [field: string]: any }
-  domProps?: { [field: string]: any }
 }
 
 type nodeSetConfig = {
@@ -85,8 +84,8 @@ export default {
         dependencies: {}
       },
       UiNodes: [{
-        name: 'HContainerY',
-        tag: 'HContainer',
+        name: 'HView',
+        tag: 'HView',
         uid: 'root',
         uiConfig: {
           isLocked: false,
@@ -95,15 +94,12 @@ export default {
         nodeData: {
           props: {
             direction: 'y',
-            justify: 'start',
-            align: 'start',
-            space: 5
+            space: 5,
+            flex: 1
           },
           style: {
-            minHeight: '100%',
-            height: 'auto'
-          },
-          domProps: {}
+
+          }
         },
         children: []
       }]
@@ -127,14 +123,16 @@ export default {
   },
   mutations: <Mutations> {
     SET_PROJECT (state, val) {
-      state.Data = val
+      // @ts-ignore
+      if (val !== state.activeUid) {
+        state.Data = val
+      }
     },
     SET_NODE_DATA (state, val) {
       const $target = getPathNode(val.uid, state.Data.UiNodes)
       setObjectData($target.nodeData.style, val.style)
       setObjectData($target.nodeData.props, val.props)
       setObjectData($target.nodeData.attrs, val.attrs)
-      setObjectData($target.nodeData.domProps, val.domProps)
     },
     SET_NODE_BOX_CONFIG (state, val) {
       const $target = getPathNode(val.uid, state.Data.UiNodes)
@@ -186,6 +184,17 @@ export default {
   },
   actions: <Actions> {
     insertComponent ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
+      const activeUiConfig = (getters.activeNode as any).uiConfig as Project.UiConfig
+      if (activeUiConfig) {
+        if(
+          // @ts-ignore
+          (activeUiConfig.parentExcludes && activeUiConfig.parentExcludes.includes(data.name))
+          // @ts-ignore
+          ||(activeUiConfig.parentIncludes && !activeUiConfig.parentIncludes.includes(data.name))
+        ) {
+          return
+        }
+      }
       const node = deepCopy(data)
 
       const handleNode = (node: any, pid: string, root: boolean) => {
@@ -203,8 +212,7 @@ export default {
           nodeData: {
             style: {},
             attrs: {},
-            props: {},
-            domProps: {}
+            props: {}
           }
         }, {
           nodeData: nodeCompData.nodeData,
@@ -213,7 +221,7 @@ export default {
         if (!node.uiConfig.isContainer) {
           node.boxConfig = nodeCompData.boxConfig
         }
-        if (node.children.length > 0) {
+        if (typeof node.children !== 'string' && node.children.length > 0) {
           node.children.forEach((child: any) => handleNode(child, node.uid, false))
         }
       }
@@ -230,7 +238,7 @@ export default {
       const handleIds = (node: any, pid: string) => {
         node.uid = ulid()
         node.pid = pid
-        if (node.children.length > 0) {
+        if (typeof node.children !== 'string' && node.children.length > 0) {
           node.children.forEach((child: any) => handleIds(child, node.uid))
         }
       }

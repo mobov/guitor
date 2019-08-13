@@ -52,6 +52,8 @@
           <m-icon value="delete_outline"></m-icon>
         </m-button>
       </el-tooltip>
+      <!--<div class="tool-bar-divider"></div>-->
+      <!--<div style="width: 40px"></div>-->
       <div class="tool-bar-divider"></div>
       <el-popover
         placement="bottom"
@@ -71,29 +73,50 @@
           </m-button>
         </m-flex>
         <el-tooltip slot="reference" content="保存为模板" placement="top">
-          <m-button :disabled="!isContainer" height="100%" :width="40" color="primary" variety="flat" shape="square">
+          <m-button :disabled="isRoot || !isContainer" height="100%" :width="40" color="primary" variety="flat" shape="square">
             <m-icon value="folder_shared"></m-icon>
           </m-button>
         </el-tooltip>
       </el-popover>
       <div class="tool-bar-divider"></div>
-      <el-tooltip content="PC模式" placement="top">
-        <m-button height="100%" :width="40" :color="mode === 'pc' ? 'primary' : 'default'" variety="flat" shape="square"
-                  @click="handleMode('pc')">
-          <m-icon value="laptop_chromebook"></m-icon>
+      <el-tooltip :content="isModeMobile ? 'PC模式' : '移动端模式'" placement="top">
+        <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
+                  @click="handleMode">
+          <m-icon :value="modeIcon"></m-icon>
         </m-button>
       </el-tooltip>
       <div class="tool-bar-divider"></div>
-      <el-tooltip content="移动端模式" placement="top">
-        <m-button height="100%" :width="40" :color="mode === 'mobile' ? 'primary' : 'default'" variety="flat" shape="square"
-                  @click="handleMode('mobile')">
-          <m-icon value="phone_android"></m-icon>
+      <el-tooltip :content="isViewPreview ? '编辑视图' : '预览视图'" placement="top">
+        <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
+                  @click="handleView">
+          <m-icon :value="viewIcon"></m-icon>
         </m-button>
       </el-tooltip>
+      <div class="tool-bar-divider"></div>
+      <el-tooltip content="导出VUE组件" placement="top">
+        <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
+                  @click="handleExportVue">
+          <m-icon value="screen_share"></m-icon>
+        </m-button>
+      </el-tooltip>
+      <el-tooltip content="导出虚拟节点" placement="top">
+        <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
+                  @click="handleExportTemplate">
+          <m-icon value="screen_share"></m-icon>
+        </m-button>
+      </el-tooltip>
+      <!--<el-tooltip content="窗口预览" placement="top">-->
+        <!--<m-button height="100%" :width="40" color="primary" variety="flat" shape="square"-->
+                  <!--@click="handleIframeView">-->
+          <!--<m-icon value="screen_share"></m-icon>-->
+        <!--</m-button>-->
+      <!--</el-tooltip>-->
     </m-flex>
   </m-flex>
 </template>
 <script>
+  import { clip2Board } from '@mobov/es-helper'
+  import { exportVueTemplate } from '@/exports'
   import { createNamespacedHelpers } from 'vuex'
 
   const { mapGetters, mapState, mapMutations, mapActions } = createNamespacedHelpers('project')
@@ -119,6 +142,9 @@
       mode () {
         return this.$store.state.previewer.mode
       },
+      view () {
+        return this.$store.state.previewer.view
+      },
       isContainer () {
         return this.activeNodeIsContainer
       },
@@ -133,6 +159,18 @@
       },
       lockIcon () {
         return this.isLocked ? 'lock_outline' : 'lock_open'
+      },
+      isModeMobile () {
+        return this.mode === 'mobile'
+      },
+      modeIcon () {
+        return this.isModeMobile ? 'phone_android' : 'laptop_chromebook'
+      },
+      isViewPreview () {
+        return this.view === 'preview'
+      },
+      viewIcon () {
+        return this.isViewPreview ? 'tv' : 'dvr'
       }
     },
     methods: {
@@ -167,15 +205,39 @@
         this.setNodeLock(this.activeNode)
       },
       handleTemplate () {
-        this.$store.dispatch('library/saveTemplate', {
+        this.$store.dispatch('library/registerTemplate', {
           name: this.template.value,
           UiNode: this.activeNode
         })
         this.template.show = !this.template.show
       },
-      handleMode (val) {
-        this.$store.commit('previewer/SET_MODE', val)
+      handleMode () {
+        this.$store.commit('previewer/SET_MODE', this.isModeMobile ? 'pc' : 'mobile')
       },
+      handleView () {
+        this.$store.commit('previewer/SET_VIEW', this.isViewPreview ? 'editor' : 'preview')
+      },
+      handleExportVue () {
+        const result = exportVueTemplate(this.activeNode)
+        clip2Board(result)
+        this.$notify({
+          title: '成功',
+          message: '已导出到剪切板',
+          type: 'success'
+        })
+      },
+      handleExportTemplate () {
+        const result = JSON.stringify(this.activeNode, null, 2)
+        clip2Board(result)
+        this.$notify({
+          title: '成功',
+          message: '已导出到剪切板',
+          type: 'success'
+        })
+      },
+      handleIframeView () {
+
+      }
     }
   }
 </script>

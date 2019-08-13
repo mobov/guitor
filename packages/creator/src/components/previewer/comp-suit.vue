@@ -27,9 +27,6 @@
       uid: {
         type: String
       },
-      nodeName: {
-        type: String
-      },
       node: {
         type: Object
       }
@@ -97,8 +94,10 @@
       },
       init () {
         this.initSuits()
-
-        this.$sortable = new Sortable(this.$el, {
+        console.log(this.node)
+        const $sortContainer = this.node.name === 'HView' ? this.$el.children[0] : this.$el
+        console.log($sortContainer)
+        this.$sortable = new Sortable($sortContainer, {
           group: this.nodeUid,
           draggable: '.comp-suit',
           // Element is dropped into the list from another list
@@ -133,7 +132,9 @@
       },
       handleDragOver (e) {
         if (!previewDrag && this.isContainer) {
-          this.SET_ACTIVE_NODE(this.nodeUid)
+          if (!this.isActive) {
+            this.SET_ACTIVE_NODE(this.nodeUid)
+          }
           e.stopPropagation()
         }
       },
@@ -155,11 +156,27 @@
           pid: this.activeUid
         })
       },
+      RChildren (h) {
+        if (this.node.uiConfig.isContainer) {
+          return this.node.children ? renderComponent(h, this.node.children) : []
+        } else if (typeof this.node.children === 'string') {
+          console.log(this.node.children)
+          return [h('span', {
+            domProps: {
+              innerText: this.node.children
+            }
+          })]
+        } else {
+          return this.node.children ? renderComponent(h, this.node.children) : []
+        }
+      },
       addSuitListeners () {
         // document.addEventListener('mousemove', this.handleMouseMove)
         // document.addEventListener('mouseup', this.handleMouseUp)
         this.$el.addEventListener('mousedown', this.handleActive)
-        this.$el.addEventListener('dragover', this.handleDragOver)
+        if (this.isContainer) {
+          this.$el.addEventListener('dragover', this.handleDragOver)
+        }
         if (this.isRoot) {
           this.$el.addEventListener('dragstart', this.handleDragStart)
           this.$el.addEventListener('dragend', this.handleDragEnd)
@@ -172,7 +189,9 @@
         // document.removeEventListener('mousemove', this.handleMouseMove)
         // document.removeEventListener('mouseup', this.handleMouseUp)
         this.$el.removeEventListener('mousedown', this.handleMouseDown)
-        this.$el.removeEventListener('dragover', this.handleDragOver)
+        if (this.isContainer) {
+          this.$el.removeEventListener('dragover', this.handleDragOver)
+        }
         if (this.isRoot) {
           this.$el.removeEventListener('dragstart', this.handleDragStart)
           this.$el.removeEventListener('dragend', this.handleDragEnd)
@@ -208,7 +227,7 @@
         return h(
           this.node.tag,
           this.node.nodeData,
-          this.node.children ? renderComponent(h, this.node.children) : []
+          this.RChildren(h)
         )
       } else {
         console.log(this.node)
@@ -222,7 +241,7 @@
             h(
               this.node.tag,
               this.node.nodeData,
-              this.node.children ? renderComponentChildren(h, this.node.children) : []
+              this.RChildren(h)
             )
           ]
         )
@@ -300,7 +319,8 @@
 
     &.--isContainer {
       border: 1px dashed rgba(0, 0, 0, .5);
-
+      /*box-sizing: border-box !important;*/
+      /*box-shadow: 0 0 1px 1px rgba(0,0,0,.5) ;*/
       > .comp-suit-mask {
         display: none;
       }

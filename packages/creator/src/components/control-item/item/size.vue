@@ -46,12 +46,24 @@ export default {
   name: 'control-item-size',
   props: {
     value: {
-      type: [Number, String],
+      type: [Number, String, Boolean],
       default: 'auto'
     },
     config: {
       type: Object,
       default: () => {}
+    }
+  },
+  data () {
+    return {
+      SizeUnits,
+      sizeCache: 'auto',
+      undefinedAuto: false
+    }
+  },
+  created () {
+    if (typeof this.value === 'undefined') {
+      this.undefinedAuto = true
     }
   },
   computed: {
@@ -62,6 +74,8 @@ export default {
       set (val) {
         if (this.value !== 'auto') {
           this.$emit('input', `${this._value}${val}`)
+        } else if (this.undefinedAuto) {
+          this.$emit('input', undefined)
         }
       }
     },
@@ -72,6 +86,8 @@ export default {
       set (val) {
         if (this.value !== 'auto') {
           this.$emit('input', `${val}${this.unit}`)
+        } else if (this.undefinedAuto) {
+          this.$emit('input', undefined)
         }
       }
     },
@@ -80,12 +96,12 @@ export default {
     },
     isAuto: {
       get () {
-        return this.value === 'auto'
+        return this.undefinedAuto ? true : this.value === 'auto'
       },
       set (val) {
         console.log(val)
         if (val) {
-          this.$emit('input', 'auto')
+          this.$emit('input', this.undefinedAuto ? undefined : 'auto')
         } else {
           this.$emit('input', this.sizeCache === 'auto' ? '0px' : this.sizeCache)
         }
@@ -100,12 +116,6 @@ export default {
           this.sizeCache = val
         }
       }
-    }
-  },
-  data () {
-    return {
-      SizeUnits,
-      sizeCache: 'auto'
     }
   }
 }

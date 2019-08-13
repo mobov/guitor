@@ -10,7 +10,6 @@ export default function render (h: CreateElement, PNode: Project.UiNodes): VNode
     for (let node of PNode) {
       node = deepCopy(node)
       node.nodeData.attrs = node.nodeData.attrs === undefined ? {} : node.nodeData.attrs
-      node.nodeData.domProps = node.nodeData.domProps === undefined ? {} : node.nodeData.domProps
       node.nodeData.class = node.nodeData.class === undefined ? {} : node.nodeData.class
       // node.nodeData.attrs['id'] = node.uid
       node.nodeData.directives = node.nodeData.directives === undefined ? [] : node.nodeData.directives
