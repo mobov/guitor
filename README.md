@@ -1,3 +1,3 @@
-# gui-creator
+# guitor
 > Web构建器
 

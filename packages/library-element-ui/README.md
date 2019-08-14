@@ -1,4 +1,4 @@
-# `@mobov/gui-creator-library-element-ui`
+# `@guitor/library-element-ui`
 
 > TODO: description
 

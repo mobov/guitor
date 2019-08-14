@@ -1,12 +1,12 @@
 {
-  "name": "@mobov/gui-creator-project",
+  "name": "@guitor/project",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "creator:serve": "lerna run serve --scope @mobov/gui-creator --stream",
-    "creator:package": "lerna run build --scope @mobov/gui-creator --stream",
-    "ui:package": "lerna run build --scope @mobov/gui-creator-base-ui --stream"
+    "creator:serve": "lerna run serve --scope @guitor/creator --stream",
+    "creator:package": "lerna run build --scope @guitor/creator --stream",
+    "ui:package": "lerna run build --scope @guitor/base-ui --stream"
   },
   "workspaces": [
     "packages/*"

@@ -1,9 +1,9 @@
 {
-  "name": "@mobov/gui-creator-library-element-ui",
+  "name": "@guitor/library-element-ui",
   "version": "1.0.1",
   "description": "> TODO: description",
   "author": "nocoolyoyo <574857444@qq.com>",
-  "homepage": "https://github.com/mobov/gui-creator#readme",
+  "homepage": "https://github.com/mobov/guitor#readme",
   "license": "ISC",
   "main": "index.js",
   "directories": {
@@ -18,12 +18,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mobov/gui-creator.git"
+    "url": "git+https://github.com/mobov/guitor.git"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
-    "url": "https://github.com/mobov/gui-creator/issues"
+    "url": "https://github.com/mobov/guitor/issues"
   }
 }

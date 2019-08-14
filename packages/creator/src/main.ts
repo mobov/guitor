@@ -12,7 +12,7 @@ import Mobov, {
   MCheckbox, MRadio, MAppBar, MRow, MCol, MAvatar, MTable, MTableCol
 } from '@mobov/vui'
 import LibraryBaseUi from './base-ui/library'
-import LibraryElementUi from '@mobov/gui-creator-library-element-ui'
+import LibraryElementUi from '@guitor/library-element-ui'
 import * as Library from '@/library'
 import '@/directives/drag-ani'
 // @ts-ignore

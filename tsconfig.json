@@ -22,8 +22,8 @@
       "webpack-env"
     ],
     "paths": {
-      "@mobov/gui-creator/base-ui": ["./ui/src"],
-      "@mobov/gui-creator/base-ui/*": ["./ui/src/*"]
+      "@guitor/base-ui": ["./base-ui/src"],
+      "@guitor/base-ui/*": ["./base-ui/src/*"]
     }
   }
 }
