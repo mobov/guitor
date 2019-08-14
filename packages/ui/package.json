@@ -6,6 +6,9 @@
     "serve": "rollup -w --config build/rollup.config.watch.js",
     "build": "rollup --name=GuiGreatorBaseUI --config build/rollup.config.bundle.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "lib/index.cjs.js",
   "module": "lib/index.esm.js",
   "types": "types/index.d.ts",
@@ -42,5 +45,6 @@
     "sass-loader": "^7.1.0",
     "typescript": "^3.4.3",
     "vue-template-compiler": "^2.6.10"
-  }
+  },
+  "gitHead": "7dad9ccfe2d8f01c37d9d2b5e2a6111985258568"
 }
