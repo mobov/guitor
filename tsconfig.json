@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ],
+    "strict": true,
+//    "jsx": "preserve",
+//    "jsxFactory": "h",
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "baseUrl": "./packages",
+    "types": [
+      "webpack-env"
+    ],
+    "paths": {
+      "@mobov/gui-creator/base-ui": ["./ui/src"],
+      "@mobov/gui-creator/base-ui/*": ["./ui/src/*"]
+    }
+  }
+}

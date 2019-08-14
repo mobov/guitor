@@ -6,16 +6,19 @@
     "serve": "rollup -w --config build/rollup.config.watch.js",
     "build": "rollup --name=GuiGreatorBaseUI --config build/rollup.config.bundle.js"
   },
+  "main": "lib/index.cjs.js",
+  "module": "lib/index.esm.js",
+  "types": "types/index.d.ts",
+  "peerDependencies": {
+    "@mobov/scss-helper": "^0.0.5",
+    "vue": "^2.6.10"
+  },
   "dependencies": {
     "@mobov/scss-helper": "^0.0.5",
     "vue": "^2.6.10"
   },
   "devDependencies": {
-    "@types/blueimp-md5": "^2.7.0",
-    "@types/file-saver": "^2.0.0",
-    "@types/jszip": "^3.1.5",
     "@types/lodash": "^4.14.122",
-    "@types/vue-color": "^2.4.2",
     "@vue/cli-plugin-babel": "^3.9.0",
     "@vue/cli-plugin-eslint": "^3.9.0",
     "@vue/cli-plugin-typescript": "^3.9.0",

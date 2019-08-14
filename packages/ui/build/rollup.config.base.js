@@ -27,7 +27,7 @@ const config = {
     }),
     vue({
       data: {
-        scss: '@import "~@mobov/scss-helper/import";'
+        scss: '@import "~@mobov/scss-helper";'
       }
     }),
     babel({
