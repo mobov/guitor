@@ -1,4 +1,4 @@
-# gui-ui
+# creator
 
 ## Project setup
 ```

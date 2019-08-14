@@ -5,7 +5,8 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "creator:serve": "lerna run serve --scope @mobov/gui-creator --stream",
-    "creator:package": "lerna run build --scope @mobov/gui-creator --stream"
+    "creator:package": "lerna run build --scope @mobov/gui-creator --stream",
+    "ui:package": "lerna run build --scope @mobov/gui-creator-base-ui --stream"
   },
   "workspaces": [
     "packages/*"

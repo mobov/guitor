@@ -167,7 +167,7 @@
             }
           })]
         } else {
-          return this.node.children ? renderComponent(h, this.node.children) : []
+          return this.node.children ? renderComponentChildren(h, this.node.children) : []
         }
       },
       addSuitListeners () {

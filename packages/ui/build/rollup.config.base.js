@@ -13,31 +13,21 @@ const config = {
   // inputOptions
   input: 'src/index.ts',
   plugins: [
-    postcss({ extensions: ['.scss'], extract: `lib/style.css` }),
-    typescript({
-      importHelpers: true,
-      // objectHashIgnoreUnknownHack: true,
-      /// rollupCommonJSResolveHack: true,
-      tsconfig: 'tsconfig.json',
-      clean: true,
-      // rootDir: './src',
-      // declarationDir: './types/',
-      useTsconfigDeclarationDir: true,
-      extensions
+    postcss({ extensions: ['.scss'] }),
+    vue({
+      data: {
+        scss: '@import "~@mobov/scss-helper/import";'
+      }
     }),
-    vue(),
     babel({
       runtimeHelpers: true,
       babelrc: false,
       presets: [
         '@babel/preset-env',
-        '@vue/babel-preset-jsx'
+        '@vue/babel-preset-jsx',
         // '@babel/preset-typescript',
         // 'es2015-rollup',
       ],
-      // plugins: [
-      //   '@babel/plugin-syntax-dynamic-import'
-      // ],
       extensions,
       exclude: 'node_modules/**'
     }),
@@ -52,8 +42,6 @@ const config = {
     })
   ],
   external
-
-  // outputOptions
 }
 
 export default config

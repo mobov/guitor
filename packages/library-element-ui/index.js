@@ -697,19 +697,12 @@ module.exports = {
             type: 'boolean'
           }
         },
-        domProps: {
-          innerText: {
-            type: 'text'
-          }
+        children: {
+          label: '标签文案',
+          type: 'text'
         }
-      }
-      // children: [{
-      //   tag: 'span',
-      //
-      //   domProps: {
-      //     innerText: '标签'
-      //   }
-      // }]
+      },
+      children: '标签'
     },
     ElLink: {
       tag: 'ElLink',
@@ -1604,8 +1597,13 @@ module.exports = {
       },
       nodeData: {
         props: {
+        },
+        children: {
+          label: '按钮文案',
+          type: 'text'
         }
-      }
+      },
+      children: '面包'
     },
     ElBreadcrumb: {
       label: '面包屑',
@@ -1629,16 +1627,31 @@ module.exports = {
             label: '图标分隔符',
             type: 'text'
           }
+        },
+        children: {
+          label: '面包单元',
+          type: 'array',
+          config: {
+            columns: [{
+              field: 'children',
+              label: '内容',
+              type: 'text'
+            }]
+          }
         }
       },
       children: [{
         name: 'ElBreadcrumbItem',
+        children: '首页'
       }, {
         name: 'ElBreadcrumbItem',
+        children: '次页'
       }, {
         name: 'ElBreadcrumbItem',
+        children: '三叶'
       }, {
         name: 'ElBreadcrumbItem',
+        children: '四叶'
       }]
     }
   }
