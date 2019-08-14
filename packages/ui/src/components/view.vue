@@ -1,5 +1,4 @@
 <style lang="scss">
-  @import "../../../../node_modules/@mobov/scss-helper/import";
   .h-view {
     height: 100%;
     width: 100%;

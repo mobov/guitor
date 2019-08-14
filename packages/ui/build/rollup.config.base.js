@@ -14,6 +14,17 @@ const config = {
   input: 'src/index.ts',
   plugins: [
     postcss({ extensions: ['.scss'] }),
+    typescript({
+      importHelpers: true,
+      // objectHashIgnoreUnknownHack: true,
+      /// rollupCommonJSResolveHack: true,
+      tsconfig: 'tsconfig.json',
+      clean: true,
+      // rootDir: './src',
+      // declarationDir: './types/',
+      useTsconfigDeclarationDir: true,
+      extensions
+    }),
     vue({
       data: {
         scss: '@import "~@mobov/scss-helper/import";'

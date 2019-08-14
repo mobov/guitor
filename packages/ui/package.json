@@ -27,6 +27,7 @@
     "eslint-plugin-vue": "^5.0.0",
     "sass": "^1.18.0",
     "sass-loader": "^7.1.0",
+    "node-sass": "^4.9.0",
     "typescript": "^3.4.3",
     "vue-template-compiler": "^2.6.10",
     "rollup": "^1.7.4",
