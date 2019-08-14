@@ -759,15 +759,13 @@ module.exports = {
             label: '下划线',
             type: 'boolean'
           }
+        },
+        children: {
+          type: 'text',
+          label: '文案'
         }
-      }
-      // children: [{
-      //   tag: 'span',
-      //
-      //   domProps: {
-      //     innerText: '标签'
-      //   }
-      // }]
+      },
+      children: '文字链接'
     },
     ElInputNumber: {
       label: '计数器',
@@ -1653,6 +1651,541 @@ module.exports = {
         name: 'ElBreadcrumbItem',
         children: '四叶'
       }]
+    },
+    ElPagination: {
+      name: 'ElPagination',
+      label: '分页器',
+      tag: 'ElPagination',
+      nodeData: {
+        props: {
+          small: false,
+          background: false,
+          pageSize: 10,
+          total: 100,
+          pagerCount: 7,
+          currentPage: 1,
+          layout: 'prev, pager, next, jumper, ->, total',
+          pageSizes: [10, 20, 30, 40, 50, 100],
+          prevText: '',
+          nextText: '',
+          disabled: false,
+          hideOnSinglePage: false
+        }
+      },
+      control: {
+        props: {
+          small: {
+            label: '是否使用小型分页样式',
+            type: 'boolean'
+          },
+          background: {
+            label: '是否为分页按钮添加背景色',
+            type: 'boolean'
+          },
+          pageSize: {
+            label: '每页显示条目个数，支持 .sync 修饰符',
+            type: 'number'
+          },
+          total: {
+            label: '总条目数',
+            type: 'number'
+          },
+          pagerCount: {
+            label: '页码按钮的数量，当总页数超过该值时会折叠',
+            type: 'number',
+            config: {
+              min: 5,
+              max: 21,
+              step: 2
+            }
+          },
+          currentPage: {
+            label: '当前页数，支持 .sync 修饰符',
+            type: 'number'
+          },
+          layout: {
+            label: '组件布局，子组件名用逗号分隔',
+            type: 'text'
+          },
+          pageSizes: {
+            label: '组件布局，子组件名用逗号分隔',
+            type: 'array',
+            config: {
+              columns: [{
+                label: '选项',
+                type: 'number'
+              }]
+            }
+          },
+          prevText: {
+            label: '替代图标显示的上一页文字',
+            type: 'text'
+          },
+          nextText: {
+            label: '替代图标显示的下一页文字',
+            type: 'text'
+          },
+          disabled: {
+            label: '禁用',
+            type: 'boolean'
+          },
+          hideOnSinglePage: {
+            label: '只有一页时是否隐藏',
+            type: 'boolean'
+          }
+        }
+      }
+    },
+    ElTimePicker: {
+      name: 'ElTimePicker',
+      tag: 'ElTimePicker',
+      label: '时间选择器1',
+      nodeData: {
+        props: {
+          value: `${new Date().getTime()}`,
+          size: 'medium',
+          placeholder: '',
+          startPlaceholder: '',
+          endPlaceholder: '',
+          isRange: false,
+          arrowControl: false,
+          align: 'left',
+          rangeSeparator: '-',
+          valueFormat: 'timestamp',
+          prefixIcon: 'el-icon-time',
+          clearIcon: 'el-icon-circle-close',
+          clearable: true,
+          editable: false,
+          readonly: false,
+          disabled: false
+        }
+      },
+      control: {
+        props: {
+          value: {
+            type: 'text',
+            label: '值'
+          },
+          size: {
+            label: '尺寸',
+            type: 'radio',
+            config: {
+              selections: [{
+                label: 'medium',
+                value: 'medium'
+              }, {
+                label: 'small',
+                value: 'small'
+              }, {
+                label: 'mini',
+                value: 'mini'
+              }]
+            }
+          },
+          placeholder: {
+            type: 'text',
+            label: '非范围选择时的占位内容'
+          },
+          startPlaceholder: {
+            type: 'text',
+            label: '范围选择时开始日期的占位内容'
+          },
+          endPlaceholder: {
+            type: 'text',
+            label: '范围选择时结束日期的占位内容'
+          },
+          isRange: {
+            type: 'boolean',
+            label: '是否为时间范围选择'
+          },
+          arrowControl: {
+            type: 'boolean',
+            label: '是否使用箭头进行时间选择'
+          },
+          align: {
+            label: '对齐方式',
+            type: 'radio',
+            config: {
+              selections: [{
+                label: 'left',
+                value: 'left'
+              }, {
+                label: 'center',
+                value: 'center'
+              }, {
+                label: 'right',
+                value: 'right'
+              }]
+            }
+          },
+          rangeSeparator: {
+            type: 'text',
+            label: '选择范围时的分隔符'
+          },
+          valueFormat: {
+            type: 'text',
+            label: '绑定值的格式'
+          },
+          prefixIcon: {
+            type: 'text',
+            label: '自定义头部图标的类名'
+          },
+          clearIcon: {
+            type: 'text',
+            label: '自定义清空图标的类名'
+          },
+          clearable: {
+            type: 'boolean',
+            label: '是否显示清除按钮'
+          },
+          editable: {
+            type: 'boolean',
+            label: '文本框可输入'
+          },
+          readonly: {
+            type: 'boolean',
+            label: '完全只读'
+          },
+          disabled: {
+            type: 'boolean',
+            label: '禁用'
+          }
+        }
+      }
+    },
+    ElTimeSelect: {
+      name: 'ElTimeSelect',
+      tag: 'ElTimeSelect',
+      label: '时间选择器2',
+      nodeData: {
+        props: {
+          value: `${new Date().getTime()}`,
+          size: 'medium',
+          placeholder: '',
+          startPlaceholder: '',
+          endPlaceholder: '',
+          align: 'left',
+          valueFormat: 'timestamp',
+          prefixIcon: 'el-icon-time',
+          clearIcon: 'el-icon-circle-close',
+          clearable: true,
+          editable: false,
+          readonly: false,
+          disabled: false
+        }
+      },
+      control: {
+        props: {
+          value: {
+            type: 'text',
+            label: '值'
+          },
+          size: {
+            label: '尺寸',
+            type: 'radio',
+            config: {
+              selections: [{
+                label: 'medium',
+                value: 'medium'
+              }, {
+                label: 'small',
+                value: 'small'
+              }, {
+                label: 'mini',
+                value: 'mini'
+              }]
+            }
+          },
+          placeholder: {
+            type: 'text',
+            label: '非范围选择时的占位内容'
+          },
+          startPlaceholder: {
+            type: 'text',
+            label: '范围选择时开始日期的占位内容'
+          },
+          endPlaceholder: {
+            type: 'text',
+            label: '范围选择时结束日期的占位内容'
+          },
+          align: {
+            label: '对齐方式',
+            type: 'radio',
+            config: {
+              selections: [{
+                label: 'left',
+                value: 'left'
+              }, {
+                label: 'center',
+                value: 'center'
+              }, {
+                label: 'right',
+                value: 'right'
+              }]
+            }
+          },
+          valueFormat: {
+            type: 'text',
+            label: '绑定值的格式'
+          },
+          prefixIcon: {
+            type: 'text',
+            label: '自定义头部图标的类名'
+          },
+          clearIcon: {
+            type: 'text',
+            label: '自定义清空图标的类名'
+          },
+          clearable: {
+            type: 'boolean',
+            label: '是否显示清除按钮'
+          },
+          editable: {
+            type: 'boolean',
+            label: '文本框可输入'
+          },
+          readonly: {
+            type: 'boolean',
+            label: '完全只读'
+          },
+          disabled: {
+            type: 'boolean',
+            label: '禁用'
+          }
+        }
+      }
+    },
+    ElDatePicker: {
+      name: 'ElDatePicker',
+      tag: 'ElDatePicker',
+      label: '日期选择器',
+      nodeData: {
+        props: {
+          value: `${new Date().getTime()}`,
+          type: 'date',
+          size: 'small',
+          placeholder: '',
+          startPlaceholder: '',
+          endPlaceholder: '',
+          align: 'left',
+          format: 'yyyy-MM-dd',
+          valueFormat: 'timestamp',
+          prefixIcon: 'el-icon-time',
+          clearIcon: 'el-icon-circle-close',
+          unlinkPanels: false,
+          clearable: true,
+          editable: false,
+          readonly: false,
+          disabled: false
+        }
+      },
+      control: {
+        props: {
+          value: {
+            type: 'text',
+            label: '值'
+          },
+          type: {
+            label: '选择器类型',
+            type: 'radio',
+            config: {
+              selections: [{
+                label: 'year',
+                value: 'year'
+              }, {
+                label: 'month',
+                value: 'month'
+              }, {
+                label: 'date',
+                value: 'date'
+              }, {
+                label: 'dates',
+                value: 'dates'
+              }, {
+                label: 'week',
+                value: 'week'
+              }, {
+                label: 'datetime',
+                value: 'datetime'
+              }, {
+                label: 'datetimerange',
+                value: 'datetimerange'
+              }, {
+                label: 'daterange',
+                value: 'daterange'
+              }, {
+                label: 'monthrange',
+                value: 'monthrange'
+              }]
+            }
+          },
+          size: {
+            label: '尺寸',
+            type: 'radio',
+            config: {
+              selections: [{
+                label: 'large',
+                value: 'large'
+              }, {
+                label: 'small',
+                value: 'small'
+              }, {
+                label: 'mini',
+                value: 'mini'
+              }]
+            }
+          },
+          placeholder: {
+            type: 'text',
+            label: '非范围选择时的占位内容'
+          },
+          startPlaceholder: {
+            type: 'text',
+            label: '范围选择时开始日期的占位内容'
+          },
+          endPlaceholder: {
+            type: 'text',
+            label: '范围选择时结束日期的占位内容'
+          },
+          align: {
+            label: '对齐方式',
+            type: 'radio',
+            config: {
+              selections: [{
+                label: 'left',
+                value: 'left'
+              }, {
+                label: 'center',
+                value: 'center'
+              }, {
+                label: 'right',
+                value: 'right'
+              }]
+            }
+          },
+          valueFormat: {
+            type: 'text',
+            label: '绑定值的格式'
+          },
+          prefixIcon: {
+            type: 'text',
+            label: '自定义头部图标的类名'
+          },
+          clearIcon: {
+            type: 'text',
+            label: '自定义清空图标的类名'
+          },
+          clearable: {
+            type: 'boolean',
+            label: '是否显示清除按钮'
+          },
+          editable: {
+            type: 'boolean',
+            label: '文本框可输入'
+          },
+          readonly: {
+            type: 'boolean',
+            label: '完全只读'
+          },
+          disabled: {
+            type: 'boolean',
+            label: '禁用'
+          }
+        }
+      }
+    },
+    ElCalendar: {
+      name: 'ElCalendar',
+      tag: 'ElCalendar',
+      label: '日历',
+      nodeData: {
+        props: {
+          value: '2019-03-04',
+          range: ['2019-03-04', '2019-03-24']
+        }
+      },
+      control: {
+        props: {
+          value: {
+            type: 'text',
+            label: '值'
+          },
+          range: {
+            label: '时间范围',
+            type: 'array',
+            config: {
+              operation: false,
+              columns: [{
+                label: '时间范围',
+                text: 'text'
+              }]
+            }
+          }
+        }
+      }
+    },
+    ElRate: {
+      name: 'ElRate',
+      tag: 'ElRate',
+      label: '评分',
+      nodeData: {
+        props: {
+          value: 2,
+          max: 5,
+          allowHalf: false,
+          lowThreshold: 2,
+          highThreshold: 2,
+          // colors: ['#F7BA2A', '#F7BA2A', '#F7BA2A'],
+          // voidColor: '#C6D1DE',
+          // disabledVoidColor: '#EFF2F7',
+          // iconClasses: ['el-icon-star-on', 'el-icon-star-on','el-icon-star-on'],
+          showText: false,
+          showScore: false,
+          textColor: '1F2D3D',
+          texts: ['极差', '失望', '一般', '满意', '惊喜'],
+          disabled: false
+        }
+      },
+      control: {
+        props: {
+          value: {
+            type: 'number',
+            label: '值'
+          },
+          max: {
+            type: 'number',
+            label: '值'
+          },
+          allowHalf: {
+            type: 'boolean',
+            label: '是否允许半选'
+          },
+          lowThreshold: {
+            type: 'number',
+            label: '低分和中等分数的界限值'
+          },
+          highThreshold: {
+            type: 'number',
+            label: '高分和中等分数的界限值'
+          },
+          showText: {
+            type: 'boolean',
+            label: '显示辅助文字'
+          },
+          showScore: {
+            type: 'boolean',
+            label: '显示当前分数'
+          },
+          textColor: {
+            type: 'color',
+            label: '辅助文字的颜色'
+          },
+          disabled: {
+            type: 'boolean',
+            label: '禁用'
+          }
+        }
+      }
     }
   }
 }

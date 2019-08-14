@@ -2123,6 +2123,69 @@ module.exports = {
           }
         }
       }
+    },
+    ElRate: {
+      name: 'ElRate',
+      tag: 'ElRate',
+      label: '评分',
+      nodeData: {
+        props: {
+          value: 2,
+          max: 5,
+          allowHalf: false,
+          lowThreshold: 2,
+          highThreshold: 2,
+          // colors: ['#F7BA2A', '#F7BA2A', '#F7BA2A'],
+          // voidColor: '#C6D1DE',
+          // disabledVoidColor: '#EFF2F7',
+          // iconClasses: ['el-icon-star-on', 'el-icon-star-on','el-icon-star-on'],
+          showText: false,
+          showScore: false,
+          textColor: '1F2D3D',
+          texts: ['极差', '失望', '一般', '满意', '惊喜'],
+          disabled: false
+        }
+      },
+      control: {
+        props: {
+          value: {
+            type: 'number',
+            label: '值'
+          },
+          max: {
+            type: 'number',
+            label: '值'
+          },
+          allowHalf: {
+            type: 'boolean',
+            label: '是否允许半选'
+          },
+          lowThreshold: {
+            type: 'number',
+            label: '低分和中等分数的界限值'
+          },
+          highThreshold: {
+            type: 'number',
+            label: '高分和中等分数的界限值'
+          },
+          showText: {
+            type: 'boolean',
+            label: '显示辅助文字'
+          },
+          showScore: {
+            type: 'boolean',
+            label: '显示当前分数'
+          },
+          textColor: {
+            type: 'color',
+            label: '辅助文字的颜色'
+          },
+          disabled: {
+            type: 'boolean',
+            label: '禁用'
+          }
+        }
+      }
     }
   }
 }
