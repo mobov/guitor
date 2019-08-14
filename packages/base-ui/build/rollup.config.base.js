@@ -26,9 +26,9 @@ const config = {
       extensions
     }),
     vue({
-      data: {
-        scss: '@import "~@mobov/scss-helper";'
-      }
+      // data: {
+      //   scss: '@import "~@mobov/scss-helper";'
+      // }
     }),
     babel({
       runtimeHelpers: true,

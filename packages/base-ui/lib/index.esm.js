@@ -43,6 +43,80 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var script = {
   name: 'HView',
   props: {
@@ -242,15 +316,15 @@ __vue_render__._withStripped = true;
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-60b1a1fe_0", {
-    source: "/*@import \"~@mobov/scss-helper/import\";*/\n.h-view {\n  height: 100%;\n  width: 100%;\n  overflow: hidden;\n  padding: 0;\n  margin: 0;\n  position: relative;\n}\n.h-view .h-view-main {\n    height: 100%;\n    width: 100%;\n    overflow: auto;\n}\n.h-view.--direction-x {\n    flex-direction: row;\n}\n.h-view.--direction-y {\n    flex-direction: column;\n}\n\n/*# sourceMappingURL=view.vue.map */",
+  inject("data-v-5ee59adf_0", {
+    source: "@charset \"UTF-8\";\n/**\n * 滚动容器\n */\n/**\n\t * 隐藏滚动条\n\t */\n/**\n\t * slim bar样式滚动条\n\t */\n.h-view {\n  height: 100%;\n  width: 100%;\n  overflow: hidden;\n  padding: 0;\n  margin: 0;\n  position: relative;\n}\n.h-view .h-view-main {\n    height: 100%;\n    width: 100%;\n    overflow: auto;\n}\n.h-view .h-view-main::-webkit-scrollbar-thumb {\n      background-color: #a6a6a6;\n}\n.h-view .h-view-main::-webkit-scrollbar-track {\n      background-color: #e5e5e5;\n}\n.h-view .h-view-main::-webkit-scrollbar {\n      width: 7px;\n}\n.h-view .h-view-main::-webkit-scrollbar-thumb {\n      border-left: 2px solid transparent;\n}\n.h-view .h-view-mainl::-webkit-scrollbar-track {\n      border-left: 2px solid transparent;\n}\n.h-view.--direction-x {\n    flex-direction: row;\n}\n.h-view.--direction-y {\n    flex-direction: column;\n}\n\n/*# sourceMappingURL=view.vue.map */",
     map: {
       "version": 3,
-      "sources": ["D:\\Projects\\mobov\\gui-creator\\packages\\ui\\src\\components\\view.vue", "view.vue"],
+      "sources": ["view.vue", "D:\\Projects\\mobov\\gui-creator\\packages\\base-ui\\src\\components\\view.vue"],
       "names": [],
-      "mappings": "AACA,wCAAA;AACA;EACA,YAAA;EACA,WAAA;EACA,gBAAA;EACA,UAAA;EACA,SAAA;EACA,kBAAA;AAAA;AANA;IAQA,YAAA;IACA,WAAA;IACA,cAAA;AAAA;AAVA;IAcA,mBAAA;AAAA;AAdA;IAiBA,sBAAA;AAAA;;ACFA,mCAAmC",
+      "mappings": "AAAA,gBAAgB;ACChB;;EDEE;ACYF;;GDTG;ACmBH;;GDhBG;ACmEH;EACA,YAAA;EACA,WAAA;EACA,gBAAA;EACA,UAAA;EACA,SAAA;EACA,kBAAA;AAAA;AANA;IAQA,YAAA;IACA,WAAA;IACA,cAAA;AAAA;AApDA;MACA,yBAJA;AAAA;AAMA;MACA,yBANA;AAAA;AASA;MACA,UAZA;AAAA;AAcA;MACA,kCAAA;AAAA;AAEA;MACA,kCAAA;AAAA;AA4BA;IAcA,mBAAA;AAAA;AAdA;IAiBA,sBAAA;AAAA;;ADzDA,mCAAmC",
       "file": "view.vue",
-      "sourcesContent": ["<style lang=\"scss\">\r\n  /*@import \"~@mobov/scss-helper/import\";*/\r\n  .h-view {\r\n    height: 100%;\r\n    width: 100%;\r\n    overflow: hidden;\r\n    padding: 0;\r\n    margin: 0;\r\n    position: relative;\r\n    .h-view-main {\r\n      height: 100%;\r\n      width: 100%;\r\n      overflow: auto;\r\n    //  @include slim-scroll-bar();\r\n    }\r\n    &.--direction-x {\r\n      flex-direction: row;\r\n    }\r\n    &.--direction-y {\r\n      flex-direction: column;\r\n    }\r\n  }\r\n</style>\r\n<template>\r\n  <div class=\"h-view\" :class=\"classes\" :style=\"styles\">\r\n    <section ref=\"main\" class=\"h-view-main\" :style=\"mainStyles\">\r\n      <slot></slot>\r\n    </section>\r\n  </div>\r\n</template>\r\n<script>\r\n\r\nexport default {\r\n  name: 'HView',\r\n  props: {\r\n    direction: {\r\n      type: String,\r\n      default: 'y' // x / y / xy\r\n    },\r\n    flex: {\r\n      type: Number,\r\n      default: 1\r\n    },\r\n    space: {\r\n      type: Number,\r\n      default: 5\r\n    }\r\n  },\r\n  computed: {\r\n    styles () {\r\n      return {\r\n        flex: this.flex\r\n      }\r\n    },\r\n    mainStyles () {\r\n      return {\r\n        padding: `${this.space}px`\r\n      }\r\n    },\r\n    classes () {\r\n      return {\r\n        [`--direction-${this.direction}`]: true\r\n      }\r\n    }\r\n  }\r\n}\r\n</script>\r\n", "/*@import \"~@mobov/scss-helper/import\";*/\n.h-view {\n  height: 100%;\n  width: 100%;\n  overflow: hidden;\n  padding: 0;\n  margin: 0;\n  position: relative; }\n  .h-view .h-view-main {\n    height: 100%;\n    width: 100%;\n    overflow: auto; }\n  .h-view.--direction-x {\n    flex-direction: row; }\n  .h-view.--direction-y {\n    flex-direction: column; }\n\n/*# sourceMappingURL=view.vue.map */"]
+      "sourcesContent": ["@charset \"UTF-8\";\n/**\n * 滚动容器\n */\n/**\n\t * 隐藏滚动条\n\t */\n/**\n\t * slim bar样式滚动条\n\t */\n.h-view {\n  height: 100%;\n  width: 100%;\n  overflow: hidden;\n  padding: 0;\n  margin: 0;\n  position: relative; }\n  .h-view .h-view-main {\n    height: 100%;\n    width: 100%;\n    overflow: auto; }\n    .h-view .h-view-main::-webkit-scrollbar-thumb {\n      background-color: #a6a6a6; }\n    .h-view .h-view-main::-webkit-scrollbar-track {\n      background-color: #e5e5e5; }\n    .h-view .h-view-main::-webkit-scrollbar {\n      width: 7px; }\n    .h-view .h-view-main::-webkit-scrollbar-thumb {\n      border-left: 2px solid transparent; }\n    .h-view .h-view-mainl::-webkit-scrollbar-track {\n      border-left: 2px solid transparent; }\n  .h-view.--direction-x {\n    flex-direction: row; }\n  .h-view.--direction-y {\n    flex-direction: column; }\n\n/*# sourceMappingURL=view.vue.map */", "<style lang=\"scss\">\r\n  /**\r\n * 滚动容器\r\n */\r\n  @mixin scroller($dir:y){\r\n    @if($dir == y){\r\n      overflow: auto;\r\n      overflow-x: hidden;\r\n    } @else {\r\n      overflow-x: auto;\r\n      overflow-y: hidden;\r\n    }\r\n    -webkit-overflow-scrolling: touch;\r\n    transform: translateZ(0);\r\n  }\r\n  /**\r\n\t * 隐藏滚动条\r\n\t */\r\n  @mixin no-scroll-bar(){\r\n    &::-webkit-scrollbar {\r\n      width: 0;\r\n      height: 0;\r\n    }\r\n  }\r\n\r\n  /**\r\n\t * slim bar样式滚动条\r\n\t */\r\n  @mixin slim-scroll-bar(\r\n    $direction : y,\r\n\t\t$size: 7px,\r\n\t\t$bgColor:#a6a6a6,\r\n\t\t$color:#e5e5e5\r\n  ){\r\n    &::-webkit-scrollbar-thumb {\r\n      background-color: $bgColor;\r\n    }\r\n    &::-webkit-scrollbar-track {\r\n      background-color: $color;\r\n    }\r\n    @if ($direction == y) {\r\n      &::-webkit-scrollbar {\r\n        width: $size;\r\n      }\r\n      &::-webkit-scrollbar-thumb {\r\n        border-left: 2px solid transparent;\r\n      }\r\n      &l::-webkit-scrollbar-track {\r\n        border-left: 2px solid transparent;\r\n      }\r\n    }  @else if ($direction == x) {\r\n      &::-webkit-scrollbar {\r\n        height: $size;\r\n      }\r\n      &::-webkit-scrollbar-thumb {\r\n        border-top: 2px solid transparent;\r\n      }\r\n      &::-webkit-scrollbar-track {\r\n        border-top: 2px solid transparent;\r\n      }\r\n    } @else {\r\n      &::-webkit-scrollbar {\r\n        width: $size;\r\n        height: $size;\r\n      }\r\n      &::-webkit-scrollbar-thumb {\r\n        border-left: 2px solid transparent;\r\n        border-top: 2px solid transparent;\r\n      }\r\n      &l::-webkit-scrollbar-track {\r\n        border-left: 2px solid transparent;\r\n        border-top: 2px solid transparent;\r\n      }\r\n    }\r\n  }\r\n\r\n  .h-view {\r\n    height: 100%;\r\n    width: 100%;\r\n    overflow: hidden;\r\n    padding: 0;\r\n    margin: 0;\r\n    position: relative;\r\n    .h-view-main {\r\n      height: 100%;\r\n      width: 100%;\r\n      overflow: auto;\r\n      @include slim-scroll-bar();\r\n    }\r\n    &.--direction-x {\r\n      flex-direction: row;\r\n    }\r\n    &.--direction-y {\r\n      flex-direction: column;\r\n    }\r\n  }\r\n</style>\r\n<template>\r\n  <div class=\"h-view\" :class=\"classes\" :style=\"styles\">\r\n    <section ref=\"main\" class=\"h-view-main\" :style=\"mainStyles\">\r\n      <slot></slot>\r\n    </section>\r\n  </div>\r\n</template>\r\n<script>\r\n\r\nexport default {\r\n  name: 'HView',\r\n  props: {\r\n    direction: {\r\n      type: String,\r\n      default: 'y' // x / y / xy\r\n    },\r\n    flex: {\r\n      type: Number,\r\n      default: 1\r\n    },\r\n    space: {\r\n      type: Number,\r\n      default: 5\r\n    }\r\n  },\r\n  computed: {\r\n    styles () {\r\n      return {\r\n        flex: this.flex\r\n      }\r\n    },\r\n    mainStyles () {\r\n      return {\r\n        padding: `${this.space}px`\r\n      }\r\n    },\r\n    classes () {\r\n      return {\r\n        [`--direction-${this.direction}`]: true\r\n      }\r\n    }\r\n  }\r\n}\r\n</script>\r\n"]
     },
     media: undefined
   });
@@ -396,11 +470,11 @@ __vue_render__$1._withStripped = true;
 
 var __vue_inject_styles__$1 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-a6cc2154_0", {
+  inject("data-v-748625f4_0", {
     source: ".h-container {\n  display: flex;\n  position: relative;\n  box-sizing: border-box;\n  /*width: 100%;*/\n  /*height: 100%;*/\n  width: 100%;\n  flex-wrap: nowrap;\n}\n.h-container.--wrap {\n    flex-wrap: wrap;\n}\n.h-container.--direction-x {\n    flex-direction: row;\n    height: auto;\n}\n.h-container.--direction-y {\n    flex-direction: column;\n    height: 100%;\n}\n.h-container.--justify-start {\n    justify-content: flex-start;\n}\n.h-container.--justify-center {\n    justify-content: center;\n}\n.h-container.--justify-end {\n    justify-content: flex-end;\n}\n.h-container.--justify-around {\n    justify-content: space-around;\n}\n.h-container.--justify-between {\n    justify-content: space-between;\n}\n.h-container.--align-start {\n    align-items: flex-start;\n}\n.h-container.--align-center {\n    align-items: center;\n}\n.h-container.--align-end {\n    align-items: flex-end;\n}\n.h-container.--align-stretch {\n    align-items: stretch;\n}\n\n/*# sourceMappingURL=container.vue.map */",
     map: {
       "version": 3,
-      "sources": ["D:\\Projects\\mobov\\gui-creator\\packages\\ui\\src\\components\\container.vue", "container.vue"],
+      "sources": ["D:\\Projects\\mobov\\gui-creator\\packages\\base-ui\\src\\components\\container.vue", "container.vue"],
       "names": [],
       "mappings": "AACA;EACA,aAAA;EACA,kBAAA;EACA,sBAAA;EACA,eAAA;EACA,gBAAA;EACA,WAAA;EACA,iBAAA;AAAA;AAPA;IASA,eAAA;AAAA;AATA;IAYA,mBAAA;IACA,YAAA;AAAA;AAbA;IAgBA,sBAAA;IACA,YAAA;AAAA;AAjBA;IAoBA,2BAAA;AAAA;AApBA;IAuBA,uBAAA;AAAA;AAvBA;IA0BA,yBAAA;AAAA;AA1BA;IA6BA,6BAAA;AAAA;AA7BA;IAgCA,8BAAA;AAAA;AAhCA;IAmCA,uBAAA;AAAA;AAnCA;IAsCA,mBAAA;AAAA;AAtCA;IAyCA,qBAAA;AAAA;AAzCA;IA4CA,oBAAA;AAAA;;ACVA,wCAAwC",
       "file": "container.vue",
@@ -516,11 +590,11 @@ __vue_render__$2._withStripped = true;
 
 var __vue_inject_styles__$2 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-355646a4_0", {
+  inject("data-v-df47d218_0", {
     source: ".h-box {\n  position: relative;\n  box-sizing: border-box;\n  height: auto;\n}\n\n/*# sourceMappingURL=box.vue.map */",
     map: {
       "version": 3,
-      "sources": ["D:\\Projects\\mobov\\gui-creator\\packages\\ui\\src\\components\\box.vue", "box.vue"],
+      "sources": ["D:\\Projects\\mobov\\gui-creator\\packages\\base-ui\\src\\components\\box.vue", "box.vue"],
       "names": [],
       "mappings": "AACA;EACA,kBAAA;EACA,sBAAA;EACA,YAAA;AAAA;;ACCA,kCAAkC",
       "file": "box.vue",
