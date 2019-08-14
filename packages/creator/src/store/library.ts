@@ -2,18 +2,14 @@ import { RootState, RootGetters } from '@/store/index'
 import { deepCopy, findNode } from '@mobov/es-helper'
 import Library from '@/typings/library'
 import { merge } from 'lodash'
-import Project from '@/typings/project'
 
 export type State = {
-  Data: Array<Library.Options>
-  Templates: Array<Library.Template>
+  Data: Array<Library.Plugin>
 }
 
 export type Getters = {
-  isContainer: (state: State, getters: Getters) => (name: string) => boolean
   getLibrary: (state: State) => (name: string) => any
   getComponent:  (state: State) => (name: string) => any
-  getTemplate:  (state: State) => (name: string) => any
 }
 
 export type Mutations = {
@@ -30,15 +26,13 @@ export type ActionsParams = {
 }
 
 export type Actions = {
-  registerLibrary: (params: ActionsParams, val: Library.Plugin) => Promise<void>
-  registerTemplate: (params: ActionsParams, val: Library.Template) => Promise<void>
+  register: (params: ActionsParams, val: Library.Plugin) => Promise<void>
 }
 
 export default {
   namespaced: true,
   state: <State> {
-    Data: [],
-    Templates: []
+    Data: []
   },
   getters: <Getters> {
     getLibrary: (state) => (name) => state.Data.find(_ => _.name === name),
@@ -47,8 +41,7 @@ export default {
       return library !== undefined && library.components !== undefined
         ? library.components[name]
         : undefined
-    },
-    getTemplate: (state) => (name) => state.Templates.find(_ => _.name === name),
+    }
   },
   mutations: <Mutations> {
     SET_DATA (state, val) {
@@ -78,12 +71,8 @@ export default {
     }
   },
   actions: <Actions> {
-    registerLibrary ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
+    register ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
       commit('SET_DATA', data)
-    },
-    registerTemplate ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
-      const template = deepCopy(data)
-      state.Templates.push(template)
     }
-  },
+  }
 }

@@ -143,7 +143,7 @@
           return
         }
         this.insertComponent({
-          name: val.name,
+          ...val,
           pid: this.activeUid
         })
       },
@@ -152,7 +152,7 @@
           return
         }
         this.insertTemplate({
-          name: val.name,
+          ...val,
           pid: this.activeUid
         })
       },
@@ -160,7 +160,6 @@
         if (this.node.uiConfig.isContainer) {
           return this.node.children ? renderComponent(h, this.node.children) : []
         } else if (typeof this.node.children === 'string') {
-          console.log(this.node.children)
           return [h('span', {
             domProps: {
               innerText: this.node.children

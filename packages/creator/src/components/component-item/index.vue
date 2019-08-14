@@ -11,6 +11,10 @@
   export default {
     name: 'component-item',
     props: {
+      library: {
+        type: String,
+        default: 'base-ui' //  component/ template
+      },
       type: {
         type: String,
         default: 'component' //  component/ template
@@ -50,7 +54,8 @@
       handleInsert () {
         const evtName = this.type === 'component' ? 'insertComponent' : 'insertTemplate'
         this.eventBus.$emit(evtName, {
-          name: this.value.name
+          name: this.value.name,
+          library: this.library
         })
       }
     },
@@ -76,6 +81,7 @@
     align-items: center;
     justify-content: center;
     background-color: #f2f2f2;
+    text-align: center;
     &.--dragging {
       cursor: grab;
     }

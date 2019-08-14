@@ -185,16 +185,16 @@ export default {
   actions: <Actions> {
     insertComponent ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
       const activeUiConfig = (getters.activeNode as any).uiConfig as Project.UiConfig
-      if (activeUiConfig) {
-        if(
-          // @ts-ignore
-          (activeUiConfig.parentExcludes && activeUiConfig.parentExcludes.includes(data.name))
-          // @ts-ignore
-          ||(activeUiConfig.parentIncludes && !activeUiConfig.parentIncludes.includes(data.name))
-        ) {
-          return
-        }
-      }
+      // if (activeUiConfig) {
+      //   if(
+      //     // @ts-ignore
+      //     (activeUiConfig.parentExcludes && activeUiConfig.parentExcludes.includes(data.name))
+      //     // @ts-ignore
+      //     ||(activeUiConfig.parentIncludes && !activeUiConfig.parentIncludes.includes(data.name))
+      //   ) {
+      //     return
+      //   }
+      // }
       const node = deepCopy(data)
 
       const handleNode = (node: any, pid: string, root: boolean) => {
@@ -233,7 +233,9 @@ export default {
       // commit('SET_ACTIVE_NODE', node.uid)
     },
     insertTemplate ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
-      const template = rootGetters['library/getTemplate'](data.name as any) as any
+      // @ts-ignore
+      const template = rootGetters['template/getTemplate'](data.library, data.name) as any
+
       const templateNode = deepCopy(template.UiNode)
       const handleIds = (node: any, pid: string) => {
         node.uid = ulid()

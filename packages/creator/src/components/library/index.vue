@@ -15,30 +15,31 @@
     <m-app-bar :font-size="16">
       UI构建器
     </m-app-bar>
-    <div :key="library.name" v-for="library in Data">
+    <div :key="library.name" v-show="library.templates.length > 0" v-for="library in Templates">
+      <el-divider content-position="left">{{library.label}}</el-divider>
+      <m-row paddingX="sm">
+        <m-col class="item" v-if="isShow(item)" :padding="2" :xs="8" :key="item.name" v-for="item in library.templates">
+          <component-item :value="item" :library="library.name" type="template"></component-item>
+        </m-col>
+      </m-row>
+    </div>
+    <div :key="library.name" v-for="library in Libraries">
       <el-divider content-position="left">{{library.label}}</el-divider>
       <m-row paddingX="sm">
         <m-col class="item" v-if="isShow(item)" :padding="2" :xs="8" :key="item.name" v-for="item in library.components">
-          <component-item :value="item" type="component"></component-item>
+          <component-item :value="item" :library="library.name" type="component"></component-item>
         </m-col>
       </m-row>
     </div>
-    <div>
-      <el-divider content-position="left">本地模板</el-divider>
-      <m-row paddingX="sm">
-        <m-col class="item" :padding="2" :xs="8" :key="item.name" v-for="item in Templates">
-          <component-item :value="item" type="template"></component-item>
-        </m-col>
-      </m-row>
-    </div>
+
   </m-view>
 </template>
 <script>
   import ComponentItem from '@/components/component-item'
-  import { createNamespacedHelpers } from 'vuex'
+  import { createNamespacedHelpers, mapGetters, mapState, mapMutations } from 'vuex'
   import { deepCopy } from '@mobov/es-helper'
-
-  const { mapGetters, mapState, mapMutations } = createNamespacedHelpers('library')
+  //
+  // const { mapGetters, mapState, mapMutations } = createNamespacedHelpers('library')
 
   export default {
     name: 'library',
@@ -51,10 +52,12 @@
       }
     },
     computed: {
-      ...mapState([
-        'Data',
-        'Templates'
-      ])
+      Libraries () {
+        return this.$store.state.library.Data
+      },
+      Templates () {
+        return this.$store.state.template.Data
+      }
     },
     methods: {
       isShow (data) {

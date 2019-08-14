@@ -67,6 +67,9 @@
       },
       columns () {
         return this.config.columns
+      },
+      isOperation () {
+        return this.config.operation === undefined ? true : this.config.operation
       }
       // model: {
       //   get (data, field) {
@@ -121,39 +124,44 @@
     created () {
     },
     render () {
-      const { handleAdd, handleRemove, _value } = this
+      const { handleAdd, handleRemove, _value, isOperation } = this
 
       return (
         <div class="control-item-array">
           <ElTable data={this._value} border>
             {this.RCols()}
-            <ElTableColumn label="操作" width="100" {...{
-              scopedSlots: {
-                default: scope => {
-                  return (
-                    <div>
-                      <MButton color="error"
-                        onClick={() => handleRemove(scope.$index)}
-                        disabled={_value.length < 2}
-                        shape="circle"
-                        variety="flat"
-                        marginLeft="xs"
-                        size={32}>
-                          <MIcon value="delete_outline" size={20} />
-                      </MButton>
-                      <MButton color="success"
-                        onClick={() => handleAdd(scope.$index)}
-                        shape="circle"
-                        variety="flat"
-                        marginLeft="xs"
-                        size={32}>
-                          <MIcon value="add" size={20} />
-                      </MButton>
-                    </div>
-                  )
-                }
+            {isOperation ?
+                 (
+                  <ElTableColumn label="操作" width="100" {...{
+                  scopedSlots: {
+                    default: scope => {
+                      return (
+                        <div>
+                          <MButton color="error"
+                                   onClick={() => handleRemove(scope.$index)}
+                                   disabled={_value.length < 2}
+                                   shape="circle"
+                                   variety="flat"
+                                   marginLeft="xs"
+                                   size={32}>
+                            <MIcon value="delete_outline" size={20} />
+                          </MButton>
+                          <MButton color="success"
+                                   onClick={() => handleAdd(scope.$index)}
+                                   shape="circle"
+                                   variety="flat"
+                                   marginLeft="xs"
+                                   size={32}>
+                            <MIcon value="add" size={20} />
+                          </MButton>
+                        </div>
+                      )
+                    }
+                  }
+                }} />
+                ) : []
               }
-            }} />
+            }
           </ElTable>
         </div>
       )

@@ -3,89 +3,12 @@ import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
 import router from './router'
-import BaseUI from './base-ui'
-import ElementUI from 'element-ui'
+import './init-ui'
+import './init-library'
+import './init-template'
 import './style/style.scss'
-// import './components/comp-suit/style.scss'
-import Mobov, {
-  MApp, MFrame, MView, MIcon, MButton, MFlexFiller, MFlex, MList, MListItem, MChip,
-  MCheckbox, MRadio, MAppBar, MRow, MCol, MAvatar, MTable, MTableCol
-} from '@mobov/vui'
-import LibraryBaseUi from './base-ui/library'
-import LibraryElementUi from '@guitor/library-element-ui'
-import * as Library from '@/library'
-import '@/directives/drag-ani'
-// @ts-ignore
-import arrow_downward from '@mobov/vui/lib/icons/arrow_downward'
-// @ts-ignore
-import arrow_upward from '@mobov/vui/lib/icons/arrow_upward'
-// @ts-ignore
-import unfold_more from '@mobov/vui/lib/icons/unfold_more'
-// @ts-ignore
-import unfold_less from '@mobov/vui/lib/icons/unfold_less'
-// @ts-ignore
-import icon_delete from '@mobov/vui/lib/icons/delete'
-// @ts-ignore
-import delete_outline from '@mobov/vui/lib/icons/delete_outline'
-// @ts-ignore
-import lock_open from '@mobov/vui/lib/icons/lock_open'
-// @ts-ignore
-import lock_outline from '@mobov/vui/lib/icons/lock_outline'
-// @ts-ignore
-import folder_shared from '@mobov/vui/lib/icons/folder_shared'
-// @ts-ignore
-import laptop_chromebook from '@mobov/vui/lib/icons/laptop_chromebook'
-// @ts-ignore
-import phone_android from '@mobov/vui/lib/icons/phone_android'
-// @ts-ignore
-import dvr from '@mobov/vui/lib/icons/dvr'
-// @ts-ignore
-import tv from '@mobov/vui/lib/icons/tv'
-// @ts-ignore
-import screen_share from '@mobov/vui/lib/icons/screen_share'
 
-Library.register(LibraryBaseUi as any)
-Library.register(LibraryElementUi as any)
-Vue.use(ElementUI)
-Vue.use(BaseUI)
-Vue.use(Mobov, {
-  components: {
-    MApp,
-    MAvatar,
-    MFrame,
-    MAppBar,
-    MIcon,
-    MButton,
-    MFlexFiller,
-    MFlex,
-    MList,
-    MListItem,
-    MView,
-    MCheckbox,
-    MRadio,
-    MRow,
-    MCol,
-    MChip,
-    MTable,
-    MTableCol
-  },
-  icons: {
-    arrow_downward,
-    arrow_upward,
-    unfold_more,
-    unfold_less,
-    icon_delete,
-    delete_outline,
-    lock_open,
-    lock_outline,
-    folder_shared,
-    laptop_chromebook,
-    phone_android,
-    dvr,
-    tv,
-    screen_share
-  }
-})
+import '@/directives/drag-ani'
 
 Vue.config.productionTip = false
 // 事件总线
