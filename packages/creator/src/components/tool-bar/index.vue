@@ -1,6 +1,13 @@
 <template>
   <m-flex class="tool-bar" justify="center">
     <m-flex :elevation="2" class="tool-bar-main">
+      <el-tooltip content="定位到根节点 " placement="top">
+        <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
+                  @click="handleActiveRoot">
+          <m-icon value="location_on"></m-icon>
+        </m-button>
+      </el-tooltip>
+      <div class="tool-bar-divider"></div>
       <el-tooltip content="向上" placement="top">
         <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
                   @click="handleActivePrev">
@@ -96,7 +103,7 @@
       <el-tooltip content="保存快照" placement="top">
         <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
                   @click="handleSaveShot">
-          <m-icon value="screen_share"></m-icon>
+          <m-icon value="save"></m-icon>
         </m-button>
       </el-tooltip>
       <div class="tool-bar-divider"></div>
@@ -182,6 +189,9 @@
       }
     },
     methods: {
+      ...mapMutations([
+        'SET_ACTIVE_NODE'
+      ]),
       ...mapActions([
         'activeNodePrev',
         'activeNodeNext',
@@ -191,6 +201,9 @@
         'removeNode',
         'clearNode'
       ]),
+      handleActiveRoot () {
+       this.SET_ACTIVE_NODE('root')
+      },
       handleActivePrev () {
         this.activeNodePrev(this.activeNode)
       },

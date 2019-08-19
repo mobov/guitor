@@ -31,6 +31,10 @@ import dvr from '@mobov/vui/lib/icons/dvr'
 import tv from '@mobov/vui/lib/icons/tv'
 // @ts-ignore
 import screen_share from '@mobov/vui/lib/icons/screen_share'
+// @ts-ignore
+import save from '@mobov/vui/lib/icons/save'
+// @ts-ignore
+import location_on from '@mobov/vui/lib/icons/location_on'
 
 Vue.use(ElementUI)
 Vue.use(BaseUI)
@@ -69,6 +73,8 @@ Vue.use(Mobov, {
     phone_android,
     dvr,
     tv,
-    screen_share
+    screen_share,
+    save,
+    location_on
   }
 })
