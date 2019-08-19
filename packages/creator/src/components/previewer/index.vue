@@ -80,6 +80,11 @@
   export default {
     name: 'previewer',
     components: { ToolBar, CompSuit },
+    data () {
+      return {
+        previewDrag: false
+      }
+    },
     computed: {
       ...mapState([
         'mode',
@@ -106,7 +111,13 @@
     methods: {
       handleClick (e) {
         e.stopPropagation()
-      }
+      },
+      handleDragStart (e) {
+        previewDrag = true
+      },
+      handleDragEnd (e) {
+        previewDrag = false
+      },
     },
     render (h) {
       const { screenStyles, screenClasses, handleClick } = this

@@ -2186,6 +2186,145 @@ module.exports = {
           }
         }
       }
+    },
+    ElSubmenu: {
+      name: 'ElSubmenu',
+      tag: 'ElSubmenu',
+      label: '水平二级菜单',
+      uiConfig: {
+        isHidden: true,
+        isBoxWrap: false
+      },
+      nodeData: {
+        props: {
+          index: '1',
+          disabled: false
+        }
+      },
+      children: []
+    },
+    ElMenuItem: {
+      name: 'ElMenuItem',
+      tag: 'ElMenuItem',
+      label: '菜单单元',
+      uiConfig: {
+        isBoxWrap: false
+      },
+      nodeData: {
+        props: {
+          index: '1',
+          disabled: false
+        }
+      },
+      control: {
+        props: {
+          index: {
+            type: 'text',
+            label: '索引'
+          },
+          disabled: {
+            type: 'boolean',
+            label: '禁用'
+          }
+        },
+        children: {
+          type: 'text',
+          label: '标题'
+        }
+      },
+      children: '菜单'
+    },
+    ElMenuY: {
+      name: 'ElMenuY',
+      tag: 'ElMenu',
+      label: '横向菜单',
+      boxConfig: {
+        space: 0
+      },
+      uiConfig: {
+        isContainer: true
+      },
+      nodeData: {
+        props: {
+          mode: 'horizontal',
+          backgroundColor: '#ffffff',
+          textColor: '#303133',
+          activeTextColor: '#303133',
+          defaultActive: '1',
+          uniqueOpened: false,
+          menuTrigger: 'hover',
+        }
+      },
+      control: {
+        props: {
+          backgroundColor: {
+            type: 'color',
+            label: '菜单的背景色'
+          },
+          textColor: {
+            type: 'color',
+            label: '菜单的文字颜色'
+          },
+          activeTextColor: {
+            type: 'color',
+            label: '激活菜单的文字颜色'
+          },
+          defaultActive: {
+            type: 'text',
+            label: '当前激活菜单的index'
+          },
+          uniqueOpened: {
+            type: 'boolean',
+            label: '是否只保持一个子菜单的展开'
+          },
+          menuTrigger: {
+            type: 'radio',
+            label: '子菜单打开的触发方式',
+            config: {
+              selections: [{
+                label: 'hover',
+                value: 'hover'
+              }, {
+                label: 'click',
+                value: 'click'
+              }]
+            }
+          }
+        }
+      },
+      children: [{
+        name: 'ElMenuItem',
+        nodeData: {
+          props: {
+            index: '1'
+          }
+        },
+        children: '处理中心'
+      }, {
+        name: 'ElMenuItem',
+        nodeData: {
+          props: {
+            index: '2'
+          }
+        },
+        children: '我的工作台'
+      }, {
+        name: 'ElMenuItem',
+        nodeData: {
+          props: {
+            index: '3'
+          }
+        },
+        children: '消息中心'
+      }, {
+        name: 'ElMenuItem',
+        nodeData: {
+          props: {
+            index: '4'
+          }
+        },
+        children: '订单管理'
+      }]
     }
   }
 }

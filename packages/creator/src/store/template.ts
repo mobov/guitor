@@ -67,7 +67,8 @@ export default {
       commit('SET_DATA', data)
     },
     saveLocalTemplate ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
-      state.Data[0].push(data)
+      // @ts-ignore
+      state.Data[0].templates.push(data)
     },
   },
 }

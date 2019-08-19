@@ -15,17 +15,20 @@ export type Options = {
   UiNodes: UiNodes
 }
 
-
-
 export type BoxConfig = {
 
 }
 
 export type UiConfig = {
+  // 组件项
   isContainer?: boolean
-  isLocked?: boolean
+  isBoxWrap?: boolean
+  isHidden?: boolean
+  enableDelete?: boolean
   parentExcludes: []
   parentIncludes: []
+  // 独立项
+  isLocked?: boolean
 }
 
 export type UiNode = {

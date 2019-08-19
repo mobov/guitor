@@ -205,7 +205,7 @@
         this.setNodeLock(this.activeNode)
       },
       handleTemplate () {
-        this.$store.dispatch('library/registerTemplate', {
+        this.$store.dispatch('template/saveLocalTemplate', {
           name: this.template.value,
           UiNode: this.activeNode
         })

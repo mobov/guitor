@@ -1,23 +1,18 @@
 <style lang="scss">
-  .h-container {
+  .h-container-x {
     display: flex;
     position: relative;
     box-sizing: border-box;
+    /*flex-basis: auto  ;*/
     /*width: 100%;*/
     /*height: 100%;*/
     width: 100%;
+    height: auto;
     flex-wrap: nowrap;
     &.--wrap {
       flex-wrap: wrap;
     }
-    &.--direction-x {
-      flex-direction: row;
-      height: auto;
-    }
-    &.--direction-y {
-      flex-direction: column;
-      height: 100%;
-    }
+    flex-direction: row;
     &.--justify-start {
       justify-content: flex-start;
     }
@@ -48,19 +43,15 @@
   }
 </style>
 <template>
-  <div class="h-container" :class="classes" :style="styles">
+  <div class="h-container-x" :class="classes" :style="styles">
     <slot></slot>
   </div>
 </template>
 <script>
 
 export default {
-  name: 'HContainer',
+  name: 'HContainerX',
   props: {
-    direction: {
-      type: String,
-      default: 'y' // x / y
-    },
     flex: {
       type: Number,
       default: 1
@@ -71,7 +62,7 @@ export default {
     },
     wrap: {
       type: Boolean,
-      default: false
+      default: true
     },
     align: {
       type: String,
@@ -85,6 +76,8 @@ export default {
   computed: {
     styles () {
       return {
+        // flexGrow: this.flex,
+        // flexShrink: this.flex,
         flex: this.flex,
         padding: `${this.space}px`
       }
@@ -92,7 +85,6 @@ export default {
     classes () {
       return {
         [`--wrap`]: this.wrap,
-        [`--direction-${this.direction}`]: true,
         [`--align-${this.align}`]: true,
         [`--justify-${this.justify}`]: true
       }

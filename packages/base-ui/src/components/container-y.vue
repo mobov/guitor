@@ -1,5 +1,5 @@
 <style lang="scss">
-  .h-container {
+  .h-container-y {
     display: flex;
     position: relative;
     box-sizing: border-box;
@@ -9,15 +9,7 @@
     width: 100%;
     height: auto;
     flex-wrap: nowrap;
-    &.--wrap {
-      flex-wrap: wrap;
-    }
-    &.--direction-x {
-      flex-direction: row;
-    }
-    &.--direction-y {
-      flex-direction: column;
-    }
+    flex-direction: column;
     &.--justify-start {
       justify-content: flex-start;
     }
@@ -48,19 +40,15 @@
   }
 </style>
 <template>
-  <div class="h-container" :class="classes" :style="styles">
+  <div class="h-container-y" :class="classes" :style="styles">
     <slot></slot>
   </div>
 </template>
 <script>
 
 export default {
-  name: 'HContainer',
+  name: 'HContainerY',
   props: {
-    direction: {
-      type: String,
-      default: 'y' // x / y
-    },
     flex: {
       type: Number,
       default: 1
@@ -93,8 +81,6 @@ export default {
     },
     classes () {
       return {
-        [`--wrap`]: this.wrap,
-        [`--direction-${this.direction}`]: true,
         [`--align-${this.align}`]: true,
         [`--justify-${this.justify}`]: true
       }

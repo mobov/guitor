@@ -5,7 +5,7 @@
 </style>
 <template>
   <m-view class="comp-api" paddingY="md" paddingX="sm">
-    <div v-if="!activeNodeIsContainer">
+    <div v-if="isBox">
       <el-divider content-position="left">盒属性</el-divider>
       <control-item  class="m-mb-sm m-px-sm"
                     v-model="item.value"
@@ -71,11 +71,20 @@
       ...mapState([
         'activeUid'
       ]),
+      // boxConfig () {
+      //   return this.compData.uiConfig.isBoxWrap ? this.activeNode.boxConfig : {}
+      // },
+      // props () {
+      //   return this.compData.control.children || false
+      // },
+      isBox () {
+        return (this.compData.uiConfig && this.compData.uiConfig.isBoxWrap)
+      },
       compData () {
         return this.$store.getters['library/getComponent'](this.activeNode.name)
       },
       boxConfigApi () {
-        return this.$store.getters['library/getComponent']('HContainer').control.props
+        return this.$store.getters['library/getComponent']('HBox').control.props
       },
       propsApi () {
         return this.compData.control.props || {}
@@ -120,7 +129,7 @@
       init () {
         this.initData('props')
         this.initData('attrs')
-        if (!this.activeNodeIsContainer) {
+        if (this.isBox) {
           this.initBoxConfigData()
         }
       },

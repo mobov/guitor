@@ -83,13 +83,134 @@ export default {
         version: '0.0.1',
         dependencies: {}
       },
+      // UiNodes: [{
+      //
+      // }]
+      // UiNodes: [{
+      //   name: 'HFrame',
+      //   tag: 'HFrame',
+      //   uid: 'root',
+      //   uiConfig: {
+      //     isLocked: false,
+      //     isContainer: true
+      //   },
+      //   nodeData: {
+      //     props: {
+      //       isHeader: true,
+      //       isFooter: false
+      //       // direction: 'y',
+      //       // space: 5,
+      //       // flex: 1
+      //     },
+      //     style: {
+      //
+      //     }
+      //   },
+      //   children: [{
+      //     name: 'HView',
+      //     tag: 'HView',
+      //     uid: 'root-l',
+      //     pid: 'root',
+      //     uiConfig: {
+      //       isLocked: false,
+      //       isContainer: true
+      //     },
+      //     nodeData: {
+      //       slot: 'left',
+      //       props: {
+      //       },
+      //       style: {
+      //
+      //       }
+      //     },
+      //     children: []
+      //   }, {
+      //     name: 'HView',
+      //     tag: 'HView',
+      //     uid: 'root-r',
+      //     pid: 'root',
+      //     nodeData: {
+      //       slot: 'right',
+      //       props: {
+      //       },
+      //       style: {
+      //
+      //       }
+      //     },
+      //     uiConfig: {
+      //       isLocked: false,
+      //       isContainer: false
+      //     },
+      //     children: []
+      //   }, {
+      //     name: 'HContainer',
+      //     tag: 'HContainer',
+      //     nodeData: {
+      //       slot: 'header',
+      //       props: {
+      //         direction: 'y',
+      //       },
+      //       style: {
+      //
+      //       }
+      //     },
+      //     uid: 'root-h',
+      //     pid: 'root',
+      //     uiConfig: {
+      //       isLocked: false,
+      //       isContainer: true
+      //     },
+      //     children: []
+      //   }, {
+      //     name: 'HContainer',
+      //     tag: 'HContainer',
+      //     nodeData: {
+      //       slot: 'footer',
+      //       props: {
+      //         direction: 'y',
+      //       },
+      //       style: {
+      //
+      //       }
+      //     },
+      //     uid: 'root-b',
+      //     pid: 'root',
+      //     uiConfig: {
+      //       isLocked: false,
+      //       isContainer: true
+      //     },
+      //     children: []
+      //   }, {
+      //     name: 'HView',
+      //     tag: 'HView',
+      //     uid: 'root-m',
+      //     pid: 'root',
+      //     uiConfig: {
+      //       isLocked: false,
+      //       isContainer: true
+      //     },
+      //     nodeData: {
+      //       props: {
+      //
+      //       },
+      //       style: {
+      //
+      //       }
+      //     },
+      //     children: []
+      //   }]
+      // }]
       UiNodes: [{
         name: 'HView',
         tag: 'HView',
         uid: 'root',
         uiConfig: {
           isLocked: false,
-          isContainer: true
+          isContainer: true,
+          isBoxWrap: false
+        },
+        boxConfig: {
+          flex: 1
         },
         nodeData: {
           props: {
@@ -111,7 +232,6 @@ export default {
     UiNodes: state => state.Data.UiNodes,
     activeNode: state => getPathNode(state.activeUid, state.Data.UiNodes),
     activeNodeIsContainer: (state, getters, rootState, rootGetters) => {
-      console.log( rootGetters['library/getComponent'](getters.activeNode.name as any))
       const compData = rootGetters['library/getComponent'](getters.activeNode.name as any) as any
 
       return compData.uiConfig !== undefined
@@ -184,7 +304,7 @@ export default {
   },
   actions: <Actions> {
     insertComponent ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
-      const activeUiConfig = (getters.activeNode as any).uiConfig as Project.UiConfig
+      // const activeUiConfig = (getters.activeNode as any).uiConfig as Project.UiConfig
       // if (activeUiConfig) {
       //   if(
       //     // @ts-ignore
@@ -197,40 +317,22 @@ export default {
       // }
       const node = deepCopy(data)
 
-      const handleNode = (node: any, pid: string, root: boolean) => {
+      const handleNode = (node: any, pid: string) => {
         const nodeComp = rootGetters['library/getComponent'](node.name as any) as any
         const nodeCompData = deepCopy(nodeComp)
         const nodeCopy = deepCopy(node)
         merge(node, {
           uid: ulid(),
-          pid,
-          tag: nodeCompData.tag,
-          uiConfig: {
-            isLocked: false
-          },
-          children: nodeCompData.children ? nodeCompData.children : [],
-          nodeData: {
-            style: {},
-            attrs: {},
-            props: {}
-          }
-        }, {
-          nodeData: nodeCompData.nodeData,
-          uiConfig: nodeCompData.uiConfig ? nodeCompData.uiConfig : {}
-        }, nodeCopy)
-        if (!node.uiConfig.isContainer) {
-          node.boxConfig = nodeCompData.boxConfig
-        }
+          pid
+        }, nodeCompData, nodeCopy)
+
         if (typeof node.children !== 'string' && node.children.length > 0) {
-          node.children.forEach((child: any) => handleNode(child, node.uid, false))
+          node.children.forEach((child: any) => handleNode(child, node.uid))
         }
       }
-      handleNode(node, node.pid, true)
-
-      console.log(node)
+      handleNode(node, node.pid)
 
       commit('INSERT_NODE', node)
-      // commit('SET_ACTIVE_NODE', node.uid)
     },
     insertTemplate ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
       // @ts-ignore
@@ -250,6 +352,7 @@ export default {
       commit('INSERT_NODE', templateNode)
     },
     sortNode ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
+      console.log(data)
       const parentNode = getPathNode(data.id, state.Data.UiNodes)
       const from = parentNode.children[data.oldIndex]
       const to = parentNode.children[data.newIndex]

@@ -53,19 +53,32 @@ export default {
           name: key,
           library: result.name,
           uiConfig: {
-            isLocked: false,
-            isContainer: false
-          },
-          boxConfig: {
-            flex: 0,
-            space: 5
+            isContainer: false,
+            isBoxWrap: true,
+            isLocked: false
           },
           nodeData: {
             style: {},
-            attrs: {},
             props: {}
-          }
+          },
+          children: []
         }, item)
+
+        // if (result.components[key].uiConfig.isContainer) {
+        //   merge(result.components[key], {
+        //     children: []
+        //   })
+        // }
+        if (result.components[key].uiConfig.isBoxWrap) {
+          merge(result.components[key], {
+            boxConfig: {
+              flex: 0,
+              space: 5
+            }
+          })
+        }
+        // console.log(item)
+        // console.log(result.components[key])
       })
       state.Data.push(result)
     }

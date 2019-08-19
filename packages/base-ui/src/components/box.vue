@@ -3,6 +3,7 @@
     position: relative;
     box-sizing: border-box;
     height: auto;
+    /*flex-basis: auto;*/
   }
 </style>
 <template>
@@ -55,6 +56,8 @@
       styles () {
         return {
           flex: this.flex,
+          // flexGrow: this.flex,
+          // flexShrink: this.flex,
           width: this.width,
           padding: `${this.space}px`
         }

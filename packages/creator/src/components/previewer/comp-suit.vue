@@ -94,12 +94,11 @@
       },
       init () {
         this.initSuits()
-        console.log(this.node)
         const $sortContainer = this.node.name === 'HView' ? this.$el.children[0] : this.$el
-        console.log($sortContainer)
         this.$sortable = new Sortable($sortContainer, {
           group: this.nodeUid,
           draggable: '.comp-suit',
+          // sort: false,
           // Element is dropped into the list from another list
           // Changed sorting within list
           onUpdate: this.handleDragUpdate,
@@ -110,13 +109,13 @@
         console.log(this.node.pid)
         console.log(e.oldDraggableIndex)
         console.log(e.newDraggableIndex)
-        // if (this.node.pid) {
-        //   this.sortNode({
-        //     id: this.node.pid,
-        //     oldIndex: e.oldDraggableIndex,
-        //     newIndex: e.newDraggableIndex
-        //   })
-        // }
+        if (this.node.pid) {
+          this.sortNode({
+            id: this.node.uid,
+            oldIndex: e.oldDraggableIndex,
+            newIndex: e.newDraggableIndex
+          })
+        }
       },
       handleDragUpdate (e) {
       },
@@ -228,8 +227,7 @@
           this.node.nodeData,
           this.RChildren(h)
         )
-      } else {
-        console.log(this.node)
+      } else if (this.node.uiConfig.isBoxWrap) {
         return h(
           'HBox',
           {
@@ -244,6 +242,16 @@
             )
           ]
         )
+      } else {
+        this.node.nodeData.class = this.node.nodeData.class ? {
+          ...this.node.nodeData.class,
+          ...this.classes
+        } : classes
+        return  h(
+          this.node.tag,
+          this.node.nodeData,
+          this.RChildren(h)
+        )
       }
     }
   }
@@ -256,7 +264,7 @@
   $--comp-suit-handler-color-over: #ffa365;
   $--comp-suit-handler-pos-fix: 0;
   $--comp-suit-handler-size: 2px;
-  $--comp-suit-handler-position: -1px;
+  $--comp-suit-handler-position: 0;
   $--comp-suit-handler-corner-size: 10px;
   // $--comp-suit-select-border-size: 2px;
 
@@ -269,6 +277,7 @@
     position: relative;
     transform: translate3d(0, 0, 0);
 
+    &.--hover,
     &.--active {
       z-index: 99;
       /*border-width: 0 !important;*/
@@ -288,14 +297,14 @@
       > .--↑,
       > .--↓ {
         height: $--comp-suit-handler-size;
-        width: calc(100% + #{$--comp-suit-handler-size });
+        width: 100%;
         left: $--comp-suit-handler-position;
       }
 
       > .--→,
       > .--← {
         width: $--comp-suit-handler-size;
-        height: calc(100% + #{$--comp-suit-handler-size });
+        height: 100%;
         top: $--comp-suit-handler-position;
       }
 
