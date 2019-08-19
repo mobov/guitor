@@ -1140,7 +1140,7 @@ module.exports = {
       label: '表单单元',
       uiConfig: {
         isContainer: true,
-        parentIncludes: ['ElForm']
+        containers: ['ElForm']
       },
       boxConfig: {
         space: 0
@@ -2208,7 +2208,8 @@ module.exports = {
       tag: 'ElMenuItem',
       label: '菜单单元',
       uiConfig: {
-        isBoxWrap: false
+        isBoxWrap: false,
+        containers: ['ElMenuY']
       },
       nodeData: {
         props: {

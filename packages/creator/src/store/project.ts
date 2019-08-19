@@ -62,7 +62,7 @@ export type ActionsParams = {
 }
 
 export type Actions = {
-  insertComponent: (params: ActionsParams, val: Project.UiNode) => Promise<void>
+  insertComponent: (params: ActionsParams, val: Project.UiNode) => { status: boolean, msg?: string }
   insertTemplate: (params: ActionsParams, val: { name: string, pid: string, UiNode: UiNode }) => Promise<void>
   sortNode: (params: ActionsParams, val: sortOpts) => Promise<void>
   removeNode: (params: ActionsParams, val: Project.UiNode) => Promise<void>
@@ -315,23 +315,23 @@ export default {
   },
   actions: <Actions> {
     insertComponent ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
-      // const activeUiConfig = (getters.activeNode as any).uiConfig as Project.UiConfig
-      // if (activeUiConfig) {
-      //   if(
-      //     // @ts-ignore
-      //     (activeUiConfig.parentExcludes && activeUiConfig.parentExcludes.includes(data.name))
-      //     // @ts-ignore
-      //     ||(activeUiConfig.parentIncludes && !activeUiConfig.parentIncludes.includes(data.name))
-      //   ) {
-      //     return
-      //   }
-      // }
       const node = deepCopy(data)
-
+      const parentNode = getPathNode(node.pid, state.Data.UiNodes)
+      const nodeComponent = rootGetters['library/getComponent'](node.name as any) as any
+      if (nodeComponent.uiConfig && nodeComponent.uiConfig.containers) {
+        if (!nodeComponent.uiConfig.containers.includes(parentNode.name)) {
+          return {
+            status: false,
+            msg: '该组件插入位置受限制'
+          }
+        }
+      }
       const handleNode = (node: any, pid: string) => {
         const nodeComp = rootGetters['library/getComponent'](node.name as any) as any
         const nodeCompData = deepCopy(nodeComp)
         const nodeCopy = deepCopy(node)
+        console.log(nodeComp.uiConfig)
+
         merge(node, {
           uid: ulid(),
           pid
@@ -344,6 +344,10 @@ export default {
       handleNode(node, node.pid)
 
       commit('INSERT_NODE', node)
+
+      return {
+        status: true
+      }
     },
     insertTemplate ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
       // @ts-ignore

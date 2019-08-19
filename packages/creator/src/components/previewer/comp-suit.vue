@@ -130,14 +130,17 @@
           e.stopPropagation()
         }
       },
-      handleInsertComponent (val) {
+      async handleInsertComponent (val) {
         if (this.activeNode.uiConfig.isLocked) {
           return
         }
-        this.insertComponent({
+        const result = await this.insertComponent({
           ...val,
           pid: this.activeUid
         })
+        if (!result.status) {
+          this.$message.error(result.msg)
+        }
       },
       handleInsertTemplate (val) {
         if (this.activeNode.uiConfig.isLocked) {
