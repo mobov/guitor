@@ -4,6 +4,7 @@ import previewer from './previewer'
 import project from './project'
 import library from './library'
 import template from './template'
+import timeline from './timeline'
 
 Vue.use(Vuex)
 
@@ -12,6 +13,7 @@ export interface RootState {
   project: typeof project.state
   library: typeof library.state
   template: typeof library.state
+  timeline: typeof timeline.state
 }
 
 export interface RootGetters {
@@ -27,6 +29,7 @@ export default new Vuex.Store({
     previewer,
     project,
     library,
-    template
+    template,
+    timeline
   }
 })

@@ -93,12 +93,20 @@
         </m-button>
       </el-tooltip>
       <div class="tool-bar-divider"></div>
+      <el-tooltip content="保存快照" placement="top">
+        <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
+                  @click="handleSaveShot">
+          <m-icon value="screen_share"></m-icon>
+        </m-button>
+      </el-tooltip>
+      <div class="tool-bar-divider"></div>
       <el-tooltip content="导出VUE组件" placement="top">
         <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
                   @click="handleExportVue">
           <m-icon value="screen_share"></m-icon>
         </m-button>
       </el-tooltip>
+      <div class="tool-bar-divider"></div>
       <el-tooltip content="导出虚拟节点" placement="top">
         <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
                   @click="handleExportTemplate">
@@ -235,6 +243,9 @@
           type: 'success'
         })
       },
+      handleSaveShot () {
+        this.$store.dispatch('timeline/save')
+      },
       handleIframeView () {
 
       }
@@ -245,7 +256,7 @@
   .tool-bar {
     height: 50px;
     width: 100%;
-    margin-top: 20px;
+    /*margin-top: 20px;*/
     /*padding: 2rem;*/
     .tool-bar-main {
       overflow: hidden;

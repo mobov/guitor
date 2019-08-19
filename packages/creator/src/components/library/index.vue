@@ -11,8 +11,8 @@
   }
 </style>
 <template>
-  <m-frame class="library" :header-size="60" :elevation="2">
-    <m-app-bar slot="header" :font-size="16">
+  <m-frame class="library" :header-size="50" :elevation="2">
+    <m-app-bar slot="header" :size="50" :font-size="16">
       UI构建器
     </m-app-bar>
     <div :key="library.name" v-show="library.templates.length > 0" v-for="library in Templates">

@@ -14,7 +14,6 @@ export default {
   install (Vue, opts = {}) {
     Vue.component('HFrame', HFrame)
     Vue.component('HView', HView)
-    // Vue.component('HContainer', HContainer)
     Vue.component('HContainerY', HContainerY)
     Vue.component('HContainerX', HContainerX)
     Vue.component('HBox', HBox)

@@ -40,13 +40,16 @@
     <m-frame
       rightSize="400px"
       headerSize="50px"
+      footerSize="60px"
       leftSize="300px"
       fillHeader="none"
+      fillFooter="none"
       :leftIndex="5"
       :rightIndex="5">
       <m-flex width="100%" height="100%" align="center" justify="center">
         <previewer/>
       </m-flex>
+      <timeline slot="footer" />
       <library slot="left"/>
       <m-frame slot="right" class="side-panel" :header-size="50" :elevation="2">
         <m-app-bar slot="header" :size="50" class="side-panel-navs">
@@ -65,7 +68,8 @@
 </template>
 <script>
   import Previewer from './components/previewer'
-  import ToolBar from './components/tool-bar/index'
+  import Timeline from './components/timeline'
+  import ToolBar from './components/tool-bar'
   import Library from './components/library'
 
   export default {
@@ -73,7 +77,8 @@
     components: {
       Library,
       ToolBar,
-      Previewer
+      Previewer,
+      Timeline
     },
     data () {
       return {
@@ -82,7 +87,7 @@
     computed: {
       activeName: {
         get () {
-          return this.$route.name || 'library'
+          return this.$route.name || 'comp-api'
         },
         set (name) {
           console.log(name)

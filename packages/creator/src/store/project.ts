@@ -41,6 +41,7 @@ export type Getters = {
 }
 export type Mutations = {
   SET_PROJECT: (state: State, val: Project.Options) => void
+  SET_UI_NODES: (state: State, val: Project.UiNodes) => void
   SET_NODE_DATA: (state: State, val: nodeSetData) => void
   SET_NODE_BOX_CONFIG: (state: State, val: nodeSetConfig) => void
   SET_NODE_UI_CONFIG: (state: State, val: nodeSetConfig) => void
@@ -247,6 +248,10 @@ export default {
       if (val !== state.activeUid) {
         state.Data = val
       }
+    },
+    SET_UI_NODES (state, val) {
+      // @ts-ignore
+      state.Data.UiNodes = deepCopy(val)
     },
     SET_NODE_DATA (state, val) {
       const $target = getPathNode(val.uid, state.Data.UiNodes)

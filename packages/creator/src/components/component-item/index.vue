@@ -3,7 +3,8 @@
        @dragstart="handleDragStart"
        @drag="handleDrag"
        @dblclick="handleInsert"
-       v-drag-ani>
+       draggable="true"
+      >
     {{ value.label || value.name }}
   </div>
 </template>
