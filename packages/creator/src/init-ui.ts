@@ -32,7 +32,6 @@ import tv from '@mobov/vui/lib/icons/tv'
 // @ts-ignore
 import screen_share from '@mobov/vui/lib/icons/screen_share'
 
-
 Vue.use(ElementUI)
 Vue.use(BaseUI)
 Vue.use(Mobov, {

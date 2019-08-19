@@ -273,8 +273,14 @@ export default {
         const parentNode = getPathNode(fromNode.pid, state.Data.UiNodes)
         const fromIndex = parentNode.children.findIndex(_ =>_.uid === fromNode.uid)
         const toIndex = parentNode.children.findIndex(_ =>_.uid === toNode.uid)
-        console.log(fromIndex, toIndex)
-        arraySwap(parentNode.children, fromIndex, toIndex)
+        // console.log(fromIndex, toIndex)
+        // parentNode.children.splice()
+        if (fromIndex > toIndex) {
+          arraySwap(parentNode.children, fromIndex, toIndex)
+        } else {
+          arraySwap(parentNode.children, toIndex, fromIndex)
+        }
+
       } else {
         const fromParentNode = getPathNode(fromNode.pid, state.Data.UiNodes)
         const fromIndex = fromParentNode.children.findIndex(_ =>_.uid === fromNode.uid)

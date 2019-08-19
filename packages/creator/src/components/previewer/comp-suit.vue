@@ -4,20 +4,12 @@
   import { createNamespacedHelpers } from 'vuex'
 
   const { mapGetters, mapState, mapMutations, mapActions } = createNamespacedHelpers('project')
-  //
-  // const SuitsHandlerDirections = [
-  //   '↖', '↑', '↗',
-  //   '←', '→',
-  //   '↙', '↓', '↘'
-  // ]
 
   const SuitsHandlerDirections = [
     '↑',
     '←', '→',
     '↓'
   ]
-
-  let dropId = '0'
 
   let previewDrag = false
 
@@ -95,30 +87,31 @@
       init () {
         this.initSuits()
         const $sortContainer = this.node.name === 'HView' ? this.$el.children[0] : this.$el
+
         this.$sortable = new Sortable($sortContainer, {
           group: this.nodeUid,
           draggable: '.comp-suit',
           // sort: false,
           // Element is dropped into the list from another list
           // Changed sorting within list
-          onUpdate: this.handleDragUpdate,
+          // onUpdate: this.handleDragUpdate,
           onSort: this.handleDragSort
         })
       },
-      handleDragSort (e) {
-        console.log(this.node.pid)
-        console.log(e.oldDraggableIndex)
-        console.log(e.newDraggableIndex)
-        if (this.node.pid) {
-          this.sortNode({
-            id: this.node.uid,
-            oldIndex: e.oldDraggableIndex,
-            newIndex: e.newDraggableIndex
-          })
-        }
-      },
-      handleDragUpdate (e) {
-      },
+      // handleDragSort (e) {
+      //   console.log(this.node.pid)
+      //   console.log(e.oldDraggableIndex)
+      //   console.log(e.newDraggableIndex)
+      //   if (this.node.pid) {
+      //     this.sortNode({
+      //       id: this.node.uid,
+      //       oldIndex: e.oldDraggableIndex,
+      //       newIndex: e.newDraggableIndex
+      //     })
+      //   }
+      // },
+      // handleDragUpdate (e) {
+      // },
       handleActive (e) {
         this.SET_ACTIVE_NODE(this.nodeUid)
         e.stopPropagation()
