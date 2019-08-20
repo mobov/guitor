@@ -70,12 +70,12 @@ export default {
         //   })
         // }
         if (result.components[key].uiConfig.isBoxWrap) {
-          merge(result.components[key], {
+          result.components[key] = merge({
             boxConfig: {
               flex: 0,
               space: 5
             }
-          })
+          }, result.components[key])
         }
         // console.log(item)
         // console.log(result.components[key])

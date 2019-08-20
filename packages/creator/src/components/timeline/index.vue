@@ -28,6 +28,7 @@
     },
     methods: {
       handleRollBack (data) {
+        this.$store.commit('project/SET_ACTIVE_NODE', 'root')
         this.$store.commit('project/SET_UI_NODES', data)
         console.log(data)
       }

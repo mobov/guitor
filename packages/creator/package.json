@@ -11,7 +11,6 @@
     "@guitor/base-ui": "^0.1.5",
     "@guitor/library-element-ui": "^1.0.3",
     "@guitor/library-onev-ui": "^1.0.2",
-    "@guitor/template-onemt": "^1.0.3",
     "@mobov/es-helper": "^1.1.8",
     "@mobov/scss-helper": "^0.0.5",
     "@mobov/vui": "^0.2.28",
