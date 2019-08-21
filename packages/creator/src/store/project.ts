@@ -20,8 +20,9 @@ type nodeSetConfig = {
 }
 
 type swapOpts = {
-  from: Project.UiNode
-  to: Project.UiNode
+  pid: string
+  from: number
+  to: number
 }
 
 type sortOpts = {
@@ -271,31 +272,35 @@ export default {
       state.activeUid = val
     },
     SWAP_NODE (state, val) {
-      const fromNode = val.from
-      const toNode = val.to
-      // 同容器
-      if (fromNode.pid === toNode.pid) {
-        const parentNode = getPathNode(fromNode.pid, state.Data.UiNodes)
-        const fromIndex = parentNode.children.findIndex(_ =>_.uid === fromNode.uid)
-        const toIndex = parentNode.children.findIndex(_ =>_.uid === toNode.uid)
-        // console.log(fromIndex, toIndex)
-        // parentNode.children.splice()
-        if (fromIndex > toIndex) {
-          arraySwap(parentNode.children, fromIndex, toIndex)
-        } else {
-          arraySwap(parentNode.children, toIndex, fromIndex)
-        }
+      const parentNode = getPathNode(val.pid, state.Data.UiNodes)
+      parentNode.children.splice(val.to, 0,   parentNode.children.splice(val.from, 1)[0])
 
-      } else {
-        const fromParentNode = getPathNode(fromNode.pid, state.Data.UiNodes)
-        const fromIndex = fromParentNode.children.findIndex(_ =>_.uid === fromNode.uid)
-        const toParentNode = getPathNode(toNode.pid, state.Data.UiNodes)
-        const toIndex = toParentNode.children.findIndex(_ =>_.uid === toNode.uid)
-        fromNode.pid = toParentNode.uid
-        toNode.pid = fromParentNode.uid
-        fromParentNode.children.splice(fromIndex, 1, toNode)
-        toParentNode.children.splice(toIndex, 1, fromNode)
-      }
+      // 同容器
+      // if (fromNode.pid === toNode.pid) {
+      //   const parentNode = getPathNode(fromNode.pid, state.Data.UiNodes)
+      //   const fromIndex = parentNode.children.findIndex(_ =>_.uid === fromNode.uid)
+      //   const toIndex = parentNode.children.findIndex(_ =>_.uid === toNode.uid)
+      //   // console.log(fromIndex, toIndex)
+      //   // parentNode.children.splice()
+      //   // if (fromIndex > toIndex) {
+      //   //   arraySwap(parentNode.children, fromIndex, toIndex)
+      //   // } else {
+      //   //   arraySwap(parentNode.children, toIndex, fromIndex)
+      //   // }
+      //   const fromTemp = parentNode.children[fromIndex]
+      //   const toTemp = parentNode.children[toIndex]
+      //   parentNode.children.splice(fromIndex,1)
+      //   parentNode.children.splice(toIndex,1)
+      // } else {
+      //   const fromParentNode = getPathNode(fromNode.pid, state.Data.UiNodes)
+      //   const fromIndex = fromParentNode.children.findIndex(_ =>_.uid === fromNode.uid)
+      //   const toParentNode = getPathNode(toNode.pid, state.Data.UiNodes)
+      //   const toIndex = toParentNode.children.findIndex(_ =>_.uid === toNode.uid)
+      //   fromNode.pid = toParentNode.uid
+      //   toNode.pid = fromParentNode.uid
+      //   fromParentNode.children.splice(fromIndex, 1, toNode)
+      //   toParentNode.children.splice(toIndex, 1, fromNode)
+      // }
     },
     REMOVE_NODE (state, val) {
       const parentNode = getPathNode(val.pid, state.Data.UiNodes)
@@ -367,11 +372,11 @@ export default {
       commit('INSERT_NODE', templateNode)
     },
     sortNode ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
-      console.log(data)
-      const parentNode = getPathNode(data.id, state.Data.UiNodes)
-      const from = parentNode.children[data.oldIndex]
-      const to = parentNode.children[data.newIndex]
-      commit('SWAP_NODE', { from, to })
+      // console.log(data)
+      // const parentNode = getPathNode(data.id, state.Data.UiNodes)
+      // const from = parentNode.children[data.oldIndex]
+      // const to = parentNode.children[data.newIndex]
+      commit('SWAP_NODE', { pid:data.id, from: data.oldIndex, to: data.newIndex })
     },
     removeNode ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
       commit('SET_ACTIVE_NODE', data.pid)

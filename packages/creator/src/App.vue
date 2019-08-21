@@ -41,7 +41,7 @@
       rightSize="400px"
       headerSize="50px"
       footerSize="60px"
-      leftSize="300px"
+      leftSize="260px"
       fillHeader="none"
       fillFooter="none"
       :leftIndex="5"
@@ -50,7 +50,7 @@
         <previewer/>
       </m-flex>
       <timeline slot="footer" />
-      <library slot="left"/>
+      <library slot="left" />
       <m-frame slot="right" class="side-panel" :header-size="50" :elevation="2">
         <m-app-bar slot="header" :size="50" class="side-panel-navs">
           <el-tabs v-model="activeName">

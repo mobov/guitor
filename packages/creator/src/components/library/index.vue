@@ -8,6 +8,9 @@
      border: var(--m-border-base);
      cursor: grab;
    }
+    .el-menu {
+      border-right: none;
+    }
   }
 </style>
 <template>
@@ -16,20 +19,20 @@
       UI构建器
     </m-app-bar>
     <m-flex padding="sm" width="100%">
-      <el-input v-model="search" type="text" clearable></el-input>
+      <el-input size="small" v-model="search" type="text" clearable></el-input>
     </m-flex>
-    <el-menu class="el-menu-vertical-demo" :default-openeds="defaultOpeneds">
+    <el-menu :default-openeds="defaultOpeneds">
       <el-submenu :index="template.name" :key="template.name" v-for="(template, index) in Templates">
         <template slot="title">
-          <span>{{template.label}}</span>
+          <span>{{template.label || template.name}}</span>
         </template>
-        <component-item :value="item" :library="item.name" type="template" v-for="(item) in template.templates">></component-item>
+        <component-item :value="item" :library="template.name" type="template" v-for="(item) in template.templates">></component-item>
       </el-submenu>
       <el-submenu :index="library.name" :key="library.name" v-for="(library, index) in Libraries">
         <template slot="title">
           <span>{{library.label}}</span>
         </template>
-        <component-item  v-if="isShow(item)" :value="item" :library="item.name" type="component" v-for="(item) in library.components">></component-item>
+        <component-item v-if="isShow(item)" :value="item" :library="library.name" type="component" v-for="(item) in library.components">></component-item>
       </el-submenu>
     </el-menu>
     <!--<div :key="library.name" v-show="library.templates.length > 0" v-for="library in Templates">-->

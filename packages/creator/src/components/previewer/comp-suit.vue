@@ -98,20 +98,18 @@
           onSort: this.handleDragSort
         })
       },
-      // handleDragSort (e) {
-      //   console.log(this.node.pid)
-      //   console.log(e.oldDraggableIndex)
-      //   console.log(e.newDraggableIndex)
-      //   if (this.node.pid) {
-      //     this.sortNode({
-      //       id: this.node.uid,
-      //       oldIndex: e.oldDraggableIndex,
-      //       newIndex: e.newDraggableIndex
-      //     })
-      //   }
-      // },
-      // handleDragUpdate (e) {
-      // },
+      handleDragSort (e) {
+        console.log(this.node.pid)
+        console.log(e.oldDraggableIndex)
+        console.log(e.newDraggableIndex)
+        if (this.node.pid) {
+          this.sortNode({
+            id: this.node.uid,
+            oldIndex: e.oldDraggableIndex,
+            newIndex: e.newDraggableIndex
+          })
+        }
+      },
       handleActive (e) {
         this.SET_ACTIVE_NODE(this.nodeUid)
         e.stopPropagation()
