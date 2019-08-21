@@ -74,15 +74,15 @@
 </script>
 <style lang="scss">
   .component-item {
-    cursor: auto;
+    cursor: pointer;
     width: 100%;
-    height: 80px;
-    border: var(--m-border-base);
+    height: 50px;
+    border-bottom: var(--m-border-base);
     display: flex;
     align-items: center;
-    justify-content: center;
-    background-color: #f2f2f2;
-    text-align: center;
+    padding-left: 50px;
+    /*background-color: #f2f2f2;*/
+    text-align: left;
     &.--dragging {
       cursor: grab;
     }

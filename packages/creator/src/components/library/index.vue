@@ -15,22 +15,39 @@
     <m-app-bar slot="header" :size="50" :font-size="16">
       UI构建器
     </m-app-bar>
-    <div :key="library.name" v-show="library.templates.length > 0" v-for="library in Templates">
-      <el-divider content-position="left">{{library.label}}</el-divider>
-      <m-row paddingX="sm">
-        <m-col class="item" v-if="isShow(item)" :padding="2" :xs="8" :key="item.name" v-for="item in library.templates">
-          <component-item :value="item" :library="library.name" type="template"></component-item>
-        </m-col>
-      </m-row>
-    </div>
-    <div :key="library.name" v-for="library in Libraries">
-      <el-divider content-position="left">{{library.label}}</el-divider>
-      <m-row paddingX="sm">
-        <m-col class="item" v-if="isShow(item)" :padding="2" :xs="8" :key="item.name" v-for="item in library.components">
-          <component-item :value="item" :library="library.name" type="component"></component-item>
-        </m-col>
-      </m-row>
-    </div>
+    <m-flex padding="sm" width="100%">
+      <el-input v-model="search" type="text" clearable></el-input>
+    </m-flex>
+    <el-menu class="el-menu-vertical-demo" :default-openeds="defaultOpeneds">
+      <el-submenu :index="template.name" :key="template.name" v-for="(template, index) in Templates">
+        <template slot="title">
+          <span>{{template.label}}</span>
+        </template>
+        <component-item :value="item" :library="item.name" type="template" v-for="(item) in template.templates">></component-item>
+      </el-submenu>
+      <el-submenu :index="library.name" :key="library.name" v-for="(library, index) in Libraries">
+        <template slot="title">
+          <span>{{library.label}}</span>
+        </template>
+        <component-item  v-if="isShow(item)" :value="item" :library="item.name" type="component" v-for="(item) in library.components">></component-item>
+      </el-submenu>
+    </el-menu>
+    <!--<div :key="library.name" v-show="library.templates.length > 0" v-for="library in Templates">-->
+      <!--<el-divider content-position="left">{{library.label}}</el-divider>-->
+      <!--<m-row paddingX="sm">-->
+        <!--<m-col class="item" v-if="isShow(item)" :padding="2" :xs="8" :key="item.name" v-for="item in library.templates">-->
+          <!--<component-item :value="item" :library="library.name" type="template"></component-item>-->
+        <!--</m-col>-->
+      <!--</m-row>-->
+    <!--</div>-->
+    <!--<div :key="library.name" v-for="library in Libraries">-->
+      <!--<el-divider content-position="left">{{library.label}}</el-divider>-->
+      <!--<m-row paddingX="sm">-->
+        <!--<m-col class="item" v-if="isShow(item)" :padding="2" :xs="8" :key="item.name" v-for="item in library.components">-->
+          <!--<component-item :value="item" :library="library.name" type="component"></component-item>-->
+        <!--</m-col>-->
+      <!--</m-row>-->
+    <!--</div>-->
   </m-frame>
 </template>
 <script>
@@ -45,6 +62,7 @@
     components: { ComponentItem },
     data () {
       return {
+        search: '',
         dragOptions: {
           draggable: '.item'
         }
@@ -56,11 +74,23 @@
       },
       Templates () {
         return this.$store.state.template.Data
+      },
+      defaultOpeneds () {
+        return [
+          ...this.Templates.map(_ => _.name),
+          ...this.Libraries.map(_ => _.name)
+        ]
       }
     },
     methods: {
       isShow (data) {
-        return !(!!data.uiConfig && !!data.uiConfig.isHidden)
+        let result = true
+        if (!!data.uiConfig && !!data.uiConfig.isHidden) {
+          result = false
+        } else if (this.search.trim() !== '') {
+          result = data.label.indexOf(this.search) !== -1
+        }
+        return result
       }
     }
   }
