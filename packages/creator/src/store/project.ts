@@ -80,8 +80,8 @@ export default {
   namespaced: true,
   state: <State> {
     Data: {
-      PackageConfig: {
-        name: 'demo',
+      ProjectConfig: {
+        name: 'guitor-project',
         version: '0.0.1',
         dependencies: {}
       },

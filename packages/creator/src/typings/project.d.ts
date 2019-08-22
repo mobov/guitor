@@ -1,6 +1,6 @@
 import { VNodeData, VNodeChildren, VNode } from 'vue'
 
-export type PackageConfig = {
+export type ProjectConfig = {
   name: string
   version: string
   dependencies: {
@@ -11,7 +11,7 @@ export type PackageConfig = {
 export type UiNodes = Array<UiNode>
 
 export type Options = {
-  PackageConfig: PackageConfig
+  ProjectConfig: ProjectConfig
   UiNodes: UiNodes
 }
 

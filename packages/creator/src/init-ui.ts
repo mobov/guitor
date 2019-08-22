@@ -46,6 +46,10 @@ import save from '@mobov/vui/lib/icons/save'
 import adjust from '@mobov/vui/lib/icons/adjust'
 // @ts-ignore
 import help from '@mobov/vui/lib/icons/help'
+// @ts-ignore
+import cloud_download from '@mobov/vui/lib/icons/cloud_download'
+// @ts-ignore
+import cloud_upload from '@mobov/vui/lib/icons/cloud_upload'
 
 Vue.use(ElementUI)
 Vue.use(BaseUI)
@@ -91,6 +95,8 @@ Vue.use(Mobov, {
     keyboard_arrow_up,
     keyboard_arrow_down,
     keyboard_arrow_left,
-    keyboard_arrow_right
+    keyboard_arrow_right,
+    cloud_upload,
+    cloud_download
   }
 })

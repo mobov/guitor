@@ -120,6 +120,20 @@
           <m-icon value="screen_share"></m-icon>
         </m-button>
       </el-tooltip>
+      <div class="tool-bar-divider"></div>
+      <el-tooltip content="导出工程" placement="top">
+        <m-button height="100%" :width="40" color="success" variety="flat" shape="square"
+                  @click="handleExportProject">
+          <m-icon value="cloud_upload"></m-icon>
+        </m-button>
+      </el-tooltip>
+      <div class="tool-bar-divider"></div>
+      <el-tooltip content="导入工程" placement="top">
+        <m-button height="100%" :width="40" color="success" variety="flat" shape="square">
+          <m-icon value="cloud_download"></m-icon>
+          <input @change="handleImportProject" style="cursor:pointer;opacity: 0;width: 100%;height: 100%;position: absolute;left: 0;top:0;z-index: 2" type="file" id="file" name="file" />
+        </m-button>
+      </el-tooltip>
       <!--<div class="tool-bar-divider"></div>-->
       <!--<el-tooltip content="帮助" placement="top">-->
         <!--<m-button height="100%" :width="40" color="primary" variety="flat" shape="square"-->
@@ -138,7 +152,7 @@
 </template>
 <script>
   import { clip2Board } from '@mobov/es-helper'
-  import { exportVueTemplate } from '@/exports'
+  import { exportVueTemplate, importProject, exportProject } from '../../project'
   import { createNamespacedHelpers } from 'vuex'
 
   const { mapGetters, mapState, mapMutations, mapActions } = createNamespacedHelpers('project')
@@ -155,6 +169,7 @@
     },
     computed: {
       ...mapState([
+        'Data',
         'activeUid'
       ]),
       ...mapGetters([
@@ -197,7 +212,8 @@
     },
     methods: {
       ...mapMutations([
-        'SET_ACTIVE_NODE'
+        'SET_ACTIVE_NODE',
+        'SET_PROJECT'
       ]),
       ...mapActions([
         'activeNodePrev',
@@ -265,6 +281,13 @@
       },
       handleSaveShot () {
         this.$store.dispatch('timeline/save')
+      },
+      handleExportProject () {
+        exportProject(this.Data)
+      },
+      async handleImportProject (e) {
+        const result = await importProject(e.target.files[0])
+        this.SET_PROJECT(result)
       },
       handleIframeView () {
 

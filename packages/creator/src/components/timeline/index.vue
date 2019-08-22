@@ -6,7 +6,6 @@
   </m-app-bar>
 </template>
 <script>
-  import { exportVueTemplate } from '@/exports'
   import { createNamespacedHelpers } from 'vuex'
 
   const { mapGetters, mapState, mapMutations, mapActions } = createNamespacedHelpers('timeline')
@@ -30,7 +29,6 @@
       handleRollBack (data) {
         this.$store.commit('project/SET_ACTIVE_NODE', 'root')
         this.$store.commit('project/SET_UI_NODES', data)
-        console.log(data)
       }
     }
   }
