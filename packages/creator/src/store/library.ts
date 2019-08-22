@@ -72,8 +72,8 @@ export default {
         if (result.components[key].uiConfig.isBoxWrap) {
           result.components[key] = merge({
             boxConfig: {
-              flex: 0,
-              space: 5
+              space: 5,
+              flex: 0
             }
           }, result.components[key])
         }

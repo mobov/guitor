@@ -8,6 +8,19 @@ const Variety = ['default', 'flat', 'outline']
  * 获取尺寸值
  * @param val
  */
+export function getSpaceVal (val) {
+  if (val !== undefined) {
+    if (typeof val === 'number') {
+      val = `${val}px`
+    }
+  }
+  return val
+}
+
+/**
+ * 获取尺寸值
+ * @param val
+ */
 export function getUnitVal (val) {
 	if (val !== undefined) {
 		if (typeof val === 'number') {

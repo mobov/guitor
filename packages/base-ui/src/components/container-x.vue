@@ -48,6 +48,7 @@
   </div>
 </template>
 <script>
+import { getSpaceVal } from '../core/utils'
 
 export default {
   name: 'HContainerX',
@@ -57,7 +58,7 @@ export default {
       default: 1
     },
     space: {
-      type: Number,
+      type: [String, Number],
       default: 5
     },
     wrap: {
@@ -79,7 +80,7 @@ export default {
         // flexGrow: this.flex,
         // flexShrink: this.flex,
         flex: this.flex,
-        padding: `${this.space}px`
+        padding: getSpaceVal(this.space)
       }
     },
     classes () {

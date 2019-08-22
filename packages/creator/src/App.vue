@@ -56,7 +56,8 @@
           <el-tabs v-model="activeName">
             <el-tab-pane label="组件API" name="comp-api"></el-tab-pane>
             <el-tab-pane label="样式" name="styles"></el-tab-pane>
-            <el-tab-pane label="项目" name="project"></el-tab-pane>
+            <!--<el-tab-pane label="项目" name="project"></el-tab-pane>-->
+            <el-tab-pane label="帮助" name="FAQ"></el-tab-pane>
           </el-tabs>
         </m-app-bar>
         <keep-alive>

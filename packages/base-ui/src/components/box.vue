@@ -12,6 +12,8 @@
   </div>
 </template>
 <script>
+  import { getSpaceVal } from '../core/utils'
+
   export default {
     name: 'HBox',
     props: {
@@ -24,31 +26,7 @@
         default: 1
       },
       space: {
-        type: Number,
-        default: 5
-      },
-      spaceY: {
-        type: Number,
-        default: 5
-      },
-      spaceX: {
-        type: Number,
-        default: 5
-      },
-      spaceT: {
-        type: Number,
-        default: 5
-      },
-      spaceB: {
-        type: Number,
-        default: 5
-      },
-      spaceL: {
-        type: Number,
-        default: 5
-      },
-      spaceR: {
-        type: Number,
+        type: [String, Number],
         default: 5
       }
     },
@@ -59,7 +37,7 @@
           // flexGrow: this.flex,
           // flexShrink: this.flex,
           width: this.width,
-          padding: `${this.space}px`
+          padding: getSpaceVal(this.space)
         }
       },
       classes () {

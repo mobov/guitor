@@ -5,7 +5,7 @@ import HBox from './components/box.vue'
 import HFrame from './components/frame.vue'
 import { VueConstructor } from 'vue'
 
-export type MegH5Plugin = {
+export type BaseUIPlugin = {
   installed: boolean
   install: (Vue: VueConstructor, {}) => void
 }
@@ -18,4 +18,4 @@ export default {
     Vue.component('HContainerX', HContainerX)
     Vue.component('HBox', HBox)
   }
-} as MegH5Plugin
+} as BaseUIPlugin

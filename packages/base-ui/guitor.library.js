@@ -166,8 +166,8 @@ export default {
       },
       nodeData: {
         props: {
-          flex: 1,
-          space: 10
+          space: 10,
+          flex: 1
         },
         style: {
           width: '100%',
@@ -176,33 +176,20 @@ export default {
       },
       control: {
         props: {
+          space: {
+            label: '留白',
+            type: 'space',
+            config: {
+              step: 5
+            }
+          },
           flex: {
             label: '水平容器占比',
             type: 'number',
             config: {
               step: 1
             }
-          },
-          space: {
-            label: '留白',
-            type: 'number',
-            config: {
-              step: 5
-            }
-          },
-          // direction: {
-          //   label: '视图方向',
-          //   type: 'radio',
-          //   config: {
-          //     selections: [{
-          //       label: '水平',
-          //       value: 'x'
-          //     }, {
-          //       label: '垂直',
-          //       value: 'y'
-          //     }]
-          //   }
-          // },
+          }
         }
       }
     },
@@ -309,8 +296,8 @@ export default {
       },
       nodeData: {
         props: {
-          flex: 1,
           space: 10,
+          flex: 1,
           wrap: false,
           justify: 'start',
           align: 'center'
@@ -318,18 +305,18 @@ export default {
       },
       control: {
         props: {
+          space: {
+            label: '留白',
+            type: 'space',
+            config: {
+              step: 5
+            }
+          },
           flex: {
             label: '水平容器占比',
             type: 'number',
             config: {
               step: 1
-            }
-          },
-          space: {
-            label: '留白',
-            type: 'number',
-            config: {
-              step: 5
             }
           },
           wrap: {
@@ -397,18 +384,18 @@ export default {
       },
       control: {
         props: {
+          space: {
+            label: '留白',
+            type: 'space',
+            config: {
+              step: 5
+            }
+          },
           flex: {
             label: '水平容器占比',
             type: 'number',
             config: {
               step: 1
-            }
-          },
-          space: {
-            label: '留白',
-            type: 'number',
-            config: {
-              step: 5
             }
           },
           justify: {
@@ -466,8 +453,8 @@ export default {
       },
       nodeData: {
         props: {
-          flex: 1,
-          space: 5
+          space: 5,
+          flex: 1
         },
         style: {
           width: '100%',
@@ -476,18 +463,18 @@ export default {
       },
       control: {
         props: {
+          space: {
+            label: '留白',
+            type: 'space',
+            config: {
+              step: 5
+            }
+          },
           flex: {
             label: '水平容器占比',
             type: 'number',
             config: {
               step: 1
-            }
-          },
-          space: {
-            label: '留白',
-            type: 'number',
-            config: {
-              step: 5
             }
           }
         }

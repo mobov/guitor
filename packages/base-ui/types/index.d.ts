@@ -1,7 +1,7 @@
 import { VueConstructor } from 'vue';
-export declare type MegH5Plugin = {
+export declare type BaseUIPlugin = {
     installed: boolean;
     install: (Vue: VueConstructor, {}: {}) => void;
 };
-declare const _default: MegH5Plugin;
+declare const _default: BaseUIPlugin;
 export default _default;

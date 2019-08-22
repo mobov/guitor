@@ -1,10 +1,13 @@
 export const groups = [{
   name: '盒模型',
   attrs: [
-    'minHeight', 'minWidth', 'height', 'width', 'margin', 'padding',
-    'marginLeft', 'marginRight', 'marginTop', 'marginBottom',
-    'paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom'
+    'minHeight', 'minWidth', 'height', 'width', 'margin', 'padding'
   ]
+  // attrs: [
+  //   'minHeight', 'minWidth', 'height', 'width', 'margin', 'padding',
+  //   'marginLeft', 'marginRight', 'marginTop', 'marginBottom',
+  //   'paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom'
+  // ]
 }, {
   name: '背景相关',
   attrs: [
@@ -54,85 +57,85 @@ export const styles = {
     }
   },
   margin: {
-    type: 'size',
+    type: 'space',
     label: '外边距',
-    value: 'auto',
+    value: 0,
     config: {
       step: 5
     }
   },
   padding: {
-    type: 'size',
+    type: 'space',
     label: '内边距',
-    value: 'auto',
+    value: 0,
     config: {
       step: 5
     }
   },
-  marginLeft: {
-    type: 'size',
-    label: '外左边距',
-    value: 'auto',
-    config: {
-      step: 5
-    }
-  },
-  marginRight: {
-    type: 'size',
-    label: '外右边距',
-    value: 'auto',
-    config: {
-      step: 5
-    }
-  },
-  marginTop: {
-    type: 'size',
-    label: '外上边距',
-    value: 'auto',
-    config: {
-      step: 5
-    }
-  },
-  marginBottom: {
-    type: 'size',
-    label: '外下边距',
-    value: 'auto',
-    config: {
-      step: 5
-    }
-  },
-  paddingLeft: {
-    type: 'size',
-    label: '内左边距',
-    value: 'auto',
-    config: {
-      step: 5
-    }
-  },
-  paddingRight: {
-    type: 'size',
-    label: '内右边距',
-    value: 'auto',
-    config: {
-      step: 5
-    }
-  },
-  paddingTop: {
-    type: 'size',
-    label: '内上边距',
-    value: 'auto',
-    config: {
-      step: 5
-    }
-  },
-  paddingBottom: {
-    type: 'size',
-    label: '内下边距',
-    value: 'auto',
-    config: {
-      step: 5
-    }
-  },
+  // marginLeft: {
+  //   type: 'size',
+  //   label: '外左边距',
+  //   value: 'auto',
+  //   config: {
+  //     step: 5
+  //   }
+  // },
+  // marginRight: {
+  //   type: 'size',
+  //   label: '外右边距',
+  //   value: 'auto',
+  //   config: {
+  //     step: 5
+  //   }
+  // },
+  // marginTop: {
+  //   type: 'size',
+  //   label: '外上边距',
+  //   value: 'auto',
+  //   config: {
+  //     step: 5
+  //   }
+  // },
+  // marginBottom: {
+  //   type: 'size',
+  //   label: '外下边距',
+  //   value: 'auto',
+  //   config: {
+  //     step: 5
+  //   }
+  // },
+  // paddingLeft: {
+  //   type: 'size',
+  //   label: '内左边距',
+  //   value: 'auto',
+  //   config: {
+  //     step: 5
+  //   }
+  // },
+  // paddingRight: {
+  //   type: 'size',
+  //   label: '内右边距',
+  //   value: 'auto',
+  //   config: {
+  //     step: 5
+  //   }
+  // },
+  // paddingTop: {
+  //   type: 'size',
+  //   label: '内上边距',
+  //   value: 'auto',
+  //   config: {
+  //     step: 5
+  //   }
+  // },
+  // paddingBottom: {
+  //   type: 'size',
+  //   label: '内下边距',
+  //   value: 'auto',
+  //   config: {
+  //     step: 5
+  //   }
+  // },
   backgroundColor: {
     type: 'color',
     label: '背景颜色',

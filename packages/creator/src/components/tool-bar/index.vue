@@ -4,7 +4,7 @@
       <el-tooltip content="定位到根节点 " placement="top">
         <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
                   @click="handleActiveRoot">
-          <m-icon value="location_on"></m-icon>
+          <m-icon value="adjust"></m-icon>
         </m-button>
       </el-tooltip>
       <div class="tool-bar-divider"></div>
@@ -120,6 +120,13 @@
           <m-icon value="screen_share"></m-icon>
         </m-button>
       </el-tooltip>
+      <!--<div class="tool-bar-divider"></div>-->
+      <!--<el-tooltip content="帮助" placement="top">-->
+        <!--<m-button height="100%" :width="40" color="primary" variety="flat" shape="square"-->
+                  <!--@click="handleExportTemplate">-->
+          <!--<m-icon value="help"></m-icon>-->
+        <!--</m-button>-->
+      <!--</el-tooltip>-->
       <!--<el-tooltip content="窗口预览" placement="top">-->
         <!--<m-button height="100%" :width="40" color="primary" variety="flat" shape="square"-->
                   <!--@click="handleIframeView">-->

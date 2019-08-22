@@ -256,7 +256,7 @@
   }
 </style>
 <script>
-  import { genSize } from '../core/styles'
+  import { genSize } from '../core/utils'
 
   const compName = 'h-frame'
 

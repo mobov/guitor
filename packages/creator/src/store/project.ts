@@ -216,7 +216,6 @@ export default {
         },
         nodeData: {
           props: {
-            direction: 'y',
             space: 5,
             flex: 1
           },

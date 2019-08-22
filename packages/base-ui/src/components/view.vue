@@ -34,7 +34,7 @@
   </div>
 </template>
 <script>
-
+import { getSpaceVal } from '../core/utils'
 export default {
   name: 'HView',
   props: {
@@ -47,7 +47,7 @@ export default {
       default: 1
     },
     space: {
-      type: Number,
+      type: [String, Number],
       default: 5
     }
   },
@@ -59,7 +59,7 @@ export default {
     },
     mainStyles () {
       return {
-        padding: `${this.space}px`
+        padding: getSpaceVal(this.space)
       }
     },
     classes () {

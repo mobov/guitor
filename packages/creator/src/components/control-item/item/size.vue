@@ -14,16 +14,16 @@
     <!--<el-input v-model="_value" size="small" type="number">-->
 
     <!--</el-input>-->
-    <m-radio v-model="isAuto"
-             marginRight="sm"
-             :label="true">
-    自动
-    </m-radio>
     <m-radio v-model="isAuto" :label="false">
       <el-input-number :disabled="isAuto" size="small" :step="step" v-model="_value" controls-position="right"></el-input-number>
       <el-select :disabled="isAuto" class="control-item-size-unit" v-model="unit" size="small" placeholder="请选择">
         <el-option :label="item" :value="item" :key="item" v-for="item in SizeUnits"></el-option>
       </el-select>
+    </m-radio>
+    <m-radio v-model="isAuto"
+             marginLeft="sm"
+             :label="true">
+      自动
     </m-radio>
 
   </div>

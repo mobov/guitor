@@ -8,6 +8,15 @@ import arrow_downward from '@mobov/vui/lib/icons/arrow_downward'
 // @ts-ignore
 import arrow_upward from '@mobov/vui/lib/icons/arrow_upward'
 // @ts-ignore
+import keyboard_arrow_up from '@mobov/vui/lib/icons/keyboard_arrow_up'
+// @ts-ignore
+import keyboard_arrow_down from '@mobov/vui/lib/icons/keyboard_arrow_down'
+// @ts-ignore
+import keyboard_arrow_left from '@mobov/vui/lib/icons/keyboard_arrow_left'
+// @ts-ignore
+import keyboard_arrow_right from '@mobov/vui/lib/icons/keyboard_arrow_right'
+
+// @ts-ignore
 import unfold_more from '@mobov/vui/lib/icons/unfold_more'
 // @ts-ignore
 import unfold_less from '@mobov/vui/lib/icons/unfold_less'
@@ -34,7 +43,9 @@ import screen_share from '@mobov/vui/lib/icons/screen_share'
 // @ts-ignore
 import save from '@mobov/vui/lib/icons/save'
 // @ts-ignore
-import location_on from '@mobov/vui/lib/icons/location_on'
+import adjust from '@mobov/vui/lib/icons/adjust'
+// @ts-ignore
+import help from '@mobov/vui/lib/icons/help'
 
 Vue.use(ElementUI)
 Vue.use(BaseUI)
@@ -75,6 +86,11 @@ Vue.use(Mobov, {
     tv,
     screen_share,
     save,
-    location_on
+    adjust,
+    help,
+    keyboard_arrow_up,
+    keyboard_arrow_down,
+    keyboard_arrow_left,
+    keyboard_arrow_right
   }
 })
