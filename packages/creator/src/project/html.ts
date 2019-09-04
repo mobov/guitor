@@ -6,8 +6,8 @@ import getHtml from '@/compiler/html'
 const JSMap = [
   'http://unpkg.com/vue@2.6.10/dist/vue.js',
   'http://unpkg.com/element-ui@2.10.0/lib/index.js',
-  'http://unpkg.com/@mobov/es-helper@1.1.8',
-  'http://unpkg.com/@guitor/base-ui@0.1.6'
+  'http://unpkg.com/@mobov/es-helper@1.1.8/lib-umd/index.js',
+  'http://unpkg.com/@guitor/base-ui@0.1.7/lib/index.umd.jsi@0.1.6'
 ]
 
 const CSSMap = [
