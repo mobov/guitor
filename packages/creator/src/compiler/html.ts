@@ -6,6 +6,11 @@ import vueCompiler from '@/compiler/vue'
 function getScripts (arr: Array<string>) {
   let result = ''
   arr.forEach(async _ => {
+//     result += `
+//     <script type="text/javascript">
+//        ${require(`./library/script/${_}.json`).data}
+//     </script>
+// `
     result += `
       <script src="${_}"></script>
 `
@@ -16,6 +21,11 @@ function getScripts (arr: Array<string>) {
 function getStyles (arr: Array<string>) {
   let result = ''
   arr.forEach(_ => {
+//     result += `
+//       <style type="text/css" >
+//       ${require(`./library/style/${_}.json`).data}
+//       </style>
+// `
     result += `
       <link href="${_}" type="text/css" rel="stylesheet"/>
 `

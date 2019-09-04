@@ -12,6 +12,11 @@ export default merge(baseConfig, {
       file: `lib/index.cjs.js`,
       format: 'cjs',
       exports: 'named'
-    }
+    },
+    {
+      file: `lib/index.umd.js`,
+      format: 'umd',
+      exports: 'named'
+    },
   ]
 })
