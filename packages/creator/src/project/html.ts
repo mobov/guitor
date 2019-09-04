@@ -7,7 +7,7 @@ const JSMap = [
   'http://unpkg.com/vue@2.6.10/dist/vue.js',
   'http://unpkg.com/element-ui@2.10.0/lib/index.js',
   'http://unpkg.com/@mobov/es-helper@1.1.8/lib-umd/index.js',
-  'http://unpkg.com/@guitor/base-ui@0.1.7/lib/index.umd.js'
+  'http://unpkg.com/@guitor/base-ui@0.1.8/lib/index.umd.js'
 ]
 
 const CSSMap = [

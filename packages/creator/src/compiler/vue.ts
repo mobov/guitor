@@ -14,15 +14,14 @@ export default function (node: UiNode) {
   let template = ''
 
   const formatNode = (data: UiNode, space = 0) => {
-    // tag
-    template += prependStrSpace(`<${lineCase(data.tag)}`, space)
-
-    if (node.nodeData !== undefined) {
-      //props
-      if (node.nodeData.props !== undefined) {
-        Object.keys(node.nodeData.props).forEach(prop => {
+    if (data.uiConfig.isBoxWrap) {
+      console.log(data)
+      data.uiConfig.isBoxWrap = false
+      template += prependStrSpace(`<h-box`, space)
+      if (data.boxConfig !== undefined) {
+        Object.keys(data.boxConfig).forEach(prop => {
           // @ts-ignore
-          const value = node.nodeData.props[prop]
+          const value = data.boxConfig[prop]
           console.log(typeof value)
           if (typeof value === 'boolean') {
             template += ` :${prop}="${value}" `
@@ -33,35 +32,66 @@ export default function (node: UiNode) {
           }
         })
       }
-      //styles
-      if (node.nodeData.style !== undefined) {
-        template += ` :style="{`
-        Object.keys(node.nodeData.style).forEach(prop => {
-          // @ts-ignore
-          const value = node.nodeData.style[prop]
-          console.log(typeof value)
-          if (typeof value === 'boolean') {
-            template += `${prop}: ${value} `
-          } else if (typeof value === 'number') {
-            template += `${prop}: ${value} `
-          } else {
-            template += `${prop}: "${value}" `
-          }
-        })
-        template += `}" `
-      }
-    }
+      template += `>
+    `
+      formatNode(data, space + 2)
+      template += prependStrSpace(`</h-box>
+`, space)
+    } else {
+      // tag
+      template += prependStrSpace(`<${lineCase(data.tag)}`, space)
 
-    template += `>
+      if (data.nodeData !== undefined) {
+        //props
+        if (data.nodeData.props !== undefined) {
+          Object.keys(data.nodeData.props).forEach(prop => {
+            // @ts-ignore
+            const value = data.nodeData.props[prop]
+            console.log(typeof value)
+            if (typeof value === 'boolean') {
+              template += ` :${prop}="${value}" `
+            } else if (typeof value === 'number') {
+              template += ` :${prop}="${value}" `
+            } else {
+              template += ` ${prop}="${value}" `
+            }
+          })
+        }
+        //styles
+        if (data.nodeData.style !== undefined) {
+          template += ` :style="{`
+          Object.keys(data.nodeData.style).forEach(prop => {
+            // @ts-ignore
+            const value = node.nodeData.style[prop]
+            console.log(typeof value)
+            if (typeof value === 'boolean') {
+              template += `${prop}: ${value} `
+            } else if (typeof value === 'number') {
+              template += `${prop}: ${value} `
+            } else {
+              template += `${prop}: "${value}" `
+            }
+          })
+          template += `}" `
+        }
+      }
+
+      template += `>
     `
 
-    if (data.children && typeof data.children !== 'string') {
-      data.children.forEach(item => {
-        formatNode(item, space + 2)
-      })
-    }
-    template += prependStrSpace(`</${lineCase(data.tag)}>
+      if (data.children) {
+        if (typeof data.children !== 'string') {
+          data.children.forEach(item => {
+            formatNode(item, space + 2)
+          })
+        } else {
+          template += data.children
+        }
+      }
+      template += prependStrSpace(`</${lineCase(data.tag)}>
 `, space)
+    }
+
   }
   formatNode(node, 0)
   return template
