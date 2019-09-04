@@ -9,7 +9,7 @@ export type BaseUIPlugin = {
   installed: boolean
   install: (Vue: VueConstructor, {}) => void
 }
-export default {
+const BaseUi = {
   installed: false,
   install (Vue, opts = {}) {
     Vue.component('HFrame', HFrame)
@@ -19,3 +19,12 @@ export default {
     Vue.component('HBox', HBox)
   }
 } as BaseUIPlugin
+
+
+// @ts-ignore
+if (typeof window !== 'undefined' && window.Vue) {
+// @ts-ignore
+  window.Vue.use(BaseUi)
+}
+
+export default BaseUi

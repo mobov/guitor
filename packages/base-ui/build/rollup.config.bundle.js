@@ -6,16 +6,19 @@ export default merge(baseConfig, {
     {
       file: `lib/index.esm.js`,
       format: 'esm',
+      name: 'GuitorBaseUI',
       exports: 'named'
     },
     {
       file: `lib/index.cjs.js`,
       format: 'cjs',
+      name: 'GuitorBaseUI',
       exports: 'named'
     },
     {
       file: `lib/index.umd.js`,
       format: 'umd',
+      name: 'GuitorBaseUI',
       exports: 'named'
     },
   ]

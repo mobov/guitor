@@ -821,7 +821,7 @@ var __vue_is_functional_template__$4 = undefined;
 
 var HFrame = normalizeComponent_1({}, __vue_inject_styles__$4, __vue_script__$4, __vue_scope_id__$4, __vue_is_functional_template__$4, __vue_module_identifier__$4, browser, undefined);
 
-var index = {
+var BaseUi = {
   installed: false,
   install: function install(Vue) {
     Vue.component('HFrame', HFrame);
@@ -830,6 +830,11 @@ var index = {
     Vue.component('HContainerX', HContainerX);
     Vue.component('HBox', HBox);
   }
-};
+}; // @ts-ignore
 
-export default index;
+if (typeof window !== 'undefined' && window.Vue) {
+  // @ts-ignore
+  window.Vue.use(BaseUi);
+}
+
+export default BaseUi;

@@ -3,5 +3,5 @@ export declare type BaseUIPlugin = {
     installed: boolean;
     install: (Vue: VueConstructor, {}: {}) => void;
 };
-declare const _default: BaseUIPlugin;
-export default _default;
+declare const BaseUi: BaseUIPlugin;
+export default BaseUi;
