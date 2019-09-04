@@ -1,6 +1,6 @@
 {
   "name": "@guitor/creator",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -9,8 +9,8 @@
     "deploy": "node deploy"
   },
   "dependencies": {
-    "@guitor/base-ui": "^0.1.6",
-    "@guitor/library-element-ui": "^1.0.4",
+    "@guitor/base-ui": "^0.1.7",
+    "@guitor/library-element-ui": "^1.0.5",
     "@mobov/es-helper": "^1.1.8",
     "@mobov/scss-helper": "^0.0.5",
     "@mobov/vui": "^0.2.28",
