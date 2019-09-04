@@ -12,3 +12,4 @@ export function getPathNode (uid: string, rootNode: Project.UiNodes): Project.Ui
     childField: 'children'
   })
 }
+

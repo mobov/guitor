@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy": "node deploy"
   },
   "dependencies": {
     "@guitor/base-ui": "^0.1.6",
@@ -13,16 +14,19 @@
     "@mobov/es-helper": "^1.1.8",
     "@mobov/scss-helper": "^0.0.5",
     "@mobov/vui": "^0.2.28",
+    "axios": "^0.19.0",
     "blueimp-md5": "^2.10.0",
     "core-js": "^2.6.5",
     "dom-to-image": "^2.6.0",
     "dom-to-string": "^1.0.1",
     "element-ui": "^2.10.0",
     "file-saver": "^2.0.1",
+    "http-jsonp": "^1.1.1",
     "jszip": "^3.2.0",
     "lodash": "^4.17.11",
     "monaco-editor": "^0.16.2",
     "muse-ui": "^3.0.2",
+    "scriptjs": "^2.5.9",
     "sortablejs": "^1.10.0-rc3",
     "ulid": "^2.3.0",
     "vue": "^2.6.10",

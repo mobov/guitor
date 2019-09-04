@@ -1425,6 +1425,9 @@ module.exports = {
     ElTable: {
       label: '表格',
       tag: 'ElTable',
+      boxConfig: {
+        flex: 1
+      },
       uiConfig: {
         isContainer: false
       },
@@ -1468,6 +1471,9 @@ module.exports = {
           showSummary: false,
           sumText: '合计',
           indent: 16
+        },
+        style: {
+          width: '100%'
         }
       },
       control: {

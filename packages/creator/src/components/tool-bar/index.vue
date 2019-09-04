@@ -134,6 +134,13 @@
           <input @change="handleImportProject" style="cursor:pointer;opacity: 0;width: 100%;height: 100%;position: absolute;left: 0;top:0;z-index: 2" type="file" id="file" name="file" />
         </m-button>
       </el-tooltip>
+      <div class="tool-bar-divider"></div>
+      <el-tooltip content="导出HTML" placement="top">
+        <m-button height="100%" :width="40" color="success" variety="flat" shape="square"
+                  @click="handleExportHtml">
+          <m-icon value="cloud_upload"></m-icon>
+        </m-button>
+      </el-tooltip>
       <!--<div class="tool-bar-divider"></div>-->
       <!--<el-tooltip content="帮助" placement="top">-->
         <!--<m-button height="100%" :width="40" color="primary" variety="flat" shape="square"-->
@@ -152,7 +159,7 @@
 </template>
 <script>
   import { clip2Board } from '@mobov/es-helper'
-  import { exportVueTemplate, importProject, exportProject } from '../../project'
+  import { exportVueTemplate, importProject, exportProject, exportHtml } from '../../project'
   import { createNamespacedHelpers } from 'vuex'
 
   const { mapGetters, mapState, mapMutations, mapActions } = createNamespacedHelpers('project')
@@ -288,6 +295,9 @@
       async handleImportProject (e) {
         const result = await importProject(e.target.files[0])
         this.SET_PROJECT(result)
+      },
+      handleExportHtml () {
+        exportHtml(this.Data)
       },
       handleIframeView () {
 

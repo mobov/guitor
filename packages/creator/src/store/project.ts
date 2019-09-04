@@ -412,7 +412,7 @@ export default {
       }
     },
     activeNodeInner ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
-      if (data.children && data.children.length > 0) {
+      if (data.children && data.children.length > 0 && typeof data.children !== 'string') {
         commit('SET_ACTIVE_NODE', data.children[0].uid)
       }
     },

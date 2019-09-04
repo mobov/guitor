@@ -9,6 +9,7 @@ function prependStrSpace (str: string,  length: number) {
   }
   return `${result}${str}`
 }
+
 export default function (node: UiNode) {
   let template = ''
 

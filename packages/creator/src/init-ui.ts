@@ -15,7 +15,6 @@ import keyboard_arrow_down from '@mobov/vui/lib/icons/keyboard_arrow_down'
 import keyboard_arrow_left from '@mobov/vui/lib/icons/keyboard_arrow_left'
 // @ts-ignore
 import keyboard_arrow_right from '@mobov/vui/lib/icons/keyboard_arrow_right'
-
 // @ts-ignore
 import unfold_more from '@mobov/vui/lib/icons/unfold_more'
 // @ts-ignore

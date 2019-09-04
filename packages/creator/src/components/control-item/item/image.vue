@@ -89,10 +89,7 @@
           }
         } else {
           // @ts-ignore
-          // this.$app.showMessage({
-          //   color: 'error',
-          //   msg: '图片不能大于1M'
-          // })
+          this.$message.error('图片不能大于1M')
         }
       },
       handleDelete () {
