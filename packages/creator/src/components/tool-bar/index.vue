@@ -159,7 +159,7 @@
 </template>
 <script>
   import { clip2Board } from '@mobov/es-helper'
-  import { exportVueTemplate, importProject, exportProject, exportHtml } from '../../project'
+  import { exportVueSFC, importProject, exportProject, exportHtml } from '../../project'
   import { createNamespacedHelpers } from 'vuex'
 
   const { mapGetters, mapState, mapMutations, mapActions } = createNamespacedHelpers('project')
@@ -269,7 +269,7 @@
         this.$store.commit('previewer/SET_VIEW', this.isViewPreview ? 'editor' : 'preview')
       },
       handleExportVue () {
-        const result = exportVueTemplate(this.activeNode)
+        const result = exportVueSFC(this.activeNode)
         clip2Board(result)
         this.$notify({
           title: '成功',

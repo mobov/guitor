@@ -59,7 +59,6 @@ export default function (node: UiNode) {
               vueTemplate += ` ${prop}="${value}" `
             } else if (value !== undefined) {
               // vueTemplate += ` ${prop}="${value}" `
-              vueTemplate += ` ${prop}="${value}" `
               if (vueData[dataKey] === undefined) {
                 vueData[dataKey] = {}
               }
@@ -107,6 +106,6 @@ export default function (node: UiNode) {
   formatNode(node, 0)
   return {
     template: vueTemplate,
-    data: JSON.stringify(vueData)
+    data: JSON.stringify(vueData, null, 2)
   }
 }

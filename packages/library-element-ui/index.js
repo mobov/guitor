@@ -144,7 +144,8 @@ module.exports = {
         props: {
           value: {
             label: '输入值',
-            type: 'text'
+            type: 'text',
+            model: true
           },
           placeholder: {
             label: '占位文本',
