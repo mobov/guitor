@@ -3,6 +3,7 @@ import { VNodeData, VNodeChildren, VNode } from 'vue'
 export type ProjectConfig = {
   name: string
   version: string
+  npmCDN: string
   dependencies: {
     [name: string]: string
   }

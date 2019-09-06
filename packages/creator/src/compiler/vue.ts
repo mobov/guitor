@@ -11,72 +11,83 @@ function prependStrSpace (str: string,  length: number) {
 }
 
 export default function (node: UiNode) {
-  let template = ''
+  let vueTemplate = ''
+  const vueData: any = {}
 
   const formatNode = (data: UiNode, space = 0) => {
     if (data.uiConfig.isBoxWrap) {
-      console.log(data)
       data.uiConfig.isBoxWrap = false
-      template += prependStrSpace(`<h-box`, space)
+      vueTemplate += prependStrSpace(`<h-box`, space)
       if (data.boxConfig !== undefined) {
         Object.keys(data.boxConfig).forEach(prop => {
           // @ts-ignore
           const value = data.boxConfig[prop]
           console.log(typeof value)
           if (typeof value === 'boolean') {
-            template += ` :${prop}="${value}" `
+            vueTemplate += ` :${prop}="${value}" `
           } else if (typeof value === 'number') {
-            template += ` :${prop}="${value}" `
+            vueTemplate += ` :${prop}="${value}" `
           } else {
-            template += ` ${prop}="${value}" `
+            vueTemplate += ` ${prop}="${value}" `
           }
         })
       }
-      template += `>
+      vueTemplate += `>
     `
       formatNode(data, space + 2)
-      template += prependStrSpace(`</h-box>
+      vueTemplate += prependStrSpace(`</h-box>
 `, space)
     } else {
       // tag
-      template += prependStrSpace(`<${lineCase(data.tag)}`, space)
+      vueTemplate += prependStrSpace(`<${lineCase(data.tag)}`, space)
 
       if (data.nodeData !== undefined) {
         //props
         if (data.nodeData.props !== undefined) {
+          const dataKey = `${data.name}_${data.uid}`
+          console.info(data)
+         // vueData[]
           Object.keys(data.nodeData.props).forEach(prop => {
             // @ts-ignore
             const value = data.nodeData.props[prop]
             console.log(typeof value)
             if (typeof value === 'boolean') {
-              template += ` :${prop}="${value}" `
+              vueTemplate += ` :${prop}="${value}" `
             } else if (typeof value === 'number') {
-              template += ` :${prop}="${value}" `
-            } else {
-              template += ` ${prop}="${value}" `
+              vueTemplate += ` :${prop}="${value}" `
+            } else if (typeof value === 'string') {
+              vueTemplate += ` ${prop}="${value}" `
+            } else if (value !== undefined) {
+              // vueTemplate += ` ${prop}="${value}" `
+              vueTemplate += ` ${prop}="${value}" `
+              if (vueData[dataKey] === undefined) {
+                vueData[dataKey] = {}
+              }
+              vueData[dataKey][prop] = value
+              vueTemplate += ` :${prop}="${dataKey}.${prop}" `
             }
           })
         }
         //styles
         if (data.nodeData.style !== undefined) {
-          template += ` :style="{`
+          vueTemplate += ` :style="{`
           Object.keys(data.nodeData.style).forEach(prop => {
             // @ts-ignore
             const value = node.nodeData.style[prop]
             console.log(typeof value)
             if (typeof value === 'boolean') {
-              template += `${prop}: ${value} `
+              vueTemplate += `${prop}: ${value} `
             } else if (typeof value === 'number') {
-              template += `${prop}: ${value} `
-            } else {
-              template += `${prop}: "${value}" `
+              vueTemplate += `${prop}: ${value} `
+            } else if (value !== undefined) {
+              vueTemplate += `${prop}: "${value}" `
             }
           })
-          template += `}" `
+          vueTemplate += `}" `
         }
       }
 
-      template += `>
+      vueTemplate += `>
     `
 
       if (data.children) {
@@ -85,14 +96,17 @@ export default function (node: UiNode) {
             formatNode(item, space + 2)
           })
         } else {
-          template += data.children
+          vueTemplate += data.children
         }
       }
-      template += prependStrSpace(`</${lineCase(data.tag)}>
+      vueTemplate += prependStrSpace(`</${lineCase(data.tag)}>
 `, space)
     }
 
   }
   formatNode(node, 0)
-  return template
+  return {
+    template: vueTemplate,
+    data: JSON.stringify(vueData)
+  }
 }

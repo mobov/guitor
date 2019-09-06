@@ -347,6 +347,9 @@ module.exports = {
       children: [
         {
           name: 'ElRadio',
+          uiConfig: {
+            isBoxWrap: false
+          },
           nodeData: {
             props: {
               label: '单选1'
@@ -355,6 +358,9 @@ module.exports = {
         },
         {
           name: 'ElRadio',
+          uiConfig: {
+            isBoxWrap: false
+          },
           nodeData: {
             props: {
               label: '单选2'
@@ -466,6 +472,9 @@ module.exports = {
       children: [
         {
           name: 'ElCheckbox',
+          uiConfig: {
+            isBoxWrap: false
+          },
           nodeData: {
             props: {
               label: '多选1'
@@ -474,6 +483,9 @@ module.exports = {
         },
         {
           name: 'ElCheckbox',
+          uiConfig: {
+            isBoxWrap: false
+          },
           nodeData: {
             props: {
               label: '多选2'
@@ -608,6 +620,9 @@ module.exports = {
       children: [
         {
           name: 'ElRadioButton',
+          uiConfig: {
+            isBoxWrap: false
+          },
           nodeData: {
             props: {
               label: '单选1'
@@ -616,6 +631,9 @@ module.exports = {
         },
         {
           name: 'ElRadioButton',
+          uiConfig: {
+            isBoxWrap: false
+          },
           nodeData: {
             props: {
               label: '单选2'
@@ -1317,7 +1335,8 @@ module.exports = {
       tag: 'ElTableColumn',
       uiConfig: {
         isHidden: true,
-        isContainer: false
+        isContainer: false,
+        isBoxWrap: false
       },
       nodeData: {
         props: {

@@ -75,7 +75,7 @@ export type Actions = {
   activeNodePrev: (params: ActionsParams, val: Project.UiNode) => Promise<void>
   activeNodeNext: (params: ActionsParams, val: Project.UiNode) => Promise<void>
 }
-
+console.log(process.env.NPM_CDN)
 export default {
   namespaced: true,
   state: <State> {
@@ -83,7 +83,13 @@ export default {
       ProjectConfig: {
         name: 'guitor-project',
         version: '0.0.1',
-        dependencies: {}
+        npmCDN: process.env.NPM_CDN,
+        dependencies: {
+          'vue': '2.6.10',
+          'element-ui': '2.10.0',
+          '@mobov/es-helper': '1.1.8',
+          '@guitor/base-ui': '0.1.8'
+        }
       },
       // UiNodes: [{
       //

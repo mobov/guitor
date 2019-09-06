@@ -379,7 +379,7 @@ export default {
           // flex: 0,
           space: 10,
           justify: 'start',
-          align: 'center'
+          align: 'stretch'
         }
       },
       control: {

@@ -8,6 +8,10 @@
                   v-model="Project.version"
                   type="text"
                   label="项目版本"></control-item>
+    <control-item class="m-mb-sm m-px-sm"
+                  v-model="Project.npmCDN"
+                  type="text"
+                  label="npm CDN"></control-item>
   </div>
 </template>
 <script>

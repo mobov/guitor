@@ -34,7 +34,6 @@ function getStyles (arr: Array<string>) {
   return result
 }
 
-
 export default function ({
   style = '', script = '', UiNode
 } = {} as {
@@ -58,16 +57,14 @@ export default function ({
           <strong>We're sorry but creator doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
         </noscript>
         <div id="app">
-          ${vueData}
+          ${vueData.template}
         </div>
         ${getScripts(script)}
         <script>
         var app = new Vue({
           el: '#app',
           data () {
-          	return {
-          		
-          	}
+          	return ${vueData.data}
           }  
         })
         </script>
