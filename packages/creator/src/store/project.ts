@@ -91,6 +91,9 @@ export default {
           '@guitor/base-ui': '0.1.8'
         }
       },
+      Variables: [{
+
+      }],
       // UiNodes: [{
       //
       // }]

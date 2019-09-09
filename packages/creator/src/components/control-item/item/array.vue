@@ -105,6 +105,7 @@
         this.columns.forEach(col => {
           result.push(
             <ElTableColumn key={col.field}
+                           align="center"
                            label={col.label}
                            {...{
             scopedSlots: {
@@ -128,11 +129,11 @@
 
       return (
         <div class="control-item-array">
-          <ElTable data={this._value} border>
+          <ElTable data={this._value} border size="mini">
             {this.RCols()}
             {isOperation ?
                  (
-                  <ElTableColumn label="操作" width="100" {...{
+                  <ElTableColumn label="操作" align="center" width="100" {...{
                   scopedSlots: {
                     default: scope => {
                       return (

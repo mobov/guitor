@@ -3,7 +3,7 @@
 </style>
 <template>
   <div class="control-item-text">
-    <el-input v-model="_value" size="small">
+    <el-input v-model="_value" size="small" @onChange="handleChange">
 
     </el-input>
   </div>
@@ -20,11 +20,18 @@ export default {
   computed: {
     _value: {
       get () {
+        console.log(this.value)
         return this.value
       },
       set (val) {
+        console.log(val)
         this.$emit('input', val)
       }
+    }
+  },
+  methods: {
+    handleChange () {
+      this.$emit('change', this._value)
     }
   }
 }

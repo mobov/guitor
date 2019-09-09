@@ -42,7 +42,6 @@ export default {
   getters: <Getters> {
     getLibrary: (state) => (name) => state.Data.find(_ => _.name === name),
     getTemplate: (state) => (libraryName, name) => {
-
       // @ts-ignore
       const library = state.Data.find(_ => _.name === libraryName)
       // @ts-ignore

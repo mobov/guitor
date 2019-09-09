@@ -1500,22 +1500,7 @@ module.exports = {
         props: {
           data: {
             label: '表格数据',
-            type: 'array',
-            config: {
-              columns: [{
-                field: 'name',
-                label: '标题',
-                type: 'text'
-              }, {
-                field: 'address',
-                label: '地址',
-                type: 'text'
-              }, {
-                field: 'date',
-                label: '日期',
-                type: 'text'
-              }]
-            }
+            type: 'data'
           },
           height: {
             label: '高度',
@@ -1581,6 +1566,23 @@ module.exports = {
             label: '展示树形数据时，树节点的缩进',
             type: 'number'
           }
+        },
+        children: {
+          type: 'array',
+          label: '列数据',
+          config: {
+            columns: [{
+              field: 'label',
+              path: 'nodeData/props',
+              label: '标题',
+              type: 'text'
+            }, {
+              field: 'prop',
+              path: 'nodeData/props',
+              label: '字段',
+              type: 'text'
+            }]
+          }
         }
       },
       children: [{
@@ -1617,7 +1619,8 @@ module.exports = {
       tag: 'ElBreadcrumbItem',
       uiConfig: {
         isHidden: true,
-        isContainer: false
+        isContainer: false,
+        isBoxWrap: false
       },
       nodeData: {
         props: {
@@ -2235,7 +2238,7 @@ module.exports = {
       label: '菜单单元',
       uiConfig: {
         isBoxWrap: false,
-        containers: ['ElMenuY']
+        containers: ['ElMenuY', 'ElMenuX']
       },
       nodeData: {
         props: {
@@ -2263,6 +2266,108 @@ module.exports = {
     },
     ElMenuY: {
       name: 'ElMenuY',
+      tag: 'ElMenu',
+      label: '侧向菜单',
+      boxConfig: {
+        space: 0
+      },
+      uiConfig: {
+        isContainer: true
+      },
+      nodeData: {
+        props: {
+          mode: 'vertical',
+          collapse: false,
+          collapseTransition: true,
+          backgroundColor: '#ffffff',
+          textColor: '#303133',
+          activeTextColor: '#303133',
+          defaultActive: '1',
+          uniqueOpened: false,
+          menuTrigger: 'hover',
+        }
+      },
+      control: {
+        props: {
+          collapse: {
+            type: 'boolean',
+            label: '是否叠收起菜单'
+          },
+          collapseTransition: {
+            type: 'boolean',
+            label: '是否开启折叠动画'
+          },
+          backgroundColor: {
+            type: 'color',
+            label: '菜单的背景色'
+          },
+          textColor: {
+            type: 'color',
+            label: '菜单的文字颜色'
+          },
+          activeTextColor: {
+            type: 'color',
+            label: '激活菜单的文字颜色'
+          },
+          defaultActive: {
+            type: 'text',
+            label: '当前激活菜单的index'
+          },
+          uniqueOpened: {
+            type: 'boolean',
+            label: '是否只保持一个子菜单的展开'
+          },
+          menuTrigger: {
+            type: 'radio',
+            label: '子菜单打开的触发方式',
+            config: {
+              selections: [{
+                label: 'hover',
+                value: 'hover'
+              }, {
+                label: 'click',
+                value: 'click'
+              }]
+            }
+          }
+        }
+      },
+      children: [{
+        name: 'ElMenuItem',
+        nodeData: {
+          props: {
+            index: '1'
+          }
+        },
+        children: '处理中心'
+      }, {
+        name: 'ElMenuItem',
+        nodeData: {
+          props: {
+            index: '2'
+          }
+        },
+        children: '我的工作台'
+      }, {
+        name: 'ElMenuItem',
+        nodeData: {
+          props: {
+            index: '3'
+          }
+        },
+        children: '消息中心'
+      }, {
+        name: 'ElMenuItem',
+        nodeData: {
+          props: {
+            index: '4'
+          }
+        },
+        children: '订单管理'
+      }]
+    },
+    ElMenuX: {
+      name: 'ElMenuX',
       tag: 'ElMenu',
       label: '横向菜单',
       boxConfig: {
@@ -2448,5 +2553,114 @@ module.exports = {
     //     children: '订单管理'
     //   }]
     // }
+    ElTabPane: {
+      name: 'ElTabPane',
+      tag: 'ElTabPane',
+      label: '选项卡单元',
+      boxConfig: {
+        space: 0
+      },
+      uiConfig: {
+        isBoxWrap: false,
+        isHidden: true,
+        isContainer: true
+      },
+      nodeData: {
+        props: {
+          label: '选项卡单元',
+          name: '选项卡单元'
+        }
+      },
+    },
+    ElTabs: {
+      name: 'ElTabs',
+      tag: 'ElTabs',
+      label: '选项卡',
+      boxConfig: {
+        space: 0
+      },
+      uiConfig: {
+        isContainer: false
+      },
+      nodeData: {
+        props: {
+          value: '1',
+          type: 'card', // card/border-card/
+          tabPosition: 'top', // top/right/bottom/left
+          stretch: false,
+          closable: false,
+          addable: false,
+          editable: false,
+        }
+      },
+      control: {
+        props: {
+          type: {
+            type: 'radio',
+            label: '风格类型',
+            config: {
+              selections: [{
+                label: 'none',
+                value: 'none'
+              }, {
+                label: 'card',
+                value: 'card'
+              }, {
+                label: 'border-card',
+                value: 'border-card'
+              }]
+            }
+          },
+          tabPosition: {
+            type: 'radio',
+            label: '选项卡所在位置',
+            config: {
+              selections: [{
+                label: 'top',
+                value: 'top'
+              }, {
+                label: 'right',
+                value: 'right'
+              }, {
+                label: 'bottom',
+                value: 'bottom'
+              }, {
+                label: 'left',
+                value: 'left'
+              }]
+            }
+          },
+          stretch: {
+            type: 'boolean',
+            label: '标签的宽度是否自撑开'
+          },
+          closable: {
+            type: 'boolean',
+            label: '标签是否可关闭'
+          },
+          addable: {
+            type: 'boolean',
+            label: '标签是否可增加'
+          },
+          editable: {
+            type: 'boolean',
+            label: '标签是否同时可增加和关闭'
+          },
+        }
+      },
+      children: [{
+        name: 'ElTabPane',
+        uiConfig: {
+          isBoxWrap: false,
+          isContainer: true
+        },
+        nodeData: {
+          props: {
+            label: '1'
+          }
+        },
+        children: []
+      },]
+    }
   }
 }
