@@ -11,7 +11,7 @@ export function renderComponentChildren (h: CreateElement, PNode: Project.UiNode
       result.push(h(
         node.tag,
         node.nodeData,
-        node.children ? renderComponent(h, node.children) : <any>[]
+        node.children && node.children instanceof Array ? renderComponent(h, node.children) : node.children
       ))
     }
   }

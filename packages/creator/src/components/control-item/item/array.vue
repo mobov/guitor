@@ -59,7 +59,13 @@
     computed: {
       _value: {
         get () {
-          return this.value
+          const temp = deepCopy(this.value)
+          temp.forEach(item => {
+            if (item.children) {
+              delete item.children
+            }
+          })
+          return temp
         },
         set (val) {
           console.log(val)
@@ -86,10 +92,15 @@
         this._value.splice(index, 1)
       },
       handleAdd (index) {
-        console.log(this._value)
-        const result = deepCopy(this._value[index])
-        console.log(result)
+        const result = deepCopy(this.value[index])
         if (result.uid) {
+          if (result.nodeData.props) {
+            Object.keys(result.nodeData.props).forEach(key => {
+              if (['name', 'key', 'value'].includes(key)) {
+                result.nodeData.props[key] = `${result.nodeData.props[key]}${result.uid}`
+              }
+            })
+          }
           this.$store.dispatch('project/insertNode', {
             pid: result.pid,
             UiNode: result
