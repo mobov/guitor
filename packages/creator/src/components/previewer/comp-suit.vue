@@ -43,6 +43,7 @@
           '--active': this.isActive,
           '--over': this.isOver,
           '--isContainer': this.isContainer,
+          '--isNoMask': this.isNoMask,
           '--isLocked': this.isLocked
         }
       },
@@ -54,6 +55,9 @@
       },
       isContainer () {
         return this.node.uiConfig.isContainer
+      },
+      isNoMask () {
+        return this.node.uiConfig.isNoMask !== undefined ? this.node.uiConfig.isNoMask : false
       },
       isActive () {
         return this.activeUid === this.nodeUid
@@ -150,6 +154,7 @@
         })
       },
       RChildren (h) {
+        console.log(this.node)
         if (this.node.uiConfig.isContainer) {
           return this.node.children ? renderComponent(h, this.node.children) : []
         } else if (typeof this.node.children === 'string') {
@@ -323,6 +328,12 @@
       border: 1px dashed rgba(0, 0, 0, .5);
       /*box-sizing: border-box !important;*/
       /*box-shadow: 0 0 1px 1px rgba(0,0,0,.5) ;*/
+      > .comp-suit-mask {
+        display: none;
+      }
+    }
+
+    &.--isNoMask {
       > .comp-suit-mask {
         display: none;
       }

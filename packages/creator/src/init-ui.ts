@@ -49,9 +49,8 @@ import help from '@mobov/vui/lib/icons/help'
 import cloud_download from '@mobov/vui/lib/icons/cloud_download'
 // @ts-ignore
 import cloud_upload from '@mobov/vui/lib/icons/cloud_upload'
-
-Vue.use(ElementUI)
 Vue.use(BaseUI)
+Vue.use(ElementUI)
 Vue.use(Mobov, {
   components: {
     MApp,

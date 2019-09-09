@@ -54,7 +54,7 @@
       <m-frame slot="right" class="side-panel" :header-size="50" :elevation="2">
         <m-app-bar slot="header" :size="50" class="side-panel-navs">
           <el-tabs v-model="activeName">
-            <el-tab-pane label="组件API" name="comp-api"></el-tab-pane>
+            <el-tab-pane label="API" name="comp-api"></el-tab-pane>
             <el-tab-pane label="样式" name="styles"></el-tab-pane>
             <el-tab-pane label="项目" name="project"></el-tab-pane>
             <el-tab-pane label="事件" name="event"></el-tab-pane>

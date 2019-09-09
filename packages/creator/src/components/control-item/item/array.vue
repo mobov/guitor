@@ -44,6 +44,7 @@
 <script lang="jsx">
   import Text from './text'
   import { deepCopy } from '@mobov/es-helper'
+  import { ulid } from 'ulid'
   export default {
     name: 'control-item-array',
     props: {
@@ -85,7 +86,17 @@
         this._value.splice(index, 1)
       },
       handleAdd (index) {
-       this._value.splice(index, 0, deepCopy(this._value[index]))
+        console.log(this._value)
+        const result = deepCopy(this._value[index])
+        console.log(result)
+        if (result.uid) {
+          this.$store.dispatch('project/insertNode', {
+            pid: result.pid,
+            UiNode: result
+          })
+        } else {
+          this._value.splice(index, 0, deepCopy(this._value[index]))
+        }
       },
       item (type) {
         return require(`@/components/control-item/item/${type}.vue`).default

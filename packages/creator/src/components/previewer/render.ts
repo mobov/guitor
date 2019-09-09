@@ -7,10 +7,11 @@ export function renderComponentChildren (h: CreateElement, PNode: Project.UiNode
   if (PNode !== undefined && PNode.length > 0) {
     for (let node of PNode) {
       node = deepCopy(node)
+      console.log(node)
       result.push(h(
         node.tag,
         node.nodeData,
-        node.children ? node.children : <any>[]
+        node.children ? renderComponent(h, node.children) : <any>[]
       ))
     }
   }

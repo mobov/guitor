@@ -2458,108 +2458,10 @@ module.exports = {
         children: '订单管理'
       }]
     },
-    // ElTabPane: {
-    //
-    // },
-    // ElTabs: {
-    //   name: 'ElTabs',
-    //   tag: 'ElTabs',
-    //   label: '标签页',
-    //   boxConfig: {
-    //     space: 0
-    //   },
-    //   uiConfig: {
-    //     isContainer: true
-    //   },
-    //   nodeData: {
-    //     props: {
-    //       mode: 'horizontal',
-    //       backgroundColor: '#ffffff',
-    //       textColor: '#303133',
-    //       activeTextColor: '#303133',
-    //       defaultActive: '1',
-    //       uniqueOpened: false,
-    //       menuTrigger: 'hover',
-    //     }
-    //   },
-    //   control: {
-    //     props: {
-    //       backgroundColor: {
-    //         type: 'color',
-    //         label: '菜单的背景色'
-    //       },
-    //       textColor: {
-    //         type: 'color',
-    //         label: '菜单的文字颜色'
-    //       },
-    //       activeTextColor: {
-    //         type: 'color',
-    //         label: '激活菜单的文字颜色'
-    //       },
-    //       defaultActive: {
-    //         type: 'text',
-    //         label: '当前激活菜单的index'
-    //       },
-    //       uniqueOpened: {
-    //         type: 'boolean',
-    //         label: '是否只保持一个子菜单的展开'
-    //       },
-    //       menuTrigger: {
-    //         type: 'radio',
-    //         label: '子菜单打开的触发方式',
-    //         config: {
-    //           selections: [{
-    //             label: 'hover',
-    //             value: 'hover'
-    //           }, {
-    //             label: 'click',
-    //             value: 'click'
-    //           }]
-    //         }
-    //       }
-    //     }
-    //   },
-    //   children: [{
-    //     name: 'ElMenuItem',
-    //     nodeData: {
-    //       props: {
-    //         index: '1'
-    //       }
-    //     },
-    //     children: '处理中心'
-    //   }, {
-    //     name: 'ElMenuItem',
-    //     nodeData: {
-    //       props: {
-    //         index: '2'
-    //       }
-    //     },
-    //     children: '我的工作台'
-    //   }, {
-    //     name: 'ElMenuItem',
-    //     nodeData: {
-    //       props: {
-    //         index: '3'
-    //       }
-    //     },
-    //     children: '消息中心'
-    //   }, {
-    //     name: 'ElMenuItem',
-    //     nodeData: {
-    //       props: {
-    //         index: '4'
-    //       }
-    //     },
-    //     children: '订单管理'
-    //   }]
-    // }
     ElTabPane: {
       name: 'ElTabPane',
       tag: 'ElTabPane',
       label: '选项卡单元',
-      boxConfig: {
-        space: 0
-      },
       uiConfig: {
         isBoxWrap: false,
         isHidden: true,
@@ -2571,6 +2473,7 @@ module.exports = {
           name: '选项卡单元'
         }
       },
+      children: []
     },
     ElTabs: {
       name: 'ElTabs',
@@ -2580,11 +2483,12 @@ module.exports = {
         space: 0
       },
       uiConfig: {
-        isContainer: false
+        isBoxWrap: true,
+        isNoMask: true
       },
       nodeData: {
         props: {
-          value: '1',
+          value: 'first',
           type: 'card', // card/border-card/
           tabPosition: 'top', // top/right/bottom/left
           stretch: false,
@@ -2595,6 +2499,10 @@ module.exports = {
       },
       control: {
         props: {
+          value: {
+            type: 'text',
+            label: '显示的tab'
+          },
           type: {
             type: 'radio',
             label: '风格类型',
@@ -2646,9 +2554,45 @@ module.exports = {
             type: 'boolean',
             label: '标签是否同时可增加和关闭'
           },
+        },
+        children: {
+          type: 'array',
+          label: '标签页',
+          config: {
+            columns: [{
+              field: 'label',
+              path: 'nodeData/props',
+              label: '标题',
+              type: 'text'
+            }, {
+              field: 'name',
+              path: 'nodeData/props',
+              label: '索引',
+              type: 'text'
+            }]
+          }
         }
       },
       children: [{
+        name: 'ElTabPane',
+        uiConfig: {
+          isBoxWrap: true,
+          isContainer: true
+        },
+        nodeData: {
+          props: {
+            name: 'first',
+            label: '用户管理',
+          }
+        },
+        children: [{
+          name: 'HContainerY',
+          style: {
+            height: '500px'
+          },
+          children: []
+        }]
+      },{
         name: 'ElTabPane',
         uiConfig: {
           isBoxWrap: false,
@@ -2656,10 +2600,17 @@ module.exports = {
         },
         nodeData: {
           props: {
-            label: '1'
+            name: 'second',
+            label: '配置管理',
           }
         },
-        children: []
+        children: [{
+          name: 'HContainerY',
+          style: {
+            height: '500px'
+          },
+          children: []
+        }]
       },]
     }
   }

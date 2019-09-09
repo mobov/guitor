@@ -65,6 +65,7 @@ export type ActionsParams = {
 export type Actions = {
   insertComponent: (params: ActionsParams, val: Project.UiNode) => { status: boolean, msg?: string }
   insertTemplate: (params: ActionsParams, val: { name: string, pid: string, UiNode: UiNode }) => Promise<void>
+  insertNode: (params: ActionsParams, val: { pid: string, UiNode: UiNode }) => Promise<void>
   sortNode: (params: ActionsParams, val: sortOpts) => Promise<void>
   removeNode: (params: ActionsParams, val: Project.UiNode) => Promise<void>
   clearNode: (params: ActionsParams, val: Project.UiNode) => Promise<void>
@@ -376,6 +377,20 @@ export default {
       }
       handleIds(templateNode, data.pid)
       console.log(templateNode)
+
+      commit('INSERT_NODE', templateNode)
+    },
+    insertNode ({ state, rootState, commit, dispatch, getters, rootGetters }, data) {
+      // @ts-ignore
+      const templateNode = deepCopy(data.UiNode)
+      const handleIds = (node: any, pid: string) => {
+        node.uid = ulid()
+        node.pid = pid
+        if (typeof node.children !== 'string' && node.children.length > 0) {
+          node.children.forEach((child: any) => handleIds(child, node.uid))
+        }
+      }
+      handleIds(templateNode, data.pid)
 
       commit('INSERT_NODE', templateNode)
     },
