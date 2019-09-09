@@ -2483,7 +2483,7 @@ module.exports = {
         space: 0
       },
       uiConfig: {
-        isBoxWrap: true,
+        isBoxWrap: false,
         isNoMask: true
       },
       nodeData: {
