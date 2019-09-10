@@ -59,13 +59,6 @@
     computed: {
       _value: {
         get () {
-          // const temp = deepCopy(this.value)
-          // temp.forEach(item => {
-          //   if (item.children) {
-          //     delete item.children
-          //   }
-          // })
-          // return temp
           return this.value
         },
         set (val) {
