@@ -2,6 +2,7 @@
   "name": "@guitor/project",
   "version": "0.1.0",
   "private": true,
+  "description": "UI组件库可视化",
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "creator:serve": "lerna run serve --scope @guitor/creator --stream",
