@@ -11,6 +11,7 @@ const envMap = {
 // console.log(ENV)
 // console.log(envMap[process.env.ENV])
 module.exports = {
+  publicPath: './',
   chainWebpack: config => {
     config.plugin('define')
       .use(DefinePlugin, [{
