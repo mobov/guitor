@@ -1,7 +1,7 @@
 # guitor
 > web构建器
 
-[项目预览](http://39.96.82.132:8103/)
+[项目预览](https://mobov.github.io/guitor/)
 
 <img align="center" width="100%" src="./showcase-1.gif">
 
