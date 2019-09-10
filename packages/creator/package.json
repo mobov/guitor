@@ -6,7 +6,8 @@
     "serve": "cross-env ENV=development vue-cli-service serve",
     "build": "cross-env ENV=production vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "deploy": "node deploy"
+    "tsc": "tsc ./deploy/gh-pages.ts",
+    "deploy:gh-pages": "yarn run tsc && node ./deploy/gh-pages"
   },
   "dependencies": {
     "@guitor/base-ui": "^0.1.9",
@@ -41,6 +42,7 @@
     "@types/file-saver": "^2.0.0",
     "@types/jszip": "^3.1.5",
     "@types/lodash": "^4.14.122",
+    "@types/shelljs": "^0.8.5",
     "@types/vue-color": "^2.4.2",
     "@vue/cli-plugin-babel": "^3.9.0",
     "@vue/cli-plugin-eslint": "^3.9.0",
@@ -54,6 +56,7 @@
     "eslint-plugin-vue": "^5.0.0",
     "sass": "^1.18.0",
     "sass-loader": "^7.1.0",
+    "shelljs": "^0.8.3",
     "typescript": "^3.4.3",
     "vue-template-compiler": "^2.6.10"
   }
