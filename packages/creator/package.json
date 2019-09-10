@@ -1,6 +1,6 @@
 {
   "name": "@guitor/creator",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "private": true,
   "scripts": {
     "serve": "cross-env ENV=development vue-cli-service serve",
@@ -12,7 +12,7 @@
   "dependencies": {
     "@guitor/base-ui": "^0.1.9",
     "@guitor/library-element-ui": "^1.0.6",
-    "@guitor/template-common": "^1.0.2",
+    "@guitor/template-common": "^1.0.3",
     "@mobov/es-helper": "^1.1.8",
     "@mobov/scss-helper": "^0.0.5",
     "@mobov/vui": "^0.2.28",
