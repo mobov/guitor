@@ -4,7 +4,7 @@ export default {
     "name": "HContainerY",
     "library": "base-ui",
     "pid": "root",
-    "uid": "01DMCWV537BD9E1EBRG8ECZBM8",
+    "uid": "01DMDE6G18X88VWK6H20H1GCY4",
     "uiConfig": {
       "isContainer": true,
       "isBoxWrap": false,
@@ -21,432 +21,10 @@ export default {
     },
     "children": [
       {
-        "name": "HContainerX",
-        "library": "base-ui",
-        "pid": "01DMCWV537BD9E1EBRG8ECZBM8",
-        "uid": "01DMCWV8GFCS2NBQEC9FFRH73K",
-        "uiConfig": {
-          "isContainer": true,
-          "isBoxWrap": false,
-          "isLocked": false
-        },
-        "nodeData": {
-          "style": {},
-          "props": {
-            "space": "0px 0px 0px 0px",
-            "flex": 1,
-            "wrap": false,
-            "justify": "start",
-            "align": "center"
-          }
-        },
-        "children": [
-          {
-            "name": "ElInput",
-            "library": "element-ui",
-            "pid": "01DMCWV8GFCS2NBQEC9FFRH73K",
-            "uid": "01DMCWVCP69WVF43CF797RVRR2",
-            "boxConfig": {
-              "space": 5,
-              "flex": 1,
-              "width": "100%"
-            },
-            "uiConfig": {
-              "isContainer": false,
-              "isBoxWrap": true,
-              "isLocked": false
-            },
-            "nodeData": {
-              "style": {},
-              "props": {
-                "value": "输入值",
-                "placeholder": "",
-                "size": "medium",
-                "type": "text",
-                "maxLength": 999999,
-                "minlength": 0,
-                "showWordLimit": false,
-                "clearable": false,
-                "showPassword": false,
-                "prefixIcon": "",
-                "suffixIcon": "",
-                "rows": 2,
-                "autosize": false,
-                "autocomplete": "off",
-                "autofocus": false,
-                "readonly": false,
-                "resize": "none",
-                "maxlength": 1
-              }
-            },
-            "children": [],
-            "tag": "ElInput",
-            "label": "输入框",
-            "control": {
-              "props": {
-                "value": {
-                  "label": "输入值",
-                  "type": "text",
-                  "model": true
-                },
-                "placeholder": {
-                  "label": "占位文本",
-                  "type": "text"
-                },
-                "size": {
-                  "label": "尺寸",
-                  "type": "radio",
-                  "toolTip": "输入框尺寸，只在 type!=\"textarea\" 时有效",
-                  "config": {
-                    "selections": [
-                      {
-                        "label": "medium",
-                        "value": "medium"
-                      },
-                      {
-                        "label": "small",
-                        "value": "small"
-                      },
-                      {
-                        "label": "mini",
-                        "value": "mini"
-                      }
-                    ]
-                  }
-                },
-                "type": {
-                  "label": "类型",
-                  "type": "radio",
-                  "toolTip": "text，textarea 和其他 原生 input 的 type 值",
-                  "config": {
-                    "selections": [
-                      {
-                        "label": "text",
-                        "value": "text"
-                      },
-                      {
-                        "label": "textarea",
-                        "value": "textarea"
-                      },
-                      {
-                        "label": "number",
-                        "value": "number"
-                      }
-                    ]
-                  }
-                },
-                "maxlength": {
-                  "label": "最大输入长度",
-                  "type": "number",
-                  "toolTip": "最大输入长度"
-                },
-                "minlength": {
-                  "label": "最小输入长度",
-                  "type": "number",
-                  "toolTip": "最小输入长度"
-                },
-                "showWordLimit": {
-                  "label": "字数统计",
-                  "type": "boolean",
-                  "toolTip": "是否显示输入字数统计，只在 type = \"text\" 或 type = \"textarea\" 时有效"
-                },
-                "clearable": {
-                  "label": "可清空",
-                  "type": "boolean"
-                },
-                "showPassword": {
-                  "label": "是否显示切换密码图标",
-                  "type": "boolean"
-                },
-                "prefixIcon": {
-                  "label": "输入框头部图标",
-                  "type": "text"
-                },
-                "suffixIcon": {
-                  "label": "输入框尾部图标",
-                  "type": "text"
-                },
-                "rows": {
-                  "label": "输入框行数",
-                  "type": "number",
-                  "toolTip": "输入框行数，只对 type=\"textarea\" 有效"
-                },
-                "autosize": {
-                  "label": "自适应内容高度",
-                  "type": "boolean"
-                },
-                "autocomplete": {
-                  "label": "自动补全",
-                  "type": "radio",
-                  "toolTip": "原生属性，自动补全",
-                  "config": {
-                    "selections": [
-                      {
-                        "label": "on",
-                        "value": "on"
-                      },
-                      {
-                        "label": "off",
-                        "value": "off"
-                      }
-                    ]
-                  }
-                },
-                "autofocus": {
-                  "label": "自动聚焦",
-                  "type": "boolean"
-                },
-                "readonly": {
-                  "label": "只读",
-                  "type": "boolean"
-                },
-                "resize": {
-                  "label": "缩放",
-                  "type": "radio",
-                  "toolTip": "控制是否能被用户缩放",
-                  "config": {
-                    "selections": [
-                      {
-                        "label": "none",
-                        "value": "none"
-                      },
-                      {
-                        "label": "both",
-                        "value": "both"
-                      },
-                      {
-                        "label": "horizontal",
-                        "value": "horizontal"
-                      },
-                      {
-                        "label": "vertical",
-                        "value": "vertical"
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          {
-            "name": "ElButton",
-            "library": "element-ui",
-            "pid": "01DMCWV8GFCS2NBQEC9FFRH73K",
-            "uid": "01DMCWVF1Y0RMXT69HZ948HBWG",
-            "boxConfig": {
-              "space": 5,
-              "flex": 0
-            },
-            "uiConfig": {
-              "isContainer": false,
-              "isBoxWrap": true,
-              "isLocked": false
-            },
-            "nodeData": {
-              "style": {},
-              "props": {
-                "type": "primary",
-                "size": "medium",
-                "plain": false,
-                "round": false,
-                "circle": false,
-                "loading": false,
-                "autofocus": false,
-                "icon": "el-icon-search",
-                "nativeType": "button"
-              }
-            },
-            "children": "搜索",
-            "label": "按钮",
-            "tag": "ElButton",
-            "control": {
-              "props": {
-                "type": {
-                  "label": "主题",
-                  "type": "radio",
-                  "config": {
-                    "selections": [
-                      {
-                        "label": "primary",
-                        "value": "primary"
-                      },
-                      {
-                        "label": "success",
-                        "value": "success"
-                      },
-                      {
-                        "label": "warning",
-                        "value": "warning"
-                      },
-                      {
-                        "label": "danger",
-                        "value": "danger"
-                      },
-                      {
-                        "label": "info",
-                        "value": "info"
-                      },
-                      {
-                        "label": "text",
-                        "value": "text"
-                      }
-                    ]
-                  }
-                },
-                "size": {
-                  "label": "尺寸",
-                  "type": "radio",
-                  "config": {
-                    "selections": [
-                      {
-                        "label": "medium",
-                        "value": "medium"
-                      },
-                      {
-                        "label": "small",
-                        "value": "small"
-                      },
-                      {
-                        "label": "mini",
-                        "value": "mini"
-                      }
-                    ]
-                  }
-                },
-                "plain": {
-                  "label": "是否朴素按钮",
-                  "type": "boolean"
-                },
-                "round": {
-                  "label": "是否圆角按钮",
-                  "type": "boolean"
-                },
-                "circle": {
-                  "label": "是否圆形按钮",
-                  "type": "boolean"
-                },
-                "loading": {
-                  "label": "是否加载中状态",
-                  "type": "boolean"
-                },
-                "autofocus": {
-                  "label": "是否默认聚焦",
-                  "type": "boolean"
-                },
-                "icon": {
-                  "label": "图标类名",
-                  "type": "text"
-                },
-                "nativeType": {
-                  "label": "原生 type 属性",
-                  "type": "radio",
-                  "config": {
-                    "selections": [
-                      {
-                        "label": "button",
-                        "value": "button"
-                      },
-                      {
-                        "label": "submit",
-                        "value": "submit"
-                      },
-                      {
-                        "label": "reset",
-                        "value": "reset"
-                      }
-                    ]
-                  }
-                }
-              },
-              "children": {
-                "label": "按钮文案",
-                "type": "text"
-              }
-            }
-          }
-        ],
-        "label": "水平容器",
-        "tag": "HContainerX",
-        "control": {
-          "props": {
-            "space": {
-              "label": "留白",
-              "type": "space",
-              "config": {
-                "step": 5
-              }
-            },
-            "flex": {
-              "label": "水平容器占比",
-              "type": "number",
-              "config": {
-                "step": 1
-              }
-            },
-            "wrap": {
-              "label": "溢出换行",
-              "type": "boolean"
-            },
-            "justify": {
-              "label": "子元素的内容对齐方式",
-              "type": "radio",
-              "config": {
-                "selections": [
-                  {
-                    "label": "左对齐",
-                    "value": "start"
-                  },
-                  {
-                    "label": "居中",
-                    "value": "center"
-                  },
-                  {
-                    "label": "右对齐",
-                    "value": "end"
-                  },
-                  {
-                    "label": "环绕",
-                    "value": "around"
-                  },
-                  {
-                    "label": "两边",
-                    "value": "between"
-                  }
-                ]
-              }
-            },
-            "align": {
-              "label": "子元素的浮动对齐方式",
-              "type": "radio",
-              "config": {
-                "selections": [
-                  {
-                    "label": "置顶",
-                    "value": "start"
-                  },
-                  {
-                    "label": "居中",
-                    "value": "center"
-                  },
-                  {
-                    "label": "置底",
-                    "value": "end"
-                  },
-                  {
-                    "label": "填充",
-                    "value": "stretch"
-                  }
-                ]
-              }
-            }
-          }
-        }
-      },
-      {
         "name": "ElTable",
         "library": "element-ui",
-        "pid": "01DMCWV537BD9E1EBRG8ECZBM8",
-        "uid": "01DMCWVXH7ZS7Q749BMQTGY447",
+        "pid": "01DMDE6G18X88VWK6H20H1GCY4",
+        "uid": "01DMDE6G18V831PTC7C037D9B9",
         "boxConfig": {
           "space": 5,
           "flex": 1
@@ -524,8 +102,8 @@ export default {
               "style": {}
             },
             "children": [],
-            "uid": "01DMCWVXH9DVRK6MYJRFYDZP0F",
-            "pid": "01DMCWVXH7ZS7Q749BMQTGY447",
+            "uid": "01DMDE6G189G3F7RST4YGGQ12Q",
+            "pid": "01DMDE6G18V831PTC7C037D9B9",
             "library": "element-ui",
             "uiConfig": {
               "isContainer": false,
@@ -657,8 +235,8 @@ export default {
               "style": {}
             },
             "children": [],
-            "uid": "01DMCWVXH9ZG0RXM3WMV03H5TC",
-            "pid": "01DMCWVXH7ZS7Q749BMQTGY447",
+            "uid": "01DMDE6G18TDN3XSBHA15A7SBX",
+            "pid": "01DMDE6G18V831PTC7C037D9B9",
             "library": "element-ui",
             "uiConfig": {
               "isContainer": false,
@@ -790,8 +368,8 @@ export default {
               "style": {}
             },
             "children": [],
-            "uid": "01DMCWVXHAZR68QDTA7DY8XXYF",
-            "pid": "01DMCWVXH7ZS7Q749BMQTGY447",
+            "uid": "01DMDE6G182G338T3WD5SC7QD8",
+            "pid": "01DMDE6G18V831PTC7C037D9B9",
             "library": "element-ui",
             "uiConfig": {
               "isContainer": false,
@@ -1009,8 +587,8 @@ export default {
       {
         "name": "ElPagination",
         "library": "element-ui",
-        "pid": "01DMCWV537BD9E1EBRG8ECZBM8",
-        "uid": "01DMCWW03QCY5TKJ8XD2X9W79E",
+        "pid": "01DMDE6G18X88VWK6H20H1GCY4",
+        "uid": "01DMDE6G18BWCW4SKH3HXNARRZ",
         "boxConfig": {
           "space": 5,
           "flex": 0
