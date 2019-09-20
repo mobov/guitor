@@ -95,123 +95,7 @@ export default {
       Variables: [{
 
       }],
-      // UiNodes: [{
-      //
-      // }]
-      // UiNodes: [{
-      //   name: 'HFrame',
-      //   tag: 'HFrame',
-      //   uid: 'root',
-      //   uiConfig: {
-      //     isLocked: false,
-      //     isContainer: true
-      //   },
-      //   nodeData: {
-      //     props: {
-      //       isHeader: true,
-      //       isFooter: false
-      //       // direction: 'y',
-      //       // space: 5,
-      //       // flex: 1
-      //     },
-      //     style: {
-      //
-      //     }
-      //   },
-      //   children: [{
-      //     name: 'HView',
-      //     tag: 'HView',
-      //     uid: 'root-l',
-      //     pid: 'root',
-      //     uiConfig: {
-      //       isLocked: false,
-      //       isContainer: true
-      //     },
-      //     nodeData: {
-      //       slot: 'left',
-      //       props: {
-      //       },
-      //       style: {
-      //
-      //       }
-      //     },
-      //     children: []
-      //   }, {
-      //     name: 'HView',
-      //     tag: 'HView',
-      //     uid: 'root-r',
-      //     pid: 'root',
-      //     nodeData: {
-      //       slot: 'right',
-      //       props: {
-      //       },
-      //       style: {
-      //
-      //       }
-      //     },
-      //     uiConfig: {
-      //       isLocked: false,
-      //       isContainer: false
-      //     },
-      //     children: []
-      //   }, {
-      //     name: 'HContainer',
-      //     tag: 'HContainer',
-      //     nodeData: {
-      //       slot: 'header',
-      //       props: {
-      //         direction: 'y',
-      //       },
-      //       style: {
-      //
-      //       }
-      //     },
-      //     uid: 'root-h',
-      //     pid: 'root',
-      //     uiConfig: {
-      //       isLocked: false,
-      //       isContainer: true
-      //     },
-      //     children: []
-      //   }, {
-      //     name: 'HContainer',
-      //     tag: 'HContainer',
-      //     nodeData: {
-      //       slot: 'footer',
-      //       props: {
-      //         direction: 'y',
-      //       },
-      //       style: {
-      //
-      //       }
-      //     },
-      //     uid: 'root-b',
-      //     pid: 'root',
-      //     uiConfig: {
-      //       isLocked: false,
-      //       isContainer: true
-      //     },
-      //     children: []
-      //   }, {
-      //     name: 'HView',
-      //     tag: 'HView',
-      //     uid: 'root-m',
-      //     pid: 'root',
-      //     uiConfig: {
-      //       isLocked: false,
-      //       isContainer: true
-      //     },
-      //     nodeData: {
-      //       props: {
-      //
-      //       },
-      //       style: {
-      //
-      //       }
-      //     },
-      //     children: []
-      //   }]
-      // }]
+
       UiNodes: [{
         name: 'HView',
         tag: 'HView',
@@ -245,7 +129,7 @@ export default {
     activeNodeIsContainer: (state, getters, rootState, rootGetters) => {
       const compData = rootGetters['library/getComponent'](getters.activeNode.name as any) as any
 
-      return compData.uiConfig !== undefined
+      return compData !== undefined && compData.uiConfig !== undefined
         ? compData.uiConfig.isContainer !== undefined
           ? compData.uiConfig.isContainer
           : false
@@ -283,33 +167,6 @@ export default {
     SWAP_NODE (state, val) {
       const parentNode = getPathNode(val.pid, state.Data.UiNodes)
       parentNode.children.splice(val.to, 0,   parentNode.children.splice(val.from, 1)[0])
-
-      // 同容器
-      // if (fromNode.pid === toNode.pid) {
-      //   const parentNode = getPathNode(fromNode.pid, state.Data.UiNodes)
-      //   const fromIndex = parentNode.children.findIndex(_ =>_.uid === fromNode.uid)
-      //   const toIndex = parentNode.children.findIndex(_ =>_.uid === toNode.uid)
-      //   // console.log(fromIndex, toIndex)
-      //   // parentNode.children.splice()
-      //   // if (fromIndex > toIndex) {
-      //   //   arraySwap(parentNode.children, fromIndex, toIndex)
-      //   // } else {
-      //   //   arraySwap(parentNode.children, toIndex, fromIndex)
-      //   // }
-      //   const fromTemp = parentNode.children[fromIndex]
-      //   const toTemp = parentNode.children[toIndex]
-      //   parentNode.children.splice(fromIndex,1)
-      //   parentNode.children.splice(toIndex,1)
-      // } else {
-      //   const fromParentNode = getPathNode(fromNode.pid, state.Data.UiNodes)
-      //   const fromIndex = fromParentNode.children.findIndex(_ =>_.uid === fromNode.uid)
-      //   const toParentNode = getPathNode(toNode.pid, state.Data.UiNodes)
-      //   const toIndex = toParentNode.children.findIndex(_ =>_.uid === toNode.uid)
-      //   fromNode.pid = toParentNode.uid
-      //   toNode.pid = fromParentNode.uid
-      //   fromParentNode.children.splice(fromIndex, 1, toNode)
-      //   toParentNode.children.splice(toIndex, 1, fromNode)
-      // }
     },
     REMOVE_NODE (state, val) {
       const parentNode = getPathNode(val.pid, state.Data.UiNodes)

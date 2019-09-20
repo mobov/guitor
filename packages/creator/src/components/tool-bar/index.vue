@@ -80,7 +80,7 @@
           </m-button>
         </m-flex>
         <el-tooltip slot="reference" content="保存为模板" placement="top">
-          <m-button :disabled="isRoot || !isContainer" height="100%" :width="40" color="primary" variety="flat" shape="square">
+          <m-button :disabled="isRoot" height="100%" :width="40" color="primary" variety="flat" shape="square">
             <m-icon value="folder_shared"></m-icon>
           </m-button>
         </el-tooltip>
@@ -97,6 +97,13 @@
         <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
                   @click="handleView">
           <m-icon :value="viewIcon"></m-icon>
+        </m-button>
+      </el-tooltip>
+      <div class="tool-bar-divider"></div>
+      <el-tooltip content="新窗口预览" placement="top">
+        <m-button height="100%" :width="40" color="success" variety="flat" shape="square"
+                  @click="handlePreviewHtml">
+          <m-icon value="tv"></m-icon>
         </m-button>
       </el-tooltip>
       <div class="tool-bar-divider"></div>
@@ -141,25 +148,12 @@
           <m-icon value="cloud_upload"></m-icon>
         </m-button>
       </el-tooltip>
-      <!--<div class="tool-bar-divider"></div>-->
-      <!--<el-tooltip content="帮助" placement="top">-->
-        <!--<m-button height="100%" :width="40" color="primary" variety="flat" shape="square"-->
-                  <!--@click="handleExportTemplate">-->
-          <!--<m-icon value="help"></m-icon>-->
-        <!--</m-button>-->
-      <!--</el-tooltip>-->
-      <!--<el-tooltip content="窗口预览" placement="top">-->
-        <!--<m-button height="100%" :width="40" color="primary" variety="flat" shape="square"-->
-                  <!--@click="handleIframeView">-->
-          <!--<m-icon value="screen_share"></m-icon>-->
-        <!--</m-button>-->
-      <!--</el-tooltip>-->
     </m-flex>
   </m-flex>
 </template>
 <script>
   import { clip2Board } from '@mobov/es-helper'
-  import { exportVueSFC, importProject, exportProject, exportHtml } from '../../project'
+  import { exportVueSFC, importProject, exportProject, exportHtml, previewHtml } from '../../project'
   import { createNamespacedHelpers } from 'vuex'
 
   const { mapGetters, mapState, mapMutations, mapActions } = createNamespacedHelpers('project')
@@ -299,8 +293,8 @@
       handleExportHtml () {
         exportHtml(this.Data)
       },
-      handleIframeView () {
-
+      handlePreviewHtml () {
+        previewHtml(this.Data)
       }
     }
   }

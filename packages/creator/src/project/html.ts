@@ -2,12 +2,11 @@ import { UiNode, UiNodes, ProjectConfig } from '@/typings/project'
 import npmFiles from '@/constants/npm'
 import { deepCopy } from '@mobov/es-helper'
 import getHtml from '@/compiler/html'
-import project from '@/store/project'
 
-const a = document.createElement("a");
+const exportA = document.createElement('a')
+const previewA = document.createElement('a')
 
-export default async function exportHtml ({ ProjectConfig, UiNodes } = {} as { ProjectConfig: ProjectConfig, UiNodes: UiNodes }): Promise<any> {
-  // const UiNodes = deepCopy(UiNodes)
+async function createHtml (ProjectConfig: ProjectConfig, UiNodes: UiNodes): Promise<string>  {
   const dependences = ProjectConfig.dependencies
   const npmPkgs = Object.keys(npmFiles)
   const JSMap = npmPkgs
@@ -24,9 +23,19 @@ export default async function exportHtml ({ ProjectConfig, UiNodes } = {} as { P
   const filename = ProjectConfig.name
   //@ts-ignore
   const blob = new Blob([html], { filename, type: 'text/html' })
-  // 利用URL.createObjectURL()方法为a元素生成blob URL
-  a.href = URL.createObjectURL(blob)
-  // 设置文件名，目前只有Chrome和FireFox支持此属性
-  a.download = `${filename}.html`
-  a.click()
+
+  return URL.createObjectURL(blob)
+}
+
+export async function exportHtml ({ ProjectConfig, UiNodes } = {} as { ProjectConfig: ProjectConfig, UiNodes: UiNodes }): Promise<any> {
+  const filename = ProjectConfig.name
+  exportA.href = await createHtml(ProjectConfig, UiNodes)
+  exportA.download = `${filename}.html`
+  exportA.click()
+}
+
+export async function previewHtml ({ ProjectConfig, UiNodes } = {} as { ProjectConfig: ProjectConfig, UiNodes: UiNodes }): Promise<any> {
+  previewA.href = await createHtml(ProjectConfig, UiNodes)
+  previewA.target = 'blank'
+  previewA.click()
 }
