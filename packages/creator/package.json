@@ -6,8 +6,8 @@
     "serve": "cross-env ENV=development vue-cli-service serve",
     "build": "cross-env ENV=production vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "tsc": "tsc ./deploy/gh-pages.ts",
-    "deploy:gh-pages": "yarn run tsc && node ./deploy/gh-pages"
+    "tsc:gh-pages": "tsc ./deploy/gh-pages.ts",
+    "deploy:gh-pages": "node ./deploy/gh-pages"
   },
   "dependencies": {
     "@guitor/base-ui": "^0.1.9",

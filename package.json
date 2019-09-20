@@ -7,6 +7,7 @@
     "bootstrap": "lerna bootstrap",
     "creator:serve": "lerna run serve --scope @guitor/creator --stream",
     "creator:package": "lerna run build --scope @guitor/creator --stream",
+    "creator:tsc:gh-pages": "lerna run tsc:gh-pages --scope @guitor/creator --stream",
     "creator:deploy:gh-pages": "lerna run deploy:gh-pages --scope @guitor/creator --stream",
     "ui:package": "lerna run build --scope @guitor/base-ui --stream"
   },
