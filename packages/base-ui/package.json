@@ -1,6 +1,6 @@
 {
   "name": "@guitor/base-ui",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "private": false,
   "scripts": {
     "serve": "rollup -w --config build/rollup.config.watch.js",
