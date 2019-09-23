@@ -3,6 +3,8 @@
   > * {
     width: 100%;
   }
+  .input-with-select {
+  }
 }
 </style>
 <!--<template>-->
@@ -44,7 +46,7 @@
 <script lang="jsx">
   import Text from './text'
   import { deepCopy } from '@mobov/es-helper'
-  import { ulid } from 'ulid'
+
   export default {
     name: 'control-item-array',
     props: {
@@ -62,30 +64,22 @@
           return this.value
         },
         set (val) {
-          console.log(val)
           this.$emit('input', val)
         }
       },
-      columns () {
-        return this.config.columns
-      },
       isOperation () {
         return this.config.operation === undefined ? true : this.config.operation
+      },
+      columns () {
+        return this.config.columns
       }
-      // model: {
-      //   get (data, field) {
-      //     return data[field]
-      //   },
-      //   set (val) {
-      //     console.log(val)
-      //   }
-      // }
     },
     methods: {
       handleRemove (index) {
         this._value.splice(index, 1)
       },
       handleAdd (index) {
+        index = this._value.length - 1
         const result = deepCopy(this.value[index])
         if (result.uid) {
           if (result.nodeData.props) {
@@ -136,20 +130,15 @@
           )
         })
         return result
-      }
-    },
-    created () {
-    },
-    render () {
-      const { handleAdd, handleRemove, _value, isOperation } = this
-
-      return (
-        <div class="control-item-array">
+      },
+      RLocal () {
+        const { handleAdd, handleRemove, _value, isOperation } = this
+        return ([
           <ElTable data={this._value} border size="mini">
             {this.RCols()}
             {isOperation ?
-                 (
-                  <ElTableColumn label="操作" align="center" width="100" {...{
+              (
+                <ElTableColumn label="操作" align="center" width="60" {...{
                   scopedSlots: {
                     default: scope => {
                       return (
@@ -159,27 +148,29 @@
                                    disabled={_value.length < 2}
                                    shape="circle"
                                    variety="flat"
-                                   marginLeft="xs"
                                    size={32}>
                             <MIcon value="delete_outline" size={20} />
-                          </MButton>
-                          <MButton color="success"
-                                   onClick={() => handleAdd(scope.$index)}
-                                   shape="circle"
-                                   variety="flat"
-                                   marginLeft="xs"
-                                   size={32}>
-                            <MIcon value="add" size={20} />
                           </MButton>
                         </div>
                       )
                     }
                   }
                 }} />
-                ) : []
-              }
+              ) : []
             }
-          </ElTable>
+            }
+          </ElTable>,
+          <MButton onClick={handleAdd} color="success" width="100%" marginY="sm" paddingX="md" variety="flat">新增</MButton>
+        ])
+      }
+    },
+    render () {
+
+      return (
+        <div class="control-item-array">
+          {
+            this.RLocal()
+          }
         </div>
       )
     }

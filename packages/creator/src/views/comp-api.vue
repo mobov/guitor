@@ -12,7 +12,7 @@
                     :type="item.type"
                     :key="`boxConfig${index}`"
                     :label="item.label"
-                    :config="item.config"
+                    :config.sync="item.config"
                     @input="handleUpdateBoxConfig(item.field, arguments[0])"
                     v-for="(item, index) in boxConfigData"></control-item>
     </div>
@@ -23,14 +23,14 @@
                     :type="childrenApi.type"
                     key="children"
                     :label="childrenApi.label"
-                    :config="childrenApi.config"
+                    :config.sync="childrenApi.config"
                   ></control-item>
       <control-item class="m-mb-sm m-px-sm"
                     v-model="item.value"
                     :type="item.type"
                     :key="`props${index}`"
                     :label="item.label"
-                    :config="item.config"
+                    :config.sync="item.config"
                     @input="handleUpdate('props', item.field, arguments[0])"
                     v-for="(item, index) in propsData"></control-item>
       <control-item class="m-mb-sm m-px-sm"
@@ -38,7 +38,7 @@
                     :type="item.type"
                     :key="`attrs${index}`"
                     :label="item.label"
-                    :config="item.config"
+                    :config.sync="item.config"
                     @input="handleUpdate('attrs', item.field, arguments[0])"
                     v-for="(item, index) in attrsData"></control-item>
     </div>

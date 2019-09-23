@@ -1500,7 +1500,20 @@ module.exports = {
         props: {
           data: {
             label: '表格数据',
-            type: 'data'
+            type: 'data',
+            config: {
+              enableRemote: true,
+              isRemote: false,
+              remote: {
+                url: '',
+                method: 'get',
+                protocal: 'http',
+                contentType: 'application/json;charset=UTF-8',
+                dataField: 'data',
+                header: {},
+                params: {}
+              }
+            }
           },
           height: {
             label: '高度',

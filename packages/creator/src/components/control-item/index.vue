@@ -3,6 +3,7 @@
     display: inline-block;
     .control-item-label {
       color: #919191;
+      margin-top: 10px;
       margin-bottom: 10px;
     }
     width: 100%;
@@ -16,7 +17,7 @@
 <template>
   <div class="control-item" :class="classes">
     <div class="control-item-label">{{label}}</div>
-    <component :is="item" v-model="_value" :config="config"></component>
+    <component :is="item" v-model="_value" :config="config" @updateConfig="handleUpdateConfig"></component>
   </div>
 </template>
 <script>
@@ -58,6 +59,11 @@ export default {
       return {
         [`--${this.type}`]: true
       }
+    }
+  },
+  methods: {
+    handleUpdateConfig (data) {
+      this.$emit('update:config', data)
     }
   }
 }

@@ -38,7 +38,7 @@
 <template>
   <m-app id="app" class="app">
     <m-frame
-      rightSize="400px"
+      rightSize="500px"
       headerSize="50px"
       footerSize="60px"
       leftSize="260px"

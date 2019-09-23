@@ -9,7 +9,8 @@ const env = {
   // 环境变量名
   NODE_ENV: 'production',
   // 提供导出包CDN的默认地址
-  NPM_CDN: 'http://unpkg.com/'
+  NPM_CDN: 'http://unpkg.com/',
+  BASE_API: '/'
 }
 
 module.exports = formatEnv(env)
