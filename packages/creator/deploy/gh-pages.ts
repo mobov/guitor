@@ -3,7 +3,7 @@ import * as path from 'path'
 // @ts-ignore
 import * as packageJson from '../package.json'
 // console.log(packageJson.version)
-// shell.rm('-rf','temp')
+shell.rm('-rf','temp')
 shell.mkdir('temp')
 shell.cd('temp')
 shell.exec('git clone -b gh-pages https://github.com/mobov/guitor.git')

@@ -5,7 +5,7 @@ var path = require("path");
 // @ts-ignore
 var packageJson = require("../package.json");
 // console.log(packageJson.version)
-// shell.rm('-rf','temp')
+shell.rm('-rf', 'temp');
 shell.mkdir('temp');
 shell.cd('temp');
 shell.exec('git clone -b gh-pages https://github.com/mobov/guitor.git');
