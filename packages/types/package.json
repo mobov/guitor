@@ -1,0 +1,19 @@
+{
+  "name": "@guitor/types",
+  "version": "0.0.1",
+  "private": false,
+  "description": "guitor typings",
+  "publishConfig": {
+    "access": "public"
+  },
+  "types": "*.d.ts",
+  "peerDependencies": {
+    "vue": "^2.6.10"
+  },
+  "dependencies": {
+    "vue": "^2.6.10"
+  },
+  "devDependencies": {
+    "typescript": "^3.4.3"
+  }
+}

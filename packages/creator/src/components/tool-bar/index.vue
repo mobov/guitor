@@ -1,64 +1,64 @@
 <template>
   <m-flex class="tool-bar" justify="center">
     <m-flex :elevation="2" class="tool-bar-main">
-      <el-tooltip content="定位到根节点 " placement="top">
+      <m-tooltip content="定位到根节点 " placement="top">
         <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
                   @click="handleActiveRoot">
           <m-icon value="adjust"></m-icon>
         </m-button>
-      </el-tooltip>
+      </m-tooltip>
       <div class="tool-bar-divider"></div>
-      <el-tooltip content="向上" placement="top">
+      <m-tooltip content="向上" placement="top">
         <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
                   @click="handleActivePrev">
           <m-icon value="arrow_upward"></m-icon>
         </m-button>
-      </el-tooltip>
+      </m-tooltip>
       <div class="tool-bar-divider"></div>
-      <el-tooltip content="向下" placement="top">
+      <m-tooltip content="向下" placement="top">
         <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
                   @click="handleActiveNext">
           <m-icon value="arrow_downward"></m-icon>
         </m-button>
-      </el-tooltip>
+      </m-tooltip>
       <div class="tool-bar-divider"></div>
-      <el-tooltip content="向里" placement="top">
+      <m-tooltip content="向里" placement="top">
         <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
                   @click="handleActiveInner">
           <m-icon value="unfold_less"></m-icon>
         </m-button>
-      </el-tooltip>
+      </m-tooltip>
       <div class="tool-bar-divider"></div>
-      <el-tooltip content="向外" placement="top">
+      <m-tooltip content="向外" placement="top">
         <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
                   :disabled="isRoot"
                   @click="handleActiveOuter">
           <m-icon value="unfold_more"></m-icon>
         </m-button>
-      </el-tooltip>
+      </m-tooltip>
       <div class="tool-bar-divider"></div>
-      <el-tooltip content="锁定" placement="top">
+      <m-tooltip content="锁定" placement="top">
         <m-button :disabled="!isContainer" height="100%" :width="40"
                   :color="lockColor" variety="flat" shape="square"
                   @click="handleLock">
           <m-icon :value="lockIcon"></m-icon>
         </m-button>
-      </el-tooltip>
+      </m-tooltip>
       <div class="tool-bar-divider"></div>
-      <el-tooltip content="删除节点" placement="top">
+      <m-tooltip content="删除节点" placement="top">
         <m-button height="100%" :width="40" color="error" variety="flat" shape="square"
                   :disabled="isRoot"
                   @click="handleRemove">
           <m-icon value="delete"></m-icon>
         </m-button>
-      </el-tooltip>
+      </m-tooltip>
       <div class="tool-bar-divider"></div>
-      <el-tooltip content="清空节点" placement="top">
+      <m-tooltip content="清空节点" placement="top">
         <m-button :disabled="!isContainer" height="100%" :width="40" color="error" variety="flat" shape="square"
                   @click="handleClear">
           <m-icon value="delete_outline"></m-icon>
         </m-button>
-      </el-tooltip>
+      </m-tooltip>
       <!--<div class="tool-bar-divider"></div>-->
       <!--<div style="width: 40px"></div>-->
       <div class="tool-bar-divider"></div>
@@ -86,68 +86,68 @@
         </el-tooltip>
       </el-popover>
       <div class="tool-bar-divider"></div>
-      <el-tooltip :content="isModeMobile ? 'PC模式' : '移动端模式'" placement="top">
+      <m-tooltip :content="isModeMobile ? 'PC模式' : '移动端模式'" placement="top">
         <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
                   @click="handleMode">
           <m-icon :value="modeIcon"></m-icon>
         </m-button>
-      </el-tooltip>
+      </m-tooltip>
       <div class="tool-bar-divider"></div>
-      <el-tooltip :content="isViewPreview ? '编辑视图' : '预览视图'" placement="top">
+      <m-tooltip :content="isViewPreview ? '编辑视图' : '预览视图'" placement="top">
         <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
                   @click="handleView">
           <m-icon :value="viewIcon"></m-icon>
         </m-button>
-      </el-tooltip>
+      </m-tooltip>
       <div class="tool-bar-divider"></div>
-      <el-tooltip content="新窗口预览" placement="top">
+      <m-tooltip content="新窗口预览" placement="top">
         <m-button height="100%" :width="40" color="success" variety="flat" shape="square"
                   @click="handlePreviewHtml">
           <m-icon value="tv"></m-icon>
         </m-button>
-      </el-tooltip>
+      </m-tooltip>
       <div class="tool-bar-divider"></div>
-      <el-tooltip content="保存快照" placement="top">
+      <m-tooltip content="保存快照" placement="top">
         <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
                   @click="handleSaveShot">
           <m-icon value="save"></m-icon>
         </m-button>
-      </el-tooltip>
+      </m-tooltip>
       <div class="tool-bar-divider"></div>
-      <el-tooltip content="导出VUE组件" placement="top">
+      <m-tooltip content="导出VUE组件" placement="top">
         <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
                   @click="handleExportVue">
           <m-icon value="screen_share"></m-icon>
         </m-button>
-      </el-tooltip>
+      </m-tooltip>
       <div class="tool-bar-divider"></div>
-      <el-tooltip content="导出虚拟节点" placement="top">
+      <m-tooltip content="导出虚拟节点" placement="top">
         <m-button height="100%" :width="40" color="primary" variety="flat" shape="square"
                   @click="handleExportTemplate">
           <m-icon value="screen_share"></m-icon>
         </m-button>
-      </el-tooltip>
+      </m-tooltip>
       <div class="tool-bar-divider"></div>
-      <el-tooltip content="导出工程" placement="top">
+      <m-tooltip content="导出工程" placement="top">
         <m-button height="100%" :width="40" color="success" variety="flat" shape="square"
                   @click="handleExportProject">
           <m-icon value="cloud_upload"></m-icon>
         </m-button>
-      </el-tooltip>
+      </m-tooltip>
       <div class="tool-bar-divider"></div>
-      <el-tooltip content="导入工程" placement="top">
+      <m-tooltip content="导入工程" placement="top">
         <m-button height="100%" :width="40" color="success" variety="flat" shape="square">
           <m-icon value="cloud_download"></m-icon>
           <input @change="handleImportProject" style="cursor:pointer;opacity: 0;width: 100%;height: 100%;position: absolute;left: 0;top:0;z-index: 2" type="file" id="file" name="file" />
         </m-button>
-      </el-tooltip>
+      </m-tooltip>
       <div class="tool-bar-divider"></div>
-      <el-tooltip content="导出HTML" placement="top">
+      <m-tooltip content="导出HTML" placement="top">
         <m-button height="100%" :width="40" color="success" variety="flat" shape="square"
                   @click="handleExportHtml">
           <m-icon value="cloud_upload"></m-icon>
         </m-button>
-      </el-tooltip>
+      </m-tooltip>
     </m-flex>
   </m-flex>
 </template>

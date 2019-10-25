@@ -7,7 +7,7 @@
   <m-view class="comp-api" paddingY="md" paddingX="sm">
     <div v-if="isBox">
       <el-divider content-position="left">盒属性</el-divider>
-      <control-item  class="m-mb-sm m-px-sm"
+      <control-item class="m-mb-sm m-px-sm"
                     v-model="item.value"
                     :type="item.type"
                     :key="`boxConfig${index}`"

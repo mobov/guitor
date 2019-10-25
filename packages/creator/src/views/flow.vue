@@ -1,15 +1,15 @@
 <template>
-  <m-view class="event" paddingY="md" paddingX="sm">
-
+  <m-view class="flow" paddingY="md" paddingX="sm">
+    <el-input class="checkbox"></el-input>
   </m-view>
 </template>
 <script>
   import { createNamespacedHelpers } from 'vuex'
 
-  const { mapGetters, mapState, mapMutations, mapActions } = createNamespacedHelpers('timeline')
+  const { mapGetters, mapState, mapMutations, mapActions } = createNamespacedHelpers('project')
 
   export default {
-    name: 'timeline',
+    name: 'flow',
     data () {
       return {
         template: {

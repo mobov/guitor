@@ -2507,7 +2507,7 @@ module.exports = {
           stretch: false,
           closable: false,
           addable: false,
-          editable: false,
+          editable: false
         }
       },
       control: {

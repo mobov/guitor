@@ -30,6 +30,11 @@ export default new Router({
       path: '/FAQ',
       name: 'FAQ',
       component: () => import(/* webpackChunkName: "project" */ './views/FAQ.vue')
+    },
+    {
+      path: '/flow',
+      name: 'flow',
+      component: () => import(/* webpackChunkName: "flow" */ './views/flow.vue')
     }
   ]
 })

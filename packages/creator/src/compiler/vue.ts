@@ -2,7 +2,7 @@
 // @ts-ignore
 import { lineCase } from '@mobov/es-helper'
 
-function prependStrSpace (str: string,  length: number) {
+function prependStrSpace (str: string, length: number) {
   let result = ''
   for (let i = 0; i < length; i++) {
     result += ' '
@@ -42,7 +42,7 @@ export default function (node: UiNode) {
       vueTemplate += prependStrSpace(`<${lineCase(data.tag)}`, space)
 
       if (data.nodeData !== undefined) {
-        //props
+        // props
         if (data.nodeData.props !== undefined) {
           const dataKey = `${data.name}_${data.uid}`
           console.info(data)
@@ -52,11 +52,11 @@ export default function (node: UiNode) {
             const value = data.nodeData.props[prop]
             console.log(typeof value)
             if (typeof value === 'boolean') {
-              vueTemplate += ` :${prop}="${value}" `
+              vueTemplate += ` :${lineCase(prop)}="${value}" `
             } else if (typeof value === 'number') {
-              vueTemplate += ` :${prop}="${value}" `
+              vueTemplate += ` :${lineCase(prop)}="${value}" `
             } else if (typeof value === 'string') {
-              vueTemplate += ` ${prop}="${value}" `
+              vueTemplate += ` ${lineCase(prop)}="${value}" `
             } else if (value !== undefined) {
               // vueTemplate += ` ${prop}="${value}" `
               if (vueData[dataKey] === undefined) {
@@ -67,7 +67,7 @@ export default function (node: UiNode) {
             }
           })
         }
-        //styles
+        // styles
         if (data.nodeData.style !== undefined) {
           vueTemplate += ` :style="{`
           Object.keys(data.nodeData.style).forEach(prop => {
@@ -75,11 +75,11 @@ export default function (node: UiNode) {
             const value = node.nodeData.style[prop]
             console.log(typeof value)
             if (typeof value === 'boolean') {
-              vueTemplate += `${prop}: ${value} `
+              vueTemplate += `${prop}: ${value},`
             } else if (typeof value === 'number') {
-              vueTemplate += `${prop}: ${value} `
+              vueTemplate += `${prop}: ${value},`
             } else if (value !== undefined) {
-              vueTemplate += `${prop}: "${value}" `
+              vueTemplate += `${prop}: "${value}",`
             }
           })
           vueTemplate += `}" `
@@ -101,8 +101,8 @@ export default function (node: UiNode) {
       vueTemplate += prependStrSpace(`</${lineCase(data.tag)}>
 `, space)
     }
-
   }
+
   formatNode(node, 0)
   return {
     template: vueTemplate,

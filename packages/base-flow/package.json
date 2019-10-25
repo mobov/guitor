@@ -1,8 +1,8 @@
 {
-  "name": "@guitor/base-ui",
-  "version": "0.1.10",
+  "name": "@guitor/base-flow",
+  "version": "0.0.1",
   "private": false,
-  "description": "guitor基础组件库",
+  "description": "guitor事务流",
   "scripts": {
     "serve": "rollup -w --config build/rollup.config.watch.js",
     "build": "rollup --name=GuiGreatorBaseUI --config build/rollup.config.bundle.js"
@@ -15,21 +15,21 @@
   "types": "types/index.d.ts",
   "peerDependencies": {
     "@mobov/scss-helper": "^0.0.5",
-    "vue": "^2.6.10"
-  },
-  "dependencies": {
-    "@mobov/scss-helper": "^0.0.5",
-    "vue": "^2.6.10"
-  },
-  "devDependencies": {
-    "@types/lodash": "^4.14.122",
+    "vue": "^2.6.10",    "@types/lodash": "^4.14.122",
     "@vue/cli-plugin-babel": "^3.9.0",
     "@vue/cli-plugin-eslint": "^3.9.0",
     "@vue/cli-plugin-typescript": "^3.9.0",
     "@vue/cli-service": "^3.9.0",
     "@vue/eslint-config-standard": "^4.0.0",
     "@vue/eslint-config-typescript": "^4.0.0",
-    "babel-eslint": "^10.0.1",
+    "babel-eslint": "^10.0.1"
+  },
+  "dependencies": {
+    "@mobov/scss-helper": "^0.0.5",
+    "vue": "^2.6.10"
+  },
+  "devDependencies": {
+
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "node-sass": "^4.9.0",
@@ -46,6 +46,5 @@
     "sass-loader": "^7.1.0",
     "typescript": "^3.4.3",
     "vue-template-compiler": "^2.6.10"
-  },
-  "gitHead": "7dad9ccfe2d8f01c37d9d2b5e2a6111985258568"
+  }
 }

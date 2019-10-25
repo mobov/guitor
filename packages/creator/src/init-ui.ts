@@ -2,7 +2,7 @@ import Vue from 'vue'
 import ElementUI from 'element-ui'
 import BaseUI from '@guitor/base-ui'
 import Mobov, { MApp, MAppBar, MAvatar, MButton, MCheckbox,
-       MChip, MFrame, MIcon, MRadio, MView, MFlex, MFlexFiller, MList, MListItem, MTableCol, MTable, MRow, MCol } from '@mobov/vui'
+       MChip, MFrame, MIcon, MRadio, MView, MFlex, MFlexFiller, MList, MListItem, MTableCol, MTable, MRow, MCol, MTooltip } from '@mobov/vui'
 // @ts-ignore
 import arrow_downward from '@mobov/vui/lib/icons/arrow_downward'
 // @ts-ignore
@@ -70,7 +70,8 @@ Vue.use(Mobov, {
     MTableCol,
     MTable,
     MRow,
-    MCol
+    MCol,
+    MTooltip
   },
   icons: {
     arrow_downward,

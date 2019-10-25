@@ -37,6 +37,10 @@ export type UiNode = {
   tag: string
   uid: string
   pid: string
+  show: boolean
+  baseConfig: {
+    show: true,
+  }
   uiConfig: UiConfig
   boxConfig: BoxConfig
   nodeData: VNodeData

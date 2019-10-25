@@ -92,10 +92,10 @@ export default {
           '@guitor/base-ui': '0.1.8'
         }
       },
-      Variables: [{
+
+      Constants: [{
 
       }],
-
       UiNodes: [{
         name: 'HView',
         tag: 'HView',
@@ -108,6 +108,9 @@ export default {
         boxConfig: {
           flex: 1
         },
+        baseData: {
+          show: true
+        },
         nodeData: {
           props: {
             space: 5,
@@ -118,6 +121,13 @@ export default {
           }
         },
         children: []
+      }],
+      Flows: [{
+        name: 'toggle',
+        config: {
+          source: 'root',
+          target: 'root'
+        }
       }]
     },
     activeUid: 'root',
@@ -166,7 +176,7 @@ export default {
     },
     SWAP_NODE (state, val) {
       const parentNode = getPathNode(val.pid, state.Data.UiNodes)
-      parentNode.children.splice(val.to, 0,   parentNode.children.splice(val.from, 1)[0])
+      parentNode.children.splice(val.to, 0, parentNode.children.splice(val.from, 1)[0])
     },
     REMOVE_NODE (state, val) {
       const parentNode = getPathNode(val.pid, state.Data.UiNodes)

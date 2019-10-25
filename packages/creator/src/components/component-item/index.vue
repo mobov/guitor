@@ -3,8 +3,7 @@
        @dragstart="handleDragStart"
        @drag="handleDrag"
        @dblclick="handleInsert"
-       draggable="true"
-      >
+       draggable="true">
     {{ value.label || value.name }}
   </div>
 </template>

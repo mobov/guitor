@@ -2,7 +2,6 @@
 import { UiNode, UiNodes } from '@/typings/project'
 import vueCompiler from '@/compiler/vue'
 
-
 function getScripts (arr: Array<string>) {
   let result = ''
   arr.forEach(async _ => {

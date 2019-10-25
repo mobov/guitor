@@ -27,7 +27,7 @@ export function renderComponent (h: CreateElement, PNode: Project.UiNodes): VNod
       const compSuitData: VNodeData = {
         key: node.uid,
         props: {
-          node,
+          node
         }
       }
 
