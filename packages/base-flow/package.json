@@ -1,6 +1,6 @@
 {
   "name": "@guitor/base-flow",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "description": "guitor事务流",
   "scripts": {
@@ -15,21 +15,21 @@
   "types": "types/index.d.ts",
   "peerDependencies": {
     "@mobov/scss-helper": "^0.0.5",
-    "vue": "^2.6.10",    "@types/lodash": "^4.14.122",
+    "@types/lodash": "^4.14.122",
     "@vue/cli-plugin-babel": "^3.9.0",
     "@vue/cli-plugin-eslint": "^3.9.0",
     "@vue/cli-plugin-typescript": "^3.9.0",
     "@vue/cli-service": "^3.9.0",
     "@vue/eslint-config-standard": "^4.0.0",
     "@vue/eslint-config-typescript": "^4.0.0",
-    "babel-eslint": "^10.0.1"
+    "babel-eslint": "^10.0.1",
+    "vue": "^2.6.10"
   },
   "dependencies": {
     "@mobov/scss-helper": "^0.0.5",
     "vue": "^2.6.10"
   },
   "devDependencies": {
-
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "node-sass": "^4.9.0",

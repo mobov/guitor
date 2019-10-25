@@ -1,6 +1,6 @@
 {
   "name": "@guitor/creator",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "private": true,
   "scripts": {
     "serve": "cross-env ENV=development vue-cli-service serve",
@@ -10,8 +10,8 @@
     "deploy:gh-pages": "node ./deploy/gh-pages"
   },
   "dependencies": {
-    "@guitor/base-ui": "^0.1.10",
-    "@guitor/library-element-ui": "^1.0.7",
+    "@guitor/base-ui": "^0.1.11",
+    "@guitor/library-element-ui": "^1.0.8",
     "@guitor/template-common": "^1.0.4",
     "@mobov/es-helper": "^1.1.8",
     "@mobov/scss-helper": "^0.0.5",
