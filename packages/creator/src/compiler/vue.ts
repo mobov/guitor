@@ -69,10 +69,10 @@ export default function (node: UiNode) {
         }
         // styles
         if (data.nodeData.style !== undefined) {
-          vueTemplate += ` :style="{`
+          vueTemplate += ` :style='{`
           Object.keys(data.nodeData.style).forEach(prop => {
             // @ts-ignore
-            const value = node.nodeData.style[prop]
+            const value = data.nodeData.style[prop]
             console.log(typeof value)
             if (typeof value === 'boolean') {
               vueTemplate += `${prop}: ${value},`
@@ -82,7 +82,7 @@ export default function (node: UiNode) {
               vueTemplate += `${prop}: "${value}",`
             }
           })
-          vueTemplate += `}" `
+          vueTemplate += `}' `
         }
       }
 
